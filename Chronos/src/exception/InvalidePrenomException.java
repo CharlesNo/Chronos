@@ -12,6 +12,7 @@ package exception;
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
+ *         Charles NEAU
  * 
  */
 public class InvalidePrenomException extends Exception

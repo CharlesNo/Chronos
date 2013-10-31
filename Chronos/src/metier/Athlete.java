@@ -14,8 +14,10 @@ import exception.InvalidePrenomException;
 
 /* _________________________________________________________ */
 /**
+ * La classe Athlete
+ * 
  * @author Jerome POINAS
- *         La classe Athlete
+ *         Charles NEAU
  */
 public class Athlete
 {
