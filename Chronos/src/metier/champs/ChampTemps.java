@@ -21,7 +21,7 @@ import java.util.Date;
 public class ChampTemps
 {
 	/** The value. */
-	private Double	value;
+	private long	value;
 
 	/* _________________________________________________________ */
 	/**
@@ -30,7 +30,7 @@ public class ChampTemps
 	 * @param value
 	 *            the value
 	 */
-	public ChampTemps(final Double value)
+	public ChampTemps(final long value)
 	{
 		super();
 		setValue(value);
@@ -48,6 +48,7 @@ public class ChampTemps
 	public ChampTemps(final Date dateDebut, final Date dateFin)
 	{
 		super();
+		setValue(dateFin.getTime() - dateDebut.getTime());
 	}
 
 	/* _________________________________________________________ */
@@ -56,7 +57,7 @@ public class ChampTemps
 	 * 
 	 * @return la valeur du champ value.
 	 */
-	public Double getValue()
+	public long getValue()
 	{
 		return value;
 	}
@@ -65,12 +66,12 @@ public class ChampTemps
 	/**
 	 * Modifie la valeur du cmap value.
 	 * 
-	 * @param value
+	 * @param l
 	 *            la valeur à placer dans le champ value.
 	 */
-	public void setValue(final Double value)
+	public void setValue(final long l)
 	{
-		this.value = value;
+		value = l;
 	}
 }
 /* _________________________________________________________ */
