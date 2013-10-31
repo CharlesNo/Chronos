@@ -101,6 +101,14 @@ public class Athlete
 		}
 		this.prenom = prenom;
 	}
+
+	@Override
+	public String toString()
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append(prenom).append(" ").append(nom);
+		return builder.toString();
+	}
 }
 /* _________________________________________________________ */
 /*
