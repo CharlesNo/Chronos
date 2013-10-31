@@ -11,12 +11,16 @@ package exception;
 
 /* _________________________________________________________ */
 /**
+ * The Class InvalidePrenomException.
+ * 
  * @author Jerome POINAS
  *         Charles NEAU
- * 
  */
 public class InvalidePrenomException extends Exception
 {
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= 5240206574393809628L;
+
 	/* _________________________________________________________ */
 	/**
 	 * Constructeur compet de l'exception "prenom invalide".

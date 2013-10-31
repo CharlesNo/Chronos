@@ -64,6 +64,27 @@ public class Athlete
 	}
 
 	/**
+	 * Methode qui permet de retourner le prenom de l'athlete.
+	 * 
+	 * @return Le prenom de l'athlete.
+	 */
+	public String getPrenom()
+	{
+		return prenom;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ resultats.
+	 * 
+	 * @return la valeur du champ resultats.
+	 */
+	public ArrayList<Resultat> getResultats()
+	{
+		return resultats;
+	}
+
+	/**
 	 * Methode qui permet de modifier le nom de l'athlete.
 	 * 
 	 * @param nom
@@ -81,16 +102,6 @@ public class Athlete
 	}
 
 	/**
-	 * Methode qui permet de retourner le prenom de l'athlete.
-	 * 
-	 * @return Le prenom de l'athlete.
-	 */
-	public String getPrenom()
-	{
-		return prenom;
-	}
-
-	/**
 	 * Methode qui permet de modifier le prenom de l'athlete.
 	 * 
 	 * @param prenom
@@ -105,17 +116,6 @@ public class Athlete
 			throw new InvalidePrenomException("Le prenom est invalide");
 		}
 		this.prenom = prenom;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Retourne la valeur du champ resultats.
-	 * 
-	 * @return la valeur du champ resultats.
-	 */
-	public ArrayList<Resultat> getResultats()
-	{
-		return resultats;
 	}
 }
 /* _________________________________________________________ */

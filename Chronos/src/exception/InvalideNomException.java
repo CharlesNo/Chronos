@@ -11,12 +11,16 @@ package exception;
 
 /* _________________________________________________________ */
 /**
+ * The Class InvalideNomException.
+ * 
  * @author Jerome POINAS
  *         Charles NEAU
- * 
  */
 public class InvalideNomException extends Exception
 {
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= 7196272913377656762L;
+
 	/* _________________________________________________________ */
 	/**
 	 * Constructeur compet de l'exception "nom invalide".
