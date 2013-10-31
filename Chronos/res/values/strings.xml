@@ -7,5 +7,6 @@
     <string name="btAjouterAthlete">Add</string>
     <string name="nomAthlete">Nom de l\'athlete :</string>
     <string name="prenomAthlete">Prenom de l\'athlete :</string>
+    <string name="validerForm">Valider</string>
 
 </resources>

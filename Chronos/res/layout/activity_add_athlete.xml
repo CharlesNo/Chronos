@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -7,13 +7,50 @@
     <TextView
         android:id="@+id/tvNom"
         android:layout_width="136dp"
-        android:layout_height="52dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp"
         android:text="@string/nomAthlete" />
+
+    <EditText
+        android:id="@+id/editTextNom"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvNom"
+        android:ems="10"
+        android:inputType="textCapCharacters" >
+           <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/tvPrenom"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextNom"
+        android:layout_marginTop="29dp"
         android:text="@string/prenomAthlete" />
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/editTextPrenom"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvPrenom"
+        android:ems="10"
+        android:inputType="text" >
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonValiderForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextPrenom"
+        android:layout_margin="50dp"
+        android:layout_marginTop="54dp"
+        android:text="@string/validerForm" />
+
+</RelativeLayout>
