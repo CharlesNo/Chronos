@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import metier.Athlete;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import exception.InvalideNomException;
@@ -19,7 +23,7 @@ import exception.InvalidePrenomException;
  *         Charles NEAU
  * 
  */
-public class MainActivityChronos extends Activity
+public class ActivityListeAthlete extends Activity
 {
 	List<Athlete>	mesAthletes;
 	ListView		lvListe;
@@ -55,6 +59,17 @@ public class MainActivityChronos extends Activity
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT)
 					.show();
 		}
+		final Button addAthlete = (Button) findViewById(R.id.bouttonAddAthlete);
+		addAthlete.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(final View v)
+			{
+				final Intent intent = new Intent(ActivityListeAthlete.this,
+						ActivityAddAthlete.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	/* _________________________________________________________ */

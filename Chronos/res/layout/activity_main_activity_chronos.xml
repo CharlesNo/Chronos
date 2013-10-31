@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivityChronos" >
+    tools:context=".ActivityListeAthlete" >
 
     <TextView
         android:id="@+id/textViewListeAthlete"
@@ -17,7 +17,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bouttonAddAthlete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -33,7 +33,7 @@
         android:layout_above="@+id/textView1"
         android:layout_below="@+id/textViewListeAthlete"
         android:layout_marginTop="28dp"
-        android:layout_toLeftOf="@+id/button1"
+        android:layout_toLeftOf="@+id/bouttonAddAthlete"
         tools:listitem="@android:layout/simple_list_item_single_choice" >
 
     </ListView>

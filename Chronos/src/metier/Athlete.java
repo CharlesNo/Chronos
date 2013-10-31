@@ -109,6 +109,11 @@ public class Athlete
 		this.prenom = prenom;
 	}
 
+	/*_________________________________________________________*/
+	/** 
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
