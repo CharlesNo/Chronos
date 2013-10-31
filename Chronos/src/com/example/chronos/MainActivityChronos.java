@@ -14,10 +14,9 @@ import exception.InvalidePrenomException;
 
 /**
  * La classe Main activity
- * _________________________________________________________
- */
-/**
+ * 
  * @author Jerome POINAS
+ *         Charles NEAU
  * 
  */
 public class MainActivityChronos extends Activity
@@ -27,7 +26,10 @@ public class MainActivityChronos extends Activity
 
 	/* _________________________________________________________ */
 	/**
+	 * On create.
+	 * 
 	 * @param savedInstanceState
+	 *            the saved instance state
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -57,8 +59,11 @@ public class MainActivityChronos extends Activity
 
 	/* _________________________________________________________ */
 	/**
+	 * On create options menu.
+	 * 
 	 * @param menu
-	 * @return
+	 *            the menu
+	 * @return true, if successful
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
