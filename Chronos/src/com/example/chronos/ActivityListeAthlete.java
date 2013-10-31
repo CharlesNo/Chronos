@@ -25,7 +25,9 @@ import exception.InvalidePrenomException;
  */
 public class ActivityListeAthlete extends Activity
 {
+	/** The mes athletes. */
 	List<Athlete>	mesAthletes;
+	/** The lv liste. */
 	ListView		lvListe;
 
 	/* _________________________________________________________ */
