@@ -9,6 +9,7 @@
  */
 package metier;
 
+import java.util.ArrayList;
 import exception.InvalideNomException;
 import exception.InvalidePrenomException;
 
@@ -24,11 +25,13 @@ public class Athlete
 	/**
 	 * Le nom de famille de l'athlete.
 	 */
-	private String	nom;
+	private String						nom;
 	/**
 	 * Le prenom de l'athlete.
 	 */
-	private String	prenom;
+	private String						prenom;
+	/** Les resultats. */
+	private final ArrayList<Resultat>	resultats	= new ArrayList<Resultat>();
 
 	/* _________________________________________________________ */
 	/**
@@ -102,6 +105,17 @@ public class Athlete
 			throw new InvalidePrenomException("Le prenom est invalide");
 		}
 		this.prenom = prenom;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ resultats.
+	 * 
+	 * @return la valeur du champ resultats.
+	 */
+	public ArrayList<Resultat> getResultats()
+	{
+		return resultats;
 	}
 }
 /* _________________________________________________________ */
