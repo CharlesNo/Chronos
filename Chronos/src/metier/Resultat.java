@@ -19,12 +19,12 @@ import java.util.Date;
  */
 public class Resultat
 {
-	/** La date. */
-	private Date	date;
 	/** The chrono. */
-	private Double	chrono;
+	private final Double	chrono;
+	/** La date. */
+	private final Date		date;
 	/** The distance. */
-	private Float	distance;
+	private final Float		distance;
 
 	/* _________________________________________________________ */
 	/**
@@ -40,32 +40,9 @@ public class Resultat
 	public Resultat(final Date date, final Double chrono, final Float distance)
 	{
 		super();
-		setDate(date);
-		setChrono(chrono);
-		setDistance(distance);
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Retourne la valeur du champ date.
-	 * 
-	 * @return la valeur du champ date.
-	 */
-	public Date getDate()
-	{
-		return date;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Modifie la valeur du cmap date.
-	 * 
-	 * @param date
-	 *            la valeur à placer dans le champ date.
-	 */
-	public void setDate(final Date date)
-	{
 		this.date = date;
+		this.chrono = chrono;
+		this.distance = distance;
 	}
 
 	/* _________________________________________________________ */
@@ -81,14 +58,13 @@ public class Resultat
 
 	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap chrono.
+	 * Retourne la valeur du champ date.
 	 * 
-	 * @param chrono
-	 *            la valeur à placer dans le champ chrono.
+	 * @return la valeur du champ date.
 	 */
-	public void setChrono(final Double chrono)
+	public Date getDate()
 	{
-		this.chrono = chrono;
+		return date;
 	}
 
 	/* _________________________________________________________ */
@@ -100,18 +76,6 @@ public class Resultat
 	public Float getDistance()
 	{
 		return distance;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Modifie la valeur du cmap distance.
-	 * 
-	 * @param distance
-	 *            la valeur à placer dans le champ distance.
-	 */
-	public void setDistance(final Float distance)
-	{
-		this.distance = distance;
 	}
 }
 /* _________________________________________________________ */
