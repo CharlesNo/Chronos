@@ -1,7 +1,7 @@
 /* _________________________________________________________ */
 /* _________________________________________________________ */
 /**
- * Fichier : Manager.java
+ * Fichier : Modele.java
  * 
  * Créé le 31 oct. 2013 à 13:24:23
  * 
@@ -13,22 +13,48 @@ import java.util.ArrayList;
 
 /* _________________________________________________________ */
 /**
- * The Class Manager.
+ * The Class Modele.
  * 
  * @author Charles NEAU
  */
-public class Manager
+public class Modele
 {
 	/** The athletes. */
-	private final ArrayList<Athlete>	athletes	= new ArrayList<Athlete>();
+	private final ArrayList<Athlete>	athletes;
+
+	/* _________________________________________________________ */
+	/**
+	 * Gets the.
+	 * 
+	 * @param arg0
+	 *            the arg0
+	 * @return the athlete
+	 * @see java.util.ArrayList#get(int)
+	 */
+	public Athlete get(final int arg0)
+	{
+		return athletes.get(arg0);
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Size.
+	 * 
+	 * @return the int
+	 * @see java.util.ArrayList#size()
+	 */
+	public int size()
+	{
+		return athletes.size();
+	}
 
 	/* _________________________________________________________ */
 	/**
 	 * Instantiates a new manager.
 	 */
-	public Manager()
+	public Modele()
 	{
-		// TODO Auto-generated constructor stub
+		athletes = new ArrayList<Athlete>();
 	}
 
 	/* _________________________________________________________ */
@@ -42,7 +68,7 @@ public class Manager
 	 */
 	public boolean add(final Athlete object)
 	{
-		return athletes.add(object);
+		return getAthletes().add(object);
 	}
 
 	/* _________________________________________________________ */
@@ -66,6 +92,6 @@ public class Manager
 }
 /* _________________________________________________________ */
 /*
- * Fin du fichier Manager.java.
+ * Fin du fichier Modele.java.
  * /*_________________________________________________________
  */

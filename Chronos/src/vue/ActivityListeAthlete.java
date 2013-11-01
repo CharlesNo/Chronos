@@ -2,24 +2,23 @@ package vue;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.chronos.R;
-import controleur.ControlerListeAthlete;
 import modele.Athlete;
 import modele.exception.InvalideNomException;
 import modele.exception.InvalidePrenomException;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.example.chronos.R;
+import controleur.ControlerListeAthlete;
 
 /**
- * La classe Main activity
+ * La classe Main activity.
+ * C'est en quelque sorte le "main",
+ * le point d'entrée du programme.
  * 
  * @author Jerome POINAS
  *         Charles NEAU
@@ -48,14 +47,21 @@ public class ActivityListeAthlete extends Activity
 		setContentView(R.layout.activity_main_activity_chronos);
 		lvListe = (ListView) findViewById(R.id.listAthlete);
 		final Button addAthlete = (Button) findViewById(R.id.bouttonAddAthlete);
-		/***********************************************************/
-		final ArrayAdapter<Athlete> adapter = new ArrayAdapter<Athlete>(
-				getBaseContext(), android.R.layout.simple_list_item_1,
-				mesAthletes);
 		lvListe.setOnItemClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
-		// On recupere les données provenant de ActivityAddAthlete si il y en a
-		final Bundle objetbunble = getIntent().getExtras();
+		bundleInit();
+		lvListe.setAdapter(new ArrayAdapter<Athlete>(getBaseContext(),
+				android.R.layout.simple_list_item_1, mesAthletes));
+		addAthlete.setOnClickListener(controler);
+	}
+
+	/**
+	 * On recupere les données provenant de ActivityAddAthlete si il y en a.
+	 */
+	private void bundleInit()
+	{
+		final Bundle objetbunble;
+		objetbunble = getIntent().getExtras();
 		// On récupère les données du Bundle
 		if ((objetbunble != null) && objetbunble.containsKey("Nom")
 				&& objetbunble.containsKey("Prenom"))
@@ -78,17 +84,6 @@ public class ActivityListeAthlete extends Activity
 						Toast.LENGTH_SHORT).show();
 			}
 		}
-		lvListe.setAdapter(adapter);
-		addAthlete.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(@SuppressWarnings("unused") final View v)
-			{
-				final Intent intent = new Intent(ActivityListeAthlete.this,
-						ActivityAddAthlete.class);
-				startActivity(intent);
-			}
-		});
 	}
 
 	/* _________________________________________________________ */

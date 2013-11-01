@@ -8,5 +8,6 @@
     <string name="nomAthlete">Nom de l\'athlete :</string>
     <string name="prenomAthlete">Prenom de l\'athlete :</string>
     <string name="validerForm">Valider</string>
+    <string name="tps_chrono">Tps chrono</string>
 
 </resources>
