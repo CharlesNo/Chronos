@@ -7,7 +7,7 @@
  * 
  * Auteur : Jerome POINAS
  */
-package exception;
+package modele.exception;
 
 /* _________________________________________________________ */
 /**
@@ -23,10 +23,10 @@ public class InvalideNomException extends Exception
 
 	/* _________________________________________________________ */
 	/**
-	 * Constructeur compet de l'exception "nom invalide".
+	 * Constructeur compet de l'modele.exception "nom invalide".
 	 * 
 	 * @param message
-	 *            Le message remonté de l'exception.
+	 *            Le message remonté de l'modele.exception.
 	 */
 	public InvalideNomException(final String message)
 	{

@@ -7,7 +7,7 @@
  * 
  * Auteur : Charles NEAU
  */
-package metier;
+package modele;
 
 import java.util.ArrayList;
 import java.util.Date;

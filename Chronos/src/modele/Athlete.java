@@ -7,11 +7,11 @@
  * 
  * Auteur : Jerome POINAS
  */
-package metier;
+package modele;
 
 import java.util.ArrayList;
-import exception.InvalideNomException;
-import exception.InvalidePrenomException;
+import modele.exception.InvalideNomException;
+import modele.exception.InvalidePrenomException;
 
 /* _________________________________________________________ */
 /**

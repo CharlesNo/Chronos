@@ -7,7 +7,7 @@
  * 
  * Auteur : Charles NEAU
  */
-package metier.champs;
+package modele.champs;
 
 import java.util.Date;
 

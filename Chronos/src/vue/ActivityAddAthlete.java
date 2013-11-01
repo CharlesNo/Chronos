@@ -7,8 +7,10 @@
  * 
  * Auteur : Jerome POINAS
  */
-package com.example.chronos;
+package vue;
 
+import com.example.chronos.R;
+import controleur.ControlerAddAthlete;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,7 +37,7 @@ public class ActivityAddAthlete extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_athlete);
 		final Button valider = (Button) findViewById(R.id.buttonValiderForm);
-		valider.setOnClickListener(new Controleur(this));
+		valider.setOnClickListener(new ControlerAddAthlete(this));
 	}
 
 	/* _________________________________________________________ */

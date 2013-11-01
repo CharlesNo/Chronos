@@ -7,7 +7,7 @@
  * 
  * Auteur : Jerome POINAS
  */
-package exception;
+package modele.exception;
 
 /* _________________________________________________________ */
 /**
@@ -23,10 +23,10 @@ public class InvalidePrenomException extends Exception
 
 	/* _________________________________________________________ */
 	/**
-	 * Constructeur compet de l'exception "prenom invalide".
+	 * Constructeur compet de l'modele.exception "prenom invalide".
 	 * 
 	 * @param message
-	 *            Le message remonté de l'exception.
+	 *            Le message remonté de l'modele.exception.
 	 */
 	public InvalidePrenomException(final String message)
 	{

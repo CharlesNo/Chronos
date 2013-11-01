@@ -7,8 +7,9 @@
  * 
  * Auteur : Charles NEAU
  */
-package com.example.chronos;
+package controleur;
 
+import vue.ActivityListeAthlete;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,16 +17,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.chronos.R;
 
 /* _________________________________________________________ */
 /**
  * @author Charles NEAU
  * 
  */
-public class Controleur implements OnClickListener
+public class ControlerAddAthlete implements OnClickListener
 {
 	/** The activity. */
 	private final Activity	activity;
+	/** The champ nom. */
+	private final EditText	champNom;
+	/** The champ prenom. */
+	private final EditText	champPrenom;
 
 	/* _________________________________________________________ */
 	/**
@@ -35,9 +41,11 @@ public class Controleur implements OnClickListener
 	 * @param activity
 	 *            the activity
 	 */
-	public Controleur(final Activity activity)
+	public ControlerAddAthlete(final Activity activity)
 	{
 		this.activity = activity;
+		champNom = (EditText) activity.findViewById(R.id.editTextNom);
+		champPrenom = (EditText) activity.findViewById(R.id.editTextPrenom);
 	}
 
 	/* _________________________________________________________ */
@@ -51,10 +59,6 @@ public class Controleur implements OnClickListener
 	@Override
 	public void onClick(@SuppressWarnings("unused") final View view)
 	{
-		final EditText champNom = (EditText) activity
-				.findViewById(R.id.editTextNom);
-		final EditText champPrenom = (EditText) activity
-				.findViewById(R.id.editTextPrenom);
 		if (!champNom.getText().toString().equals("")
 				&& !champPrenom.getText().toString().equals(""))
 		{
