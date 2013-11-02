@@ -12,21 +12,21 @@ package controleur;
 import java.util.ArrayList;
 import java.util.List;
 import modele.Athlete;
+import modele.exception.InvalideNomException;
+import modele.exception.InvalidePrenomException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.text.Editable;
-import android.text.method.KeyListener;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.chronos.R;
 
 /* _________________________________________________________ */
@@ -57,10 +57,11 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	public ControlerListeAthlete(final Activity activity)
 	{
 		this.activity = activity;
-		lvListe = (ListView) activity.findViewById(R.id.listAthlete);
 		mesAthletes = new ArrayList<Athlete>();
+		lvListe = (ListView) activity.findViewById(R.id.listAthlete);
 		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
 				android.R.layout.simple_list_item_1, mesAthletes);
+		lvListe.setAdapter(adapter);
 	}
 
 	/* _________________________________________________________ */
@@ -79,7 +80,7 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
 	 *      android.view.View, int, long)
 	 */
-	@SuppressWarnings("unused")
+
 	@Override
 	public void onItemClick(final AdapterView<?> parent, final View view,
 			final int position, final long id)
@@ -112,7 +113,6 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	 * @see android.widget.AdapterView.OnItemLongClickListener#onItemLongClick(android.widget.AdapterView,
 	 *      android.view.View, int, long)
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public boolean onItemLongClick(final AdapterView<?> arg0, final View arg1,
 			final int arg2, final long arg3)
@@ -146,7 +146,33 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	@Override
 	public void onClick(final View arg0)
 	{
+		EditText champNom = (EditText) activity.findViewById(R.id.editTextNom);
+		EditText champPrenom = (EditText) activity.findViewById(R.id.editTextPrenom);
 		
+		if(!champNom.getText().toString().equals("")&&!champPrenom.getText().toString().equals(""))
+		{
+			try {
+				Athlete athlete = new Athlete(champNom.getText().toString(), champPrenom.getText().toString());
+				adapter.add(athlete);
+				adapter.notifyDataSetChanged();
+			} catch (InvalideNomException e) {
+				Toast.makeText(activity,
+						"Le nom est vide",
+						Toast.LENGTH_SHORT).show();
+			} catch (InvalidePrenomException e) {
+				Toast.makeText(activity,
+						"Le prenom est vide",
+						Toast.LENGTH_SHORT).show();
+			}
+			champNom.setText("");
+			champPrenom.setText("");
+		}
+		else
+		{
+			Toast.makeText(activity,
+					"Veuillez renseigner le nom et le prenom de l'athlete.",
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 }
 /* _________________________________________________________ */
