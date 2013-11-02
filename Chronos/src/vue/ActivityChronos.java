@@ -11,8 +11,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.ListView;
 
 public class ActivityChronos extends Activity
 {

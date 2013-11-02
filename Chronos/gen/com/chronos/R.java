@@ -29,7 +29,7 @@ public final class R {
         public static final int bouttonAddAthlete=0x7f050007;
         public static final int btStart=0x7f050002;
         public static final int btStop=0x7f050003;
-        public static final int chronometer1=0x7f050001;
+        public static final int chronometer=0x7f050001;
         public static final int editTextNom=0x7f050008;
         public static final int editTextPrenom=0x7f050009;
         public static final int listAthlete=0x7f050005;
