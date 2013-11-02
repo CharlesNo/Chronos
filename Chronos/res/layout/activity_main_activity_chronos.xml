@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"  
         android:orientation="vertical"
-        android:layout_above="@+id/textView1"
+        android:layout_above="@+id/tempsChrono"
         android:layout_below="@+id/textViewListeAthlete"
         android:layout_marginTop="28dp"
         android:layout_toLeftOf="@+id/bouttonAddAthlete"
@@ -36,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/bouttonAddAthlete"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_toRightOf="@+id/tempsChrono"
         android:hint="@string/nomAthlete"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tempsChrono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

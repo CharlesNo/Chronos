@@ -9,5 +9,8 @@
     <string name="prenomAthlete">Prenom</string>
     <string name="validerForm">Valider</string>
     <string name="tps_chrono">Tps chrono</string>
+    <string name="Chronometre">Chronometre</string>
+    <string name="Stop">Stop</string>
+    <string name="Start">Start</string>
 
 </resources>

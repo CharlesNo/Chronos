@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.chronos.R;
 import controleur.ControlerListeAthlete;
 
 /**
  * La classe Main activity.
- * C'est en quelque sorte le "main",
- * le point d'entrée du programme.
  * 
  * @author Jerome POINAS
  *         Charles NEAU
@@ -40,7 +40,17 @@ public class ActivityListeAthlete extends Activity
 		final ControlerListeAthlete controler = new ControlerListeAthlete(this);
 		addAthlete.setOnClickListener(controler);
 		lvListe.setOnItemClickListener(controler);
-		lvListe.setOnItemLongClickListener(controler);	
+		lvListe.setOnItemLongClickListener(controler);
+		
+		//On récupère l'objet Bundle envoyé par l'autre Activity
+        Bundle objetbunble  = this.getIntent().getExtras();
+ 
+        //On récupère les données du Bundle
+        if (objetbunble != null && objetbunble.containsKey("temps")) {
+        	String temps = this.getIntent().getStringExtra("temps");
+        	final TextView champsTemps = (TextView) findViewById(R.id.tempsChrono);
+        	champsTemps.setText(temps);   
+        }
 		
 	}
 
