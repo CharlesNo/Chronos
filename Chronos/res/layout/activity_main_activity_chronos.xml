@@ -14,17 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/listeAthlete"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/bouttonAddAthlete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewListeAthlete"
-        android:layout_marginRight="22dp"
-        android:layout_marginTop="42dp"
-        android:text="@string/btAjouterAthlete" />
+        android:textSize="16sp" />
 
     <ListView
         android:id="@+id/listAthlete"
@@ -40,15 +30,46 @@
 
     </ListView>
 
+    <EditText
+        android:id="@+id/editTextNom"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bouttonAddAthlete"
+        android:layout_toRightOf="@+id/textView1"
+        android:hint="@string/nomAthlete"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
-        android:text="@string/tps_chrono" 
+        android:layout_marginBottom="26dp"
+        android:text="@string/tps_chrono"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35sp" />
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bouttonAddAthlete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextNom"
+        android:layout_alignTop="@+id/listAthlete"
+        android:text="@string/btAjouterAthlete" />
+
+    <EditText
+        android:id="@+id/editTextPrenom"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextNom"
+        android:layout_alignRight="@+id/editTextNom"
+        android:layout_below="@+id/editTextNom"
+        android:hint="@string/prenomAthlete"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
 </RelativeLayout>

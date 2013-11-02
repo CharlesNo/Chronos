@@ -12,7 +12,6 @@ package controleur;
 import java.util.ArrayList;
 import java.util.List;
 import modele.Athlete;
-import vue.ActivityAddAthlete;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -147,8 +146,7 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	@Override
 	public void onClick(final View arg0)
 	{
-		final Intent intent = new Intent(activity, ActivityAddAthlete.class);
-		activity.startActivity(intent);
+		
 	}
 }
 /* _________________________________________________________ */
