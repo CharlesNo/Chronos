@@ -1,17 +1,15 @@
 package vue;
 
-
-
-import com.chronos.R;
-
-import controleur.ControlerFenChrono;
-import controleur.ControlerListeAthlete;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
+import com.chronos.R;
+import controleur.ControlerFenChrono;
 
+/**
+ * The Class ActivityChronos.
+ */
 public class ActivityChronos extends Activity
 {
 	/* _________________________________________________________ */
@@ -27,13 +25,13 @@ public class ActivityChronos extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chronometre);
-		Button btStart = (Button) findViewById(R.id.btStart);
-		Button btStop = (Button) findViewById(R.id.btStop);
+		final Button btStart = (Button) findViewById(R.id.btStart);
+		final Button btStop = (Button) findViewById(R.id.btStop);
 		final ControlerFenChrono controler = new ControlerFenChrono(this);
 		btStart.setOnClickListener(controler);
 		btStop.setOnClickListener(controler);
 	}
-	
+
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.

@@ -62,6 +62,52 @@ public class ControlerListeAthlete implements OnItemClickListener,
 
 	/* _________________________________________________________ */
 	/**
+	 * On click.
+	 * 
+	 * @param arg0
+	 *            the arg0
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(final View arg0)
+	{
+		final EditText champNom = (EditText) activity
+				.findViewById(R.id.editTextNom);
+		final EditText champPrenom = (EditText) activity
+				.findViewById(R.id.editTextPrenom);
+		if (!champNom.getText().toString().equals("")
+				&& !champPrenom.getText().toString().equals(""))
+		{
+			try
+			{
+				final Athlete athlete = new Athlete(champNom.getText()
+						.toString(), champPrenom.getText().toString());
+				modele.getAdapter().add(athlete);
+				modele.getAdapter().notifyDataSetChanged();
+			}
+			catch (final InvalideNomException e)
+			{
+				Toast.makeText(activity, "Le nom est vide", Toast.LENGTH_SHORT)
+						.show();
+			}
+			catch (final InvalidePrenomException e)
+			{
+				Toast.makeText(activity, "Le prenom est vide",
+						Toast.LENGTH_SHORT).show();
+			}
+			champNom.setText("");
+			champPrenom.setText("");
+		}
+		else
+		{
+			Toast.makeText(activity,
+					"Veuillez renseigner le nom et le prenom de l'athlete.",
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	/* _________________________________________________________ */
+	/**
 	 * On item click.
 	 * 
 	 * @param parent
@@ -128,52 +174,6 @@ public class ControlerListeAthlete implements OnItemClickListener,
 		});
 		adb.show();
 		return true;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * On click.
-	 * 
-	 * @param arg0
-	 *            the arg0
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
-	@Override
-	public void onClick(final View arg0)
-	{
-		final EditText champNom = (EditText) activity
-				.findViewById(R.id.editTextNom);
-		final EditText champPrenom = (EditText) activity
-				.findViewById(R.id.editTextPrenom);
-		if (!champNom.getText().toString().equals("")
-				&& !champPrenom.getText().toString().equals(""))
-		{
-			try
-			{
-				final Athlete athlete = new Athlete(champNom.getText()
-						.toString(), champPrenom.getText().toString());
-				modele.getAdapter().add(athlete);
-				modele.getAdapter().notifyDataSetChanged();
-			}
-			catch (final InvalideNomException e)
-			{
-				Toast.makeText(activity, "Le nom est vide", Toast.LENGTH_SHORT)
-						.show();
-			}
-			catch (final InvalidePrenomException e)
-			{
-				Toast.makeText(activity, "Le prenom est vide",
-						Toast.LENGTH_SHORT).show();
-			}
-			champNom.setText("");
-			champPrenom.setText("");
-		}
-		else
-		{
-			Toast.makeText(activity,
-					"Veuillez renseigner le nom et le prenom de l'athlete.",
-					Toast.LENGTH_SHORT).show();
-		}
 	}
 }
 /* _________________________________________________________ */
