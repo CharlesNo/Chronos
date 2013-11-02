@@ -9,9 +9,8 @@
  */
 package controleur;
 
-import java.util.ArrayList;
-import java.util.List;
 import modele.Athlete;
+import modele.Modele;
 import modele.exception.InvalideNomException;
 import modele.exception.InvalidePrenomException;
 import android.app.Activity;
@@ -22,12 +21,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.chronos.R;
+import com.chronos.R;
 
 /* _________________________________________________________ */
 /**
@@ -35,17 +32,16 @@ import com.example.chronos.R;
  * 
  * @author Charles NEAU
  */
+@SuppressWarnings("unused")
 public class ControlerListeAthlete implements OnItemClickListener,
 		OnItemLongClickListener, OnClickListener
 {
 	/** The activity. */
-	private final Activity				activity;
+	private final Activity	activity;
 	/** The lv liste. */
-	private final ListView				lvListe;
-	/** The adapter. */
-	private final ArrayAdapter<Athlete>	adapter;
-	/** The mes athletes. */
-	List<Athlete>						mesAthletes;
+	private final ListView	lvListe;
+	/** The modele. */
+	private final Modele	modele;
 
 	/* _________________________________________________________ */
 	/**
@@ -53,15 +49,15 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	 * 
 	 * @param activity
 	 *            the activity
+	 * @param modele
+	 *            the modele
 	 */
-	public ControlerListeAthlete(final Activity activity)
+	public ControlerListeAthlete(final Activity activity, final Modele modele)
 	{
 		this.activity = activity;
-		mesAthletes = new ArrayList<Athlete>();
+		this.modele = modele;
 		lvListe = (ListView) activity.findViewById(R.id.listAthlete);
-		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
-				android.R.layout.simple_list_item_1, mesAthletes);
-		lvListe.setAdapter(adapter);
+		lvListe.setAdapter(modele.getAdapter());
 	}
 
 	/* _________________________________________________________ */
@@ -80,7 +76,6 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
 	 *      android.view.View, int, long)
 	 */
-
 	@Override
 	public void onItemClick(final AdapterView<?> parent, final View view,
 			final int position, final long id)
@@ -127,8 +122,8 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			@Override
 			public void onClick(final DialogInterface dialog, final int which)
 			{
-				adapter.remove((Athlete) lvListe
-						.getItemAtPosition(positionToRemove));
+				modele.getAdapter().remove(
+						(Athlete) lvListe.getItemAtPosition(positionToRemove));
 			}
 		});
 		adb.show();
@@ -146,22 +141,28 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	@Override
 	public void onClick(final View arg0)
 	{
-		EditText champNom = (EditText) activity.findViewById(R.id.editTextNom);
-		EditText champPrenom = (EditText) activity.findViewById(R.id.editTextPrenom);
-		
-		if(!champNom.getText().toString().equals("")&&!champPrenom.getText().toString().equals(""))
+		final EditText champNom = (EditText) activity
+				.findViewById(R.id.editTextNom);
+		final EditText champPrenom = (EditText) activity
+				.findViewById(R.id.editTextPrenom);
+		if (!champNom.getText().toString().equals("")
+				&& !champPrenom.getText().toString().equals(""))
 		{
-			try {
-				Athlete athlete = new Athlete(champNom.getText().toString(), champPrenom.getText().toString());
-				adapter.add(athlete);
-				adapter.notifyDataSetChanged();
-			} catch (InvalideNomException e) {
-				Toast.makeText(activity,
-						"Le nom est vide",
-						Toast.LENGTH_SHORT).show();
-			} catch (InvalidePrenomException e) {
-				Toast.makeText(activity,
-						"Le prenom est vide",
+			try
+			{
+				final Athlete athlete = new Athlete(champNom.getText()
+						.toString(), champPrenom.getText().toString());
+				modele.getAdapter().add(athlete);
+				modele.getAdapter().notifyDataSetChanged();
+			}
+			catch (final InvalideNomException e)
+			{
+				Toast.makeText(activity, "Le nom est vide", Toast.LENGTH_SHORT)
+						.show();
+			}
+			catch (final InvalidePrenomException e)
+			{
+				Toast.makeText(activity, "Le prenom est vide",
 						Toast.LENGTH_SHORT).show();
 			}
 			champNom.setText("");

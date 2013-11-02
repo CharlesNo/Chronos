@@ -15,7 +15,11 @@ import modele.exception.InvalidePrenomException;
 
 /* _________________________________________________________ */
 /**
- * La classe Athlete
+ * La classe Athlete.
+ * Cette classe représente un Athlete.
+ * Un Athlete est une personne, il a un nom et un prénom.
+ * 
+ * Il a une liste de resultats/performances.
  * 
  * @author Jerome POINAS
  *         Charles NEAU
@@ -31,9 +35,9 @@ public class Athlete
 	 */
 	private String						prenom;
 	/**
-	 * Les resultats.
+	 * Les performances de cet athlete.
 	 */
-	private final ArrayList<Resultat>	resultats	= new ArrayList<Resultat>();
+	private final ArrayList<Resultat>	resultats;
 
 	/* _________________________________________________________ */
 	/**
@@ -51,6 +55,7 @@ public class Athlete
 	public Athlete(final String nom, final String prenom)
 			throws InvalideNomException, InvalidePrenomException
 	{
+		resultats = new ArrayList<Resultat>();
 		setNom(nom);
 		setPrenom(prenom);
 	}

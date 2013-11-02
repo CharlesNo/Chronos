@@ -15,6 +15,12 @@ import java.util.Date;
 /* _________________________________________________________ */
 /**
  * The Class Temps.
+ * Cette classe contient les différents temps envoyés en signal.
+ * Il peut en contenir plusieurs et c'est là que l'entraineur devra
+ * choisir les temps corrects.
+ * 
+ * Cette classe est static, les données qu'elle contient ne sont interesssant
+ * que sur le court terme.
  * 
  * @author Charles NEAU
  */
@@ -24,6 +30,15 @@ public class Temps
 	private static Date				dateDebut;
 	/** The dates. */
 	private static ArrayList<Date>	dates	= new ArrayList<Date>();
+
+	/**
+	 * Restart.
+	 */
+	public void restart()
+	{
+		dateDebut = new Date();
+		dates = new ArrayList<Date>();
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -53,9 +68,15 @@ public class Temps
 	 * 
 	 * @return the temps
 	 */
-	public static ArrayList<Double> getTemps()
+	public static ArrayList<Long> getTemps()
 	{
-		return null;
+		final ArrayList<Long> temps = new ArrayList<Long>();
+		final long time = dateDebut.getTime();
+		for (final Date date : dates)
+		{
+			temps.add(date.getTime() - time);
+		}
+		return temps;
 	}
 
 	/* _________________________________________________________ */

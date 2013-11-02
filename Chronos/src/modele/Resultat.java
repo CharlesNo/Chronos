@@ -14,33 +14,34 @@ import java.util.Date;
 /* _________________________________________________________ */
 /**
  * The Class Resultat.
+ * Un {@link Resultat} est un le résultat d'une performance.
+ * Il contient le temps du chronomètre, la distance parcouru,
+ * ainsi que la date de la création de ce temps.
  * 
  * @author Charles NEAU
  */
 public class Resultat
 {
 	/** The chrono. */
-	private final Double	chrono;
+	private final long	chrono;
 	/** La date. */
-	private final Date		date;
+	private final Date	date;
 	/** The distance. */
-	private final Float		distance;
+	private final Float	distance;
 
 	/* _________________________________________________________ */
 	/**
 	 * Instantiates a new resultat.
 	 * 
-	 * @param date
-	 *            the date
 	 * @param chrono
 	 *            the chrono
 	 * @param distance
 	 *            the distance
 	 */
-	public Resultat(final Date date, final Double chrono, final Float distance)
+	public Resultat(final long chrono, final Float distance)
 	{
 		super();
-		this.date = date;
+		date = new Date();
 		this.chrono = chrono;
 		this.distance = distance;
 	}
@@ -51,7 +52,7 @@ public class Resultat
 	 * 
 	 * @return la valeur du champ chrono.
 	 */
-	public Double getChrono()
+	public long getChrono()
 	{
 		return chrono;
 	}

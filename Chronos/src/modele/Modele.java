@@ -10,17 +10,23 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import android.app.Activity;
+import android.widget.ArrayAdapter;
 
 /* _________________________________________________________ */
 /**
  * The Class Modele.
+ * Cette classe contient la liste des Athletes.
  * 
  * @author Charles NEAU
  */
-public class Modele
+public class Modele extends Observable
 {
 	/** The athletes. */
 	private final ArrayList<Athlete>	athletes;
+	/** The adapter. */
+	private final ArrayAdapter<Athlete>	adapter;
 
 	/* _________________________________________________________ */
 	/**
@@ -51,10 +57,15 @@ public class Modele
 	/* _________________________________________________________ */
 	/**
 	 * Instantiates a new manager.
+	 * 
+	 * @param activity
+	 *            the activity
 	 */
-	public Modele()
+	public Modele(final Activity activity)
 	{
 		athletes = new ArrayList<Athlete>();
+		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
+				android.R.layout.simple_list_item_1, athletes);
 	}
 
 	/* _________________________________________________________ */
@@ -88,6 +99,17 @@ public class Modele
 	 */
 	public void start()
 	{
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ adapter.
+	 * 
+	 * @return la valeur du champ adapter.
+	 */
+	public ArrayAdapter<Athlete> getAdapter()
+	{
+		return adapter;
 	}
 }
 /* _________________________________________________________ */
