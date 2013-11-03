@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Chronometer;
+
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -21,6 +22,8 @@ public class ControlerFenChrono implements OnClickListener
 {
 	/** The activity. */
 	private final Activity	activity;
+	/** Le chronometre */
+	private final Chronometer chronos;
 
 	/**
 	 * Instantiates a new controler fen chrono.
@@ -31,6 +34,7 @@ public class ControlerFenChrono implements OnClickListener
 	public ControlerFenChrono(final Activity activityChronos)
 	{
 		activity = activityChronos;
+		chronos = (Chronometer) activity.findViewById(R.id.chronometer);
 	}
 
 	/**
@@ -43,22 +47,19 @@ public class ControlerFenChrono implements OnClickListener
 	public String miseEnForme(final long timeElapsed)
 	{
 		final DecimalFormat df = new DecimalFormat("00");
-		final int hours = (int) (timeElapsed / (3600 * 1000));
+		
 		int remaining = (int) (timeElapsed % (3600 * 1000));
 		final int minutes = remaining / (60 * 1000);
 		remaining = remaining % (60 * 1000);
 		final int seconds = remaining / 1000;
 		remaining = remaining % (1000);
 		final int milliseconds = (((int) timeElapsed % 1000));
-		String text = "";
-		if (hours > 0)
-		{
-			text += df.format(hours) + ":";
-		}
-		text += df.format(minutes) + ":";
-		text += df.format(seconds) + ":";
-		text += Integer.toString(milliseconds);
-		return text;
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(df.format(minutes)).append(":");
+		builder.append(df.format(seconds)).append(":");
+		builder.append(Integer.toString(milliseconds));
+		return builder.toString();
 	}
 
 	/* _________________________________________________________ */
@@ -72,22 +73,24 @@ public class ControlerFenChrono implements OnClickListener
 	@Override
 	public void onClick(final View source)
 	{
-		final Chronometer chrono = (Chronometer) activity
-				.findViewById(R.id.chronometer);
+		
 		if (source == activity.findViewById(R.id.btStart))
 		{
-			chrono.start();
+		      chronos.start();
+		  
+		      
 		}
 		if (source == activity.findViewById(R.id.btStop))
 		{
-			chrono.stop();
+			
+			chronos.stop();
 			final Intent intent = new Intent(activity,
 					ActivityListeAthlete.class);
 			final Bundle objetbunble = new Bundle();
 			objetbunble.putString(
 					"temps",
 					miseEnForme(SystemClock.elapsedRealtime()
-							- chrono.getBase()));
+							- chronos.getBase()));
 			intent.putExtras(objetbunble);
 			activity.startActivity(intent);
 		}

@@ -12,5 +12,6 @@
     <string name="Chronometre">Chronometre</string>
     <string name="Stop">Stop</string>
     <string name="Start">Start</string>
+    <string name="Reset">Reset</string>
 
 </resources>

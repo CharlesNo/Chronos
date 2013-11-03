@@ -1,10 +1,20 @@
 package vue;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Observable;
 import java.util.Observer;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import modele.Athlete;
 import modele.Modele;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.ListView;
@@ -106,4 +116,5 @@ public class ActivityListeAthlete extends Activity implements Observer
 	{
 		// TODO Auto-generated method stub
 	}
+
 }

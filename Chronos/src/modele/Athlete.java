@@ -9,6 +9,7 @@
  */
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import modele.exception.InvalideNomException;
 import modele.exception.InvalidePrenomException;
@@ -24,7 +25,7 @@ import modele.exception.InvalidePrenomException;
  * @author Jerome POINAS
  *         Charles NEAU
  */
-public class Athlete
+public class Athlete implements Serializable
 {
 	/**
 	 * Le nom de famille de l'athlete.

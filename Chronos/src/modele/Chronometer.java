@@ -198,18 +198,15 @@ public class Chronometer extends TextView
 	{
 		timeElapsed = now - mBase;
 		final DecimalFormat df = new DecimalFormat("00");
-		final int hours = (int) (timeElapsed / (3600 * 1000));
+		
 		int remaining = (int) (timeElapsed % (3600 * 1000));
 		final int minutes = remaining / (60 * 1000);
 		remaining = remaining % (60 * 1000);
 		final int seconds = remaining / 1000;
 		remaining = remaining % (1000);
 		final int milliseconds = (((int) timeElapsed % 1000));
+		
 		String text = "";
-		if (hours > 0)
-		{
-			text += df.format(hours) + ":";
-		}
 		text += df.format(minutes) + ":";
 		text += df.format(seconds) + ":";
 		text += Integer.toString(milliseconds);

@@ -9,6 +9,10 @@
  */
 package controleur;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 import modele.Athlete;
 import modele.Modele;
 import modele.exception.InvalideNomException;
@@ -16,6 +20,7 @@ import modele.exception.InvalidePrenomException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -82,6 +87,7 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			{
 				final Athlete athlete = new Athlete(champNom.getText()
 						.toString(), champPrenom.getText().toString());
+				
 				modele.getAdapter().add(athlete);
 				modele.getAdapter().notifyDataSetChanged();
 			}
@@ -175,6 +181,7 @@ public class ControlerListeAthlete implements OnItemClickListener,
 		adb.show();
 		return true;
 	}
+	
 }
 /* _________________________________________________________ */
 /*
