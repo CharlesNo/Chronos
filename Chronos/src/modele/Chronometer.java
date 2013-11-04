@@ -16,9 +16,6 @@ import android.widget.TextView;
  */
 public class Chronometer extends TextView
 {
-	/** The Constant TAG. */
-	@SuppressWarnings("unused")
-	private static final String			TAG			= "Chronometer";
 	/** The m base. */
 	private long						mBase;
 	/** The m visible. */
@@ -198,19 +195,17 @@ public class Chronometer extends TextView
 	{
 		timeElapsed = now - mBase;
 		final DecimalFormat df = new DecimalFormat("00");
-		
 		int remaining = (int) (timeElapsed % (3600 * 1000));
 		final int minutes = remaining / (60 * 1000);
 		remaining = remaining % (60 * 1000);
 		final int seconds = remaining / 1000;
 		remaining = remaining % (1000);
-		final int milliseconds = (((int) timeElapsed % 1000));
-		
-		String text = "";
-		text += df.format(minutes) + ":";
-		text += df.format(seconds) + ":";
-		text += Integer.toString(milliseconds);
-		setText(text);
+		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
+		final StringBuilder text = new StringBuilder();
+		text.append(df.format(minutes)).append(":");
+		text.append(df.format(seconds)).append(":");
+		text.append(Integer.toString(milliseconds));
+		setText(text.toString());
 	}
 
 	/**

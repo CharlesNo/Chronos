@@ -26,6 +26,7 @@
         android:layout_marginTop="28dp"
         android:layout_toLeftOf="@+id/bouttonAddAthlete"
         android:background="@drawable/backgroundlistview"
+        android:textSize="12sp"
         tools:listitem="@android:layout/simple_list_item_single_choice" >
 
     </ListView>
@@ -57,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextNom"
+        android:layout_alignRight="@+id/editTextNom"
         android:layout_alignTop="@+id/listAthlete"
         android:text="@string/btAjouterAthlete" />
 

@@ -65,7 +65,7 @@ public class Modele extends Observable
 	{
 		athletes = new ArrayList<Athlete>();
 		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
-				android.R.layout.simple_list_item_1, athletes);
+				android.R.layout.simple_list_item_single_choice, athletes);
 	}
 
 	/* _________________________________________________________ */

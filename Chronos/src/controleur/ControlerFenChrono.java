@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Chronometer;
-
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -21,9 +19,9 @@ import com.chronos.R;
 public class ControlerFenChrono implements OnClickListener
 {
 	/** The activity. */
-	private final Activity	activity;
+	private final Activity				activity;
 	/** Le chronometre */
-	private final Chronometer chronos;
+	private final modele.Chronometer	chronos;
 
 	/**
 	 * Instantiates a new controler fen chrono.
@@ -34,7 +32,7 @@ public class ControlerFenChrono implements OnClickListener
 	public ControlerFenChrono(final Activity activityChronos)
 	{
 		activity = activityChronos;
-		chronos = (Chronometer) activity.findViewById(R.id.chronometer);
+		chronos = (modele.Chronometer) activity.findViewById(R.id.chronometer);
 	}
 
 	/**
@@ -47,15 +45,13 @@ public class ControlerFenChrono implements OnClickListener
 	public String miseEnForme(final long timeElapsed)
 	{
 		final DecimalFormat df = new DecimalFormat("00");
-		
 		int remaining = (int) (timeElapsed % (3600 * 1000));
 		final int minutes = remaining / (60 * 1000);
 		remaining = remaining % (60 * 1000);
 		final int seconds = remaining / 1000;
 		remaining = remaining % (1000);
 		final int milliseconds = (((int) timeElapsed % 1000));
-		
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		builder.append(df.format(minutes)).append(":");
 		builder.append(df.format(seconds)).append(":");
 		builder.append(Integer.toString(milliseconds));
@@ -73,16 +69,12 @@ public class ControlerFenChrono implements OnClickListener
 	@Override
 	public void onClick(final View source)
 	{
-		
 		if (source == activity.findViewById(R.id.btStart))
 		{
-		      chronos.start();
-		  
-		      
+			chronos.start();
 		}
 		if (source == activity.findViewById(R.id.btStop))
 		{
-			
 			chronos.stop();
 			final Intent intent = new Intent(activity,
 					ActivityListeAthlete.class);
