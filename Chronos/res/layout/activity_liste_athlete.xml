@@ -28,6 +28,7 @@
         android:background="@drawable/backgroundlistview"
         android:textSize="12sp"
         tools:listitem="@android:layout/simple_list_item_single_choice" >
+        
 
     </ListView>
 

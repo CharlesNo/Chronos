@@ -204,7 +204,7 @@ public class Chronometer extends TextView
 		final StringBuilder text = new StringBuilder();
 		text.append(df.format(minutes)).append(":");
 		text.append(df.format(seconds)).append(":");
-		text.append(df.format(Integer.toString(milliseconds)));
+		text.append(df.format(milliseconds));
 		setText(text.toString());
 	}
 

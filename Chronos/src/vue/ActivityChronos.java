@@ -1,15 +1,10 @@
 package vue;
 
-import modele.Chronometer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
-import android.widget.LinearLayout;
-
 import com.chronos.R;
-import com.chronos.R.layout;
-
 import controleur.ControlerFenChrono;
 
 /**
@@ -30,7 +25,6 @@ public class ActivityChronos extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chronometre);
-		
 		final Button btStart = (Button) findViewById(R.id.btStart);
 		final Button btStop = (Button) findViewById(R.id.btStop);
 		final ControlerFenChrono controler = new ControlerFenChrono(this);
