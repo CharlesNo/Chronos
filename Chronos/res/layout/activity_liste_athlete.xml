@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/athle"
     tools:context=".ActivityListeAthlete" >
 
     <TextView
@@ -26,7 +27,7 @@
         android:layout_marginTop="28dp"
         android:layout_toLeftOf="@+id/bouttonAddAthlete"
         android:background="@drawable/backgroundlistview"
-        android:textSize="12sp"
+        android:textSize="12sp"   
         tools:listitem="@android:layout/simple_list_item_single_choice" >
         
 

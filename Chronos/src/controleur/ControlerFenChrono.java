@@ -50,11 +50,11 @@ public class ControlerFenChrono implements OnClickListener
 		remaining = remaining % (60 * 1000);
 		final int seconds = remaining / 1000;
 		remaining = remaining % (1000);
-		final int milliseconds = (((int) timeElapsed % 1000));
+		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
 		final StringBuilder builder = new StringBuilder();
 		builder.append(df.format(minutes)).append(":");
 		builder.append(df.format(seconds)).append(":");
-		builder.append(Integer.toString(milliseconds));
+		builder.append(df.format(milliseconds));
 		return builder.toString();
 	}
 
