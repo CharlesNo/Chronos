@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import com.chronos.R;
-import controleur.ControlerFenChrono;
+import controler.ControlerFenChrono;
 
 /**
  * The Class ActivityChronos.

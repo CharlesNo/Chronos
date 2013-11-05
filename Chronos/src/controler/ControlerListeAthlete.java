@@ -7,7 +7,7 @@
  * 
  * Auteur : Charles NEAU
  */
-package controleur;
+package controler;
 
 import modele.Athlete;
 import modele.Modele;

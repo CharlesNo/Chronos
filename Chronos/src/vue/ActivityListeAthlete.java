@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.chronos.R;
-import controleur.ControlerListeAthlete;
+import controler.ControlerListeAthlete;
 import database.DatabaseHandler;
 
 /**
@@ -50,10 +50,10 @@ public class ActivityListeAthlete extends Activity implements Observer
 		/* Creation du modele et ajout en tant qu'observeur */
 		final Modele modele = new Modele(this, database);
 		modele.addObserver(this);
-		/* Creation du controleur */
+		/* Creation du controler */
 		final ControlerListeAthlete controler = new ControlerListeAthlete(this,
 				modele, database);
-		/* Ajout du controleur en tant que Listener */
+		/* Ajout du controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);

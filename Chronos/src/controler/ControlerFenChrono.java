@@ -1,4 +1,4 @@
-package controleur;
+package controler;
 
 import vue.ActivityListeAthlete;
 import android.app.Activity;
