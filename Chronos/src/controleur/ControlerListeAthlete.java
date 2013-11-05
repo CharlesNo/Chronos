@@ -167,8 +167,8 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			final int arg2, final long arg3)
 	{
 		final AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		adb.setTitle("Suppression d'un athlete");
-		adb.setMessage("Etes vous sure de vouloir le supprimer ? ");
+		adb.setTitle("Suppression d'un athlète");
+		adb.setMessage("Êtes vous sûr de vouloir le supprimer ? ");
 		final int positionToRemove = arg2;
 		adb.setNegativeButton("Cancel", null);
 		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
