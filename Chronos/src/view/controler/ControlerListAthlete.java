@@ -148,7 +148,7 @@ public class ControlerListAthlete implements OnItemClickListener,
 				.findViewById(R.id.tempsChrono);
 		athleteSelected.getPerformances()
 				.add(new Performance(tempsChrono, 100));
-		Toast.makeText(activity, "Performance associé.", Toast.LENGTH_SHORT)
+		Toast.makeText(activity, "Performance associée.", Toast.LENGTH_SHORT)
 				.show();
 	}
 
