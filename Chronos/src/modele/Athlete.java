@@ -39,6 +39,10 @@ public class Athlete implements Serializable
 	 * Les performances de cet athlete.
 	 */
 	private final ArrayList<Resultat>	resultats;
+	/**
+	 * ID de l'athlete
+	 */
+	private int							id;
 
 	/* _________________________________________________________ */
 	/**
@@ -56,9 +60,23 @@ public class Athlete implements Serializable
 	public Athlete(final String nom, final String prenom)
 			throws InvalideNomException, InvalidePrenomException
 	{
+		id++;
 		resultats = new ArrayList<Resultat>();
 		setNom(nom);
 		setPrenom(prenom);
+		setId(id);
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Methode qui permet de modifier l'id de l'athlete.
+	 * 
+	 * @param id
+	 *            ID de l'athlete
+	 */
+	private void setId(final int id)
+	{
+		this.id = id;
 	}
 
 	/**
@@ -139,6 +157,17 @@ public class Athlete implements Serializable
 		final StringBuilder builder = new StringBuilder();
 		builder.append(prenom).append(" ").append(nom);
 		return builder.toString();
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne l'ID de l'athlete.
+	 * 
+	 * @return L'id de l'athlete.
+	 */
+	public int getID()
+	{
+		return id;
 	}
 }
 /* _________________________________________________________ */

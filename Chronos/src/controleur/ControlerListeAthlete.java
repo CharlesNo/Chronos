@@ -9,10 +9,6 @@
  */
 package controleur;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 import modele.Athlete;
 import modele.Modele;
 import modele.exception.InvalideNomException;
@@ -20,7 +16,6 @@ import modele.exception.InvalidePrenomException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -30,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.chronos.R;
+import database.DatabaseHandler;
 
 /* _________________________________________________________ */
 /**
@@ -47,6 +43,8 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	private final ListView	lvListe;
 	/** The modele. */
 	private final Modele	modele;
+	/** La base de données */
+	final DatabaseHandler	database;
 
 	/* _________________________________________________________ */
 	/**
@@ -57,10 +55,12 @@ public class ControlerListeAthlete implements OnItemClickListener,
 	 * @param modele
 	 *            the modele
 	 */
-	public ControlerListeAthlete(final Activity activity, final Modele modele)
+	public ControlerListeAthlete(final Activity activity, final Modele modele,
+			final DatabaseHandler database)
 	{
 		this.activity = activity;
 		this.modele = modele;
+		this.database = database;
 		lvListe = (ListView) activity.findViewById(R.id.listAthlete);
 		lvListe.setAdapter(modele.getAdapter());
 	}
@@ -87,8 +87,8 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			{
 				final Athlete athlete = new Athlete(champNom.getText()
 						.toString(), champPrenom.getText().toString());
-				
 				modele.getAdapter().add(athlete);
+				database.addAthlete(athlete);
 				modele.getAdapter().notifyDataSetChanged();
 			}
 			catch (final InvalideNomException e)
@@ -174,14 +174,14 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			@Override
 			public void onClick(final DialogInterface dialog, final int which)
 			{
-				modele.getAdapter().remove(
-						(Athlete) lvListe.getItemAtPosition(positionToRemove));
+				final Athlete athleteToRemove = (Athlete) lvListe.getItemAtPosition(positionToRemove);
+				modele.getAdapter().remove(athleteToRemove);
+				database.deleteAthlete(athleteToRemove);
 			}
 		});
 		adb.show();
 		return true;
 	}
-	
 }
 /* _________________________________________________________ */
 /*

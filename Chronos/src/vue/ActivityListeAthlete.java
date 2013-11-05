@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.chronos.R;
 import controleur.ControlerListeAthlete;
+import database.DatabaseHandler;
 
 /**
  * La classe Main activity.
@@ -43,12 +44,14 @@ public class ActivityListeAthlete extends Activity implements Observer
 		/* Initialisation des attributs */
 		lvListe = (ListView) findViewById(R.id.listAthlete);
 		buttonAjouter = (Button) findViewById(R.id.bouttonAddAthlete);
+		/* Base de données */
+		final DatabaseHandler database = new DatabaseHandler(getBaseContext());
 		/* Creation du modele et ajout en tant qu'observeur */
-		final Modele modele = new Modele(this);
+		final Modele modele = new Modele(this, database);
 		modele.addObserver(this);
 		/* Creation du controleur */
 		final ControlerListeAthlete controler = new ControlerListeAthlete(this,
-				modele);
+				modele, database);
 		/* Ajout du controleur en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemClickListener(controler);

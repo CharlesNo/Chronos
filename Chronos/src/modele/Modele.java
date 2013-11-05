@@ -10,9 +10,11 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import android.app.Activity;
 import android.widget.ArrayAdapter;
+import database.DatabaseHandler;
 
 /* _________________________________________________________ */
 /**
@@ -24,7 +26,7 @@ import android.widget.ArrayAdapter;
 public class Modele extends Observable
 {
 	/** The athletes. */
-	private final ArrayList<Athlete>	athletes;
+	private List<Athlete>				athletes	= new ArrayList<Athlete>();	;
 	/** The adapter. */
 	private final ArrayAdapter<Athlete>	adapter;
 
@@ -60,10 +62,12 @@ public class Modele extends Observable
 	 * 
 	 * @param activity
 	 *            the activity
+	 * @param database
+	 *            La base de données.
 	 */
-	public Modele(final Activity activity)
+	public Modele(final Activity activity, final DatabaseHandler database)
 	{
-		athletes = new ArrayList<Athlete>();
+		athletes = database.getAllAthletes();
 		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
 				android.R.layout.simple_list_item_single_choice, athletes);
 	}
@@ -88,7 +92,7 @@ public class Modele extends Observable
 	 * 
 	 * @return la valeur du champ athletes.
 	 */
-	public ArrayList<Athlete> getAthletes()
+	public List<Athlete> getAthletes()
 	{
 		return athletes;
 	}
