@@ -12,9 +12,9 @@ package modele;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import persistence.DatabaseHandler;
 import android.app.Activity;
 import android.widget.ArrayAdapter;
-import database.DatabaseHandler;
 
 /* _________________________________________________________ */
 /**
@@ -62,7 +62,7 @@ public class Modele extends Observable
 	 * 
 	 * @param activity
 	 *            the activity
-	 * @param database
+	 * @param persistence
 	 *            La base de données.
 	 */
 	public Modele(final Activity activity, final DatabaseHandler database)

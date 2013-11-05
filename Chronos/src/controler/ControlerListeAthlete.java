@@ -9,6 +9,7 @@
  */
 package controler;
 
+import persistence.DatabaseHandler;
 import modele.Athlete;
 import modele.Modele;
 import modele.Resultat;
@@ -27,7 +28,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.chronos.R;
-import database.DatabaseHandler;
 
 /* _________________________________________________________ */
 /**

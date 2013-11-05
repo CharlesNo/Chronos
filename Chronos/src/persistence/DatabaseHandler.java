@@ -7,7 +7,7 @@
  * 
  * Auteur : Jerome POINAS
  */
-package database;
+package persistence;
 
 import java.util.ArrayList;
 import java.util.List;

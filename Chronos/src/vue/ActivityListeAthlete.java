@@ -3,6 +3,7 @@ package vue;
 import java.text.DecimalFormat;
 import java.util.Observable;
 import java.util.Observer;
+import persistence.DatabaseHandler;
 import modele.Modele;
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.chronos.R;
 import controler.ControlerListeAthlete;
-import database.DatabaseHandler;
 
 /**
  * La classe Main activity.
