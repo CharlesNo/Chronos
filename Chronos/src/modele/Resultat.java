@@ -27,7 +27,7 @@ public class Resultat
 	/** La date. */
 	private final Date	date;
 	/** The distance. */
-	private final Float	distance;
+	private final int	distance;
 
 	/* _________________________________________________________ */
 	/**
@@ -38,7 +38,7 @@ public class Resultat
 	 * @param distance
 	 *            the distance
 	 */
-	public Resultat(final long chrono, final Float distance)
+	public Resultat(final long chrono, final int distance)
 	{
 		super();
 		date = new Date();
@@ -74,7 +74,7 @@ public class Resultat
 	 * 
 	 * @return la valeur du champ distance.
 	 */
-	public Float getDistance()
+	public int getDistance()
 	{
 		return distance;
 	}

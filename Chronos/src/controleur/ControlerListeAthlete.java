@@ -11,6 +11,7 @@ package controleur;
 
 import modele.Athlete;
 import modele.Modele;
+import modele.Resultat;
 import modele.exception.InvalideNomException;
 import modele.exception.InvalidePrenomException;
 import android.app.Activity;
@@ -23,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.chronos.R;
 import database.DatabaseHandler;
@@ -135,13 +137,13 @@ public class ControlerListeAthlete implements OnItemClickListener,
 		// On recupere l'athlete selectionné
 		final Athlete athleteSelected = (Athlete) lvListe
 				.getItemAtPosition(position);
-		// Boite de dialogue
-		final AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		adb.setTitle("Sélection Item");
-		adb.setMessage("Votre choix : " + athleteSelected.getPrenom() + " "
-				+ athleteSelected.getNom());
-		adb.setPositiveButton("Ok", null);
-		adb.show();
+		final TextView champsTemps = (TextView) activity
+				.findViewById(R.id.tempsChrono);
+		athleteSelected.getResultats().add(
+				new Resultat(Long.parseLong(champsTemps.getText().toString()),
+						100));
+		Toast.makeText(activity, "Resultat associé.", Toast.LENGTH_SHORT)
+				.show();
 	}
 
 	/* _________________________________________________________ */
@@ -174,7 +176,8 @@ public class ControlerListeAthlete implements OnItemClickListener,
 			@Override
 			public void onClick(final DialogInterface dialog, final int which)
 			{
-				final Athlete athleteToRemove = (Athlete) lvListe.getItemAtPosition(positionToRemove);
+				final Athlete athleteToRemove = (Athlete) lvListe
+						.getItemAtPosition(positionToRemove);
 				modele.getAdapter().remove(athleteToRemove);
 				database.deleteAthlete(athleteToRemove);
 			}

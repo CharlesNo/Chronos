@@ -1,6 +1,5 @@
 package controleur;
 
-import java.text.DecimalFormat;
 import vue.ActivityListeAthlete;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,29 +34,6 @@ public class ControlerFenChrono implements OnClickListener
 		chronos = (modele.Chronometer) activity.findViewById(R.id.chronometer);
 	}
 
-	/**
-	 * Methode de mise en forme du rendu chronometre.
-	 * 
-	 * @param timeElapsed
-	 *            the time elapsed
-	 * @return the string
-	 */
-	public String miseEnForme(final long timeElapsed)
-	{
-		final DecimalFormat df = new DecimalFormat("00");
-		int remaining = (int) (timeElapsed % (3600 * 1000));
-		final int minutes = remaining / (60 * 1000);
-		remaining = remaining % (60 * 1000);
-		final int seconds = remaining / 1000;
-		remaining = remaining % (1000);
-		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
-		final StringBuilder builder = new StringBuilder();
-		builder.append(df.format(minutes)).append(":");
-		builder.append(df.format(seconds)).append(":");
-		builder.append(df.format(milliseconds));
-		return builder.toString();
-	}
-
 	/* _________________________________________________________ */
 	/**
 	 * On click.
@@ -81,7 +57,7 @@ public class ControlerFenChrono implements OnClickListener
 			final Bundle objetbunble = new Bundle();
 			objetbunble.putString(
 					"temps",
-					miseEnForme(SystemClock.elapsedRealtime()
+					String.valueOf(SystemClock.elapsedRealtime()
 							- chronos.getBase()));
 			intent.putExtras(objetbunble);
 			activity.startActivity(intent);

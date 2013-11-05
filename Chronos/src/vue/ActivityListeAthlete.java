@@ -1,5 +1,6 @@
 package vue;
 
+import java.text.DecimalFormat;
 import java.util.Observable;
 import java.util.Observer;
 import modele.Modele;
@@ -74,6 +75,29 @@ public class ActivityListeAthlete extends Activity implements Observer
 			final TextView champsTemps = (TextView) findViewById(R.id.tempsChrono);
 			champsTemps.setText(temps);
 		}
+	}
+
+	/**
+	 * Methode de mise en forme du rendu chronometre.
+	 * 
+	 * @param timeElapsed
+	 *            the time elapsed
+	 * @return the string
+	 */
+	public String miseEnForme(final long timeElapsed)
+	{
+		final DecimalFormat df = new DecimalFormat("00");
+		int remaining = (int) (timeElapsed % (3600 * 1000));
+		final int minutes = remaining / (60 * 1000);
+		remaining = remaining % (60 * 1000);
+		final int seconds = remaining / 1000;
+		remaining = remaining % (1000);
+		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
+		final StringBuilder builder = new StringBuilder();
+		builder.append(df.format(minutes)).append(":");
+		builder.append(df.format(seconds)).append(":");
+		builder.append(df.format(milliseconds));
+		return builder.toString();
 	}
 
 	/* _________________________________________________________ */
