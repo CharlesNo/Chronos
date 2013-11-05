@@ -11,15 +11,15 @@ package persistence;
 
 import java.util.ArrayList;
 import java.util.List;
-import modele.Athlete;
-import modele.Constantes;
-import modele.exception.InvalideNomException;
-import modele.exception.InvalidePrenomException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import business.Athlete;
+import business.Constantes;
+import business.exceptions.InvalidFirstNameException;
+import business.exceptions.InvalidNameException;
 
 /* _________________________________________________________ */
 /**
@@ -44,7 +44,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 
 	/* _________________________________________________________ */
 	/**
+	 * On create.
+	 * 
 	 * @param db
+	 *            the db
 	 * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
 	 */
 	@Override
@@ -67,6 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	 * @param newVersion
 	 *            Nouvelle version.
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void onUpgrade(final SQLiteDatabase db, final int oldVersion,
 			final int newVersion)
@@ -88,8 +92,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	{
 		final SQLiteDatabase db = getWritableDatabase();
 		final ContentValues values = new ContentValues();
-		values.put(Constantes.KEY_NOM, athlete.getNom());
-		values.put(Constantes.KEY_PRENOM, athlete.getPrenom());
+		values.put(Constantes.KEY_NOM, athlete.getName());
+		values.put(Constantes.KEY_PRENOM, athlete.getFirstName());
 		// Insertion d'une ligne dans la table
 		db.insert(Constantes.TABLE_ATHLETE, null, values);
 		db.close(); // On ferme la connexion
@@ -109,21 +113,23 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 				Constantes.KEY_ID, Constantes.KEY_NOM, Constantes.KEY_PRENOM },
 				Constantes.KEY_ID + "=?", new String[] { String.valueOf(id) },
 				null, null, null, null);
+		Athlete athlete = null;
 		if (cursor != null)
 		{
 			cursor.moveToFirst();
-		}
-		Athlete athlete = null;
-		try
-		{
-			athlete = new Athlete(cursor.getString(1), cursor.getString(2));
+			try
+			{
+				athlete = new Athlete(cursor.getString(1), cursor.getString(2));
+			}
+			catch (final InvalidNameException e)
+			{
+				e.printStackTrace();
+			}
+			catch (final InvalidFirstNameException e)
+			{
+				e.printStackTrace();
+			}
 			return athlete;
-		}
-		catch (final InvalideNomException e)
-		{
-		}
-		catch (final InvalidePrenomException e)
-		{
 		}
 		return athlete;
 	}
@@ -152,10 +158,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 							cursor.getString(2));
 					mesAthletes.add(athlete);
 				}
-				catch (final InvalideNomException e)
+				catch (final InvalidNameException e)
 				{
 				}
-				catch (final InvalidePrenomException e)
+				catch (final InvalidFirstNameException e)
 				{
 				}
 			}
@@ -172,12 +178,12 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	 * @return L'ID de l'athlete modifié.
 	 * 
 	 */
-	public int updateContact(final Athlete athlete)
+	public int updateAthlete(final Athlete athlete)
 	{
 		final SQLiteDatabase db = getWritableDatabase();
 		final ContentValues values = new ContentValues();
-		values.put(Constantes.KEY_NOM, athlete.getNom());
-		values.put(Constantes.KEY_PRENOM, athlete.getPrenom());
+		values.put(Constantes.KEY_NOM, athlete.getName());
+		values.put(Constantes.KEY_PRENOM, athlete.getFirstName());
 		// Mise à jour
 		return db.update(Constantes.TABLE_ATHLETE, values, Constantes.KEY_ID
 				+ " = ?", new String[] { String.valueOf(athlete.getID()) });
@@ -194,7 +200,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	{
 		final SQLiteDatabase db = getWritableDatabase();
 		db.delete(Constantes.TABLE_ATHLETE, Constantes.KEY_NOM + " = ?",
-				new String[] { String.valueOf(athlete.getNom()) });
+				new String[] { String.valueOf(athlete.getName()) });
 		db.close();
 	}
 
@@ -203,7 +209,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	 * 
 	 * @return Le nombre d'athlete dans la base de données.
 	 */
-	public int getContactsCount()
+	public int getAthleteCount()
 	{
 		final String countQuery = "SELECT  * FROM " + Constantes.TABLE_ATHLETE;
 		final SQLiteDatabase db = getReadableDatabase();
