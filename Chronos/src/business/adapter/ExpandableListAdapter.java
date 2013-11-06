@@ -100,7 +100,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	public View getChildView(final int groupPosition, final int childPosition,
 			final boolean isLastChild, View convertView, final ViewGroup parent)
 	{
-		final String laptop = (String) getChild(groupPosition, childPosition);
+		final Performance perf = (Performance) getChild(groupPosition,
+				childPosition);
 		final LayoutInflater inflater = context.getLayoutInflater();
 		if (convertView == null)
 		{
@@ -108,7 +109,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 		}
 		final TextView item = (TextView) convertView
 				.findViewById(R.id.resultat);
-		item.setText(laptop);
+		item.setText(perf.toString());
 		return convertView;
 	}
 
@@ -121,7 +122,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	@Override
 	public int getChildrenCount(final int groupPosition)
 	{
-		return resultsCollection.get(listeAthlete.get(groupPosition)).size();
+		final int i = resultsCollection.get(listeAthlete.get(groupPosition))
+				.size();
+		return i;
 	}
 
 	/* _________________________________________________________ */

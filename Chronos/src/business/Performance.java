@@ -9,7 +9,8 @@
  */
 package business;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 
 /* _________________________________________________________ */
 /**
@@ -25,7 +26,7 @@ public class Performance
 	/** The chrono. */
 	private final long	chrono;
 	/** La date. */
-	private final Date	date;
+	private String		date;
 	/** The distance. */
 	private final int	distance;
 
@@ -41,9 +42,21 @@ public class Performance
 	public Performance(final long chrono, final int distance)
 	{
 		super();
-		date = new Date();
+		formatDate();
 		this.chrono = chrono;
 		this.distance = distance;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Init date format.
+	 */
+	private void formatDate()
+	{
+		final Calendar cal = Calendar.getInstance(Locale.FRANCE);
+		final java.text.DateFormat dateF = java.text.DateFormat
+				.getDateInstance(java.text.DateFormat.MEDIUM);
+		date = dateF.format(cal.getTime());
 	}
 
 	/* _________________________________________________________ */
@@ -63,7 +76,7 @@ public class Performance
 	 * 
 	 * @return la valeur du champ date.
 	 */
-	public Date getDate()
+	public String getDate()
 	{
 		return date;
 	}

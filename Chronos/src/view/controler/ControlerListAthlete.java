@@ -139,7 +139,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 				database.deleteAthlete(athleteSelected);
 				model.getAdapter().remove(athleteSelected);
 				model.getAdapter().notifyDataSetChanged();
-				/************** Ajout du nouvelle athlete **********************/
+				/**************Ajout du nouvelle athlete **********************/
 				model.getAdapter().add(athlete);
 				model.getAdapter().notifyDataSetChanged();
 				lvListe.setAdapter(model.getAdapter());

@@ -86,22 +86,7 @@ public class Model extends Observable
 	{
 		for (final Athlete athlete : athletes)
 		{
-			loadChild(athlete.getPerformances());
-			mesResultats.put(athlete, new ArrayList<Performance>());
-		}
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * @param listPerf
-	 *            La liste des resultats de l'athlete.
-	 */
-	private void loadChild(final ArrayList<Performance> listPerf)
-	{
-		childList = new ArrayList<Performance>();
-		for (final Performance perf : listPerf)
-		{
-			childList.add(perf);
+			mesResultats.put(athlete, athlete.getPerformances());
 		}
 	}
 
