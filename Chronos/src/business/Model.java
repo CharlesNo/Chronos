@@ -10,11 +10,13 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import persistence.DatabaseHandler;
 import android.app.Activity;
-import android.widget.ArrayAdapter;
+import business.adapter.ExpandableListAdapter;
 
 /* _________________________________________________________ */
 /**
@@ -26,9 +28,13 @@ import android.widget.ArrayAdapter;
 public class Model extends Observable
 {
 	/** The athletes. */
-	private List<Athlete>				athletes	= new ArrayList<Athlete>();
+	private List<Athlete>							athletes		= new ArrayList<Athlete>();
 	/** The adapter. */
-	private final ArrayAdapter<Athlete>	adapter;
+	private final ExpandableListAdapter				adapter;
+	/** La map des resultat par athletes. */
+	private final Map<Athlete, List<Performance>>	mesResultats	= new HashMap<Athlete, List<Performance>>();
+	/** la liste des resultat par child */
+	private List<Performance>						childList;
 
 	/* _________________________________________________________ */
 	/**
@@ -68,8 +74,35 @@ public class Model extends Observable
 	public Model(final Activity activity, final DatabaseHandler database)
 	{
 		athletes = database.getAllAthletes();
-		adapter = new ArrayAdapter<Athlete>(activity.getBaseContext(),
-				android.R.layout.simple_list_item_single_choice, athletes);
+		initResultats();
+		adapter = new ExpandableListAdapter(activity, athletes, mesResultats);
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Initialisation de tous les resultats des athletes.
+	 */
+	private void initResultats()
+	{
+		for (final Athlete athlete : athletes)
+		{
+			loadChild(athlete.getPerformances());
+			mesResultats.put(athlete, new ArrayList<Performance>());
+		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * @param listPerf
+	 *            La liste des resultats de l'athlete.
+	 */
+	private void loadChild(final ArrayList<Performance> listPerf)
+	{
+		childList = new ArrayList<Performance>();
+		for (final Performance perf : listPerf)
+		{
+			childList.add(perf);
+		}
 	}
 
 	/* _________________________________________________________ */
@@ -111,7 +144,7 @@ public class Model extends Observable
 	 * 
 	 * @return la valeur du champ adapter.
 	 */
-	public ArrayAdapter<Athlete> getAdapter()
+	public ExpandableListAdapter getAdapter()
 	{
 		return adapter;
 	}

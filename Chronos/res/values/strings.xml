@@ -11,7 +11,7 @@
     <string name="Chronometre">Chronometre</string>
     <string name="Stop">Stop</string>
     <string name="Start">Start</string>
-    <string name="Reset">Reset</string>
     <string name="ImageDesc">Image</string>
+    <string name="tps">Temps : </string>
 
 </resources>

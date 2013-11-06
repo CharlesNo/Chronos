@@ -186,7 +186,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 		values.put(Constantes.KEY_PRENOM, athlete.getFirstName());
 		// Mise à jour
 		return db.update(Constantes.TABLE_ATHLETE, values, Constantes.KEY_ID
-				+ " = ?", new String[] { String.valueOf(athlete.getID()) });
+				+ " = ?", new String[] { String.valueOf(athlete.getName()) });
 	}
 
 	/**

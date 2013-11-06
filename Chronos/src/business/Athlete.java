@@ -30,15 +30,15 @@ public class Athlete implements Serializable
 	/**
 	 * Le name de famille de l'athlete.
 	 */
-	private String							name;
+	private String					name;
 	/**
 	 * Le firstName de l'athlete.
 	 */
-	private String							firstName;
+	private String					firstName;
 	/**
 	 * Les performances de cet athlete.
 	 */
-	private final ArrayList<Performance>	performances;
+	private ArrayList<Performance>	performances;
 
 	/* _________________________________________________________ */
 	/**
@@ -75,23 +75,7 @@ public class Athlete implements Serializable
 
 	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ id.
-	 * 
-	 * @return la valeur du champ id.
-	 */
-	public int getId()
-	{
-		return id;
-	}
-
-	/**
-	 * ID de l'athlete
-	 */
-	private int	id;
-
-	/* _________________________________________________________ */
-	/**
-	 * Constructeur complet d'un athlete.
+	 * Constructeur d'un athlete.
 	 * 
 	 * @param nom
 	 *            the nom
@@ -105,23 +89,33 @@ public class Athlete implements Serializable
 	public Athlete(final String nom, final String prenom)
 			throws InvalidNameException, InvalidFirstNameException
 	{
-		id++;
 		performances = new ArrayList<Performance>();
 		setName(nom);
 		setFirstName(prenom);
-		setId(id);
 	}
 
 	/* _________________________________________________________ */
 	/**
-	 * Methode qui permet de modifier l'id de l'athlete.
+	 * Constructeur d'un athlete.
 	 * 
-	 * @param id
-	 *            ID de l'athlete
+	 * @param nom
+	 *            the nom
+	 * @param prenom
+	 *            the prenom
+	 * @param listPerf
+	 * @throws InvalidNameException
+	 *             Exception le name est null.
+	 * @throws InvalidFirstNameException
+	 *             Exception le firstName est null.
 	 */
-	private void setId(final int id)
+	@SuppressWarnings("javadoc")
+	public Athlete(final String nom, final String prenom,
+			final ArrayList<Performance> listPerf) throws InvalidNameException,
+			InvalidFirstNameException
 	{
-		this.id = id;
+		setName(nom);
+		setFirstName(prenom);
+		setListPerf(listPerf);
 	}
 
 	/**
@@ -159,6 +153,17 @@ public class Athlete implements Serializable
 		firstName = prenom;
 	}
 
+	/**
+	 * Methode qui permet de modifier la liste des performances de l'athlete.
+	 * 
+	 * @param listPerf
+	 *            La liste des performances.
+	 */
+	public void setListPerf(final ArrayList<Performance> listPerf)
+	{
+		performances = listPerf;
+	}
+
 	/* _________________________________________________________ */
 	/**
 	 * To string.
@@ -172,17 +177,6 @@ public class Athlete implements Serializable
 		final StringBuilder builder = new StringBuilder();
 		builder.append(firstName).append(" ").append(name);
 		return builder.toString();
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Retourne l'ID de l'athlete.
-	 * 
-	 * @return L'id de l'athlete.
-	 */
-	public int getID()
-	{
-		return id;
 	}
 }
 /* _________________________________________________________ */

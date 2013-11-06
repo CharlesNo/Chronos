@@ -78,6 +78,20 @@ public class Performance
 	{
 		return distance;
 	}
+
+	/* _________________________________________________________ */
+	/**
+	 * @return Description performance.
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		final StringBuilder build = new StringBuilder();
+		build.append("Le ").append(date).append(", ");
+		build.append(chrono).append(" (").append(distance).append("m)");
+		return build.toString();
+	}
 }
 /* _________________________________________________________ */
 /*

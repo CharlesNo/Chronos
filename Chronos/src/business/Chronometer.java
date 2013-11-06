@@ -202,8 +202,8 @@ public class Chronometer extends TextView
 		remaining = remaining % (1000);
 		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
 		final StringBuilder text = new StringBuilder();
-		text.append(df.format(minutes)).append(":");
-		text.append(df.format(seconds)).append(":");
+		text.append(df.format(minutes)).append("'");
+		text.append(df.format(seconds)).append("\"");
 		text.append(df.format(milliseconds));
 		setText(text.toString());
 	}

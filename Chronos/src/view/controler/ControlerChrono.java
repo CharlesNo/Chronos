@@ -31,7 +31,8 @@ public class ControlerChrono implements OnClickListener
 	public ControlerChrono(final Activity activityChronos)
 	{
 		activity = activityChronos;
-		chronos = (business.Chronometer) activity.findViewById(R.id.chronometer);
+		chronos = (business.Chronometer) activity
+				.findViewById(R.id.chronometer);
 	}
 
 	/* _________________________________________________________ */

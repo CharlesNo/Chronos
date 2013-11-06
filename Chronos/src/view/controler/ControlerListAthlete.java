@@ -10,21 +10,18 @@
 package view.controler;
 
 import persistence.DatabaseHandler;
+import view.ActivityListAthlete;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 import business.Athlete;
 import business.Model;
-import business.Performance;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
 import com.chronos.R;
@@ -36,19 +33,20 @@ import com.chronos.R;
  * @author Charles NEAU
  */
 @SuppressWarnings("unused")
-public class ControlerListAthlete implements OnItemClickListener,
-		OnItemLongClickListener, OnClickListener
+public class ControlerListAthlete implements OnItemLongClickListener,
+		OnClickListener
 {
 	/** The activity. */
-	private final Activity	activity;
+	private final Activity				activity;
 	/** The lv liste. */
-	private final ListView	lvListe;
+	private final ExpandableListView	lvListe;
 	/** The business. */
-	private final Model		model;
+	private final Model					model;
 	/** La base de données */
-	final DatabaseHandler	database;
+	final DatabaseHandler				database;
 	/** Le temps de l'athlete */
-	private final long		tempsChrono;
+	private final long					tempsChrono;
+	private int							removePos;
 
 	/* _________________________________________________________ */
 	/**
@@ -70,7 +68,8 @@ public class ControlerListAthlete implements OnItemClickListener,
 		this.model = model;
 		this.database = database;
 		this.tempsChrono = tempsChrono;
-		lvListe = (ListView) activity.findViewById(R.id.listAthlete);
+		lvListe = (ExpandableListView) activity
+				.findViewById(R.id.listAthleteExpandable);
 		lvListe.setAdapter(model.getAdapter());
 	}
 
@@ -85,20 +84,66 @@ public class ControlerListAthlete implements OnItemClickListener,
 	@Override
 	public void onClick(final View arg0)
 	{
+		final Button add = (Button) activity
+				.findViewById(R.id.bouttonAddAthlete);
 		final EditText champNom = (EditText) activity
 				.findViewById(R.id.editTextNom);
 		final EditText champPrenom = (EditText) activity
 				.findViewById(R.id.editTextPrenom);
-		if (!champNom.getText().toString().equals("")
-				&& !champPrenom.getText().toString().equals(""))
+		if (add.getText().equals("Ajouter"))
 		{
+			if (!champNom.getText().toString().equals("")
+					&& !champPrenom.getText().toString().equals(""))
+			{
+				try
+				{
+					final Athlete athlete = new Athlete(champNom.getText()
+							.toString(), champPrenom.getText().toString());
+					model.getAdapter().add(athlete);
+					model.getAdapter().notifyDataSetChanged();
+					lvListe.setAdapter(model.getAdapter());
+					database.addAthlete(athlete);
+				}
+				catch (final InvalidNameException e)
+				{
+					Toast.makeText(activity, "Le nom est vide",
+							Toast.LENGTH_SHORT).show();
+				}
+				catch (final InvalidFirstNameException e)
+				{
+					Toast.makeText(activity, "Le prenom est vide",
+							Toast.LENGTH_SHORT).show();
+				}
+				champNom.setText("");
+				champPrenom.setText("");
+			}
+			else
+			{
+				Toast.makeText(
+						activity,
+						"Veuillez renseigner le nom et le prenom de l'athlete.",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+		else
+		{
+			final Athlete athleteSelected = (Athlete) lvListe
+					.getItemAtPosition(removePos);
+			Athlete athlete;
 			try
 			{
-				final Athlete athlete = new Athlete(champNom.getText()
-						.toString(), champPrenom.getText().toString());
-				model.getAdapter().add(athlete);
-				database.addAthlete(athlete);
+				athlete = new Athlete(champNom.getText().toString(),
+						champPrenom.getText().toString(),
+						athleteSelected.getPerformances());
+				/*********** Suppression de athlete selected *******************/
+				database.deleteAthlete(athleteSelected);
+				model.getAdapter().remove(athleteSelected);
 				model.getAdapter().notifyDataSetChanged();
+				/************** Ajout du nouvelle athlete **********************/
+				model.getAdapter().add(athlete);
+				model.getAdapter().notifyDataSetChanged();
+				lvListe.setAdapter(model.getAdapter());
+				database.addAthlete(athlete);
 			}
 			catch (final InvalidNameException e)
 			{
@@ -113,43 +158,7 @@ public class ControlerListAthlete implements OnItemClickListener,
 			champNom.setText("");
 			champPrenom.setText("");
 		}
-		else
-		{
-			Toast.makeText(activity,
-					"Veuillez renseigner le nom et le prenom de l'athlete.",
-					Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * On item click.
-	 * 
-	 * @param parent
-	 *            The AdapterView where the click happened.
-	 * @param view
-	 *            The view within the AdapterView that was clicked (this
-	 *            will be a view provided by the adapter)
-	 * @param position
-	 *            The position of the view in the adapter.
-	 * @param id
-	 *            The row id of the item that was clicked.
-	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
-	 *      android.view.View, int, long)
-	 */
-	@Override
-	public void onItemClick(final AdapterView<?> parent, final View view,
-			final int position, final long id)
-	{
-		// On recupere l'athlete selectionné
-		final Athlete athleteSelected = (Athlete) lvListe
-				.getItemAtPosition(position);
-		final TextView champsTemps = (TextView) activity
-				.findViewById(R.id.tempsChrono);
-		athleteSelected.getPerformances()
-				.add(new Performance(tempsChrono, 100));
-		Toast.makeText(activity, "Performance associée.", Toast.LENGTH_SHORT)
-				.show();
+		add.setText("Ajouter");
 	}
 
 	/* _________________________________________________________ */
@@ -170,25 +179,11 @@ public class ControlerListAthlete implements OnItemClickListener,
 	 */
 	@Override
 	public boolean onItemLongClick(final AdapterView<?> arg0, final View arg1,
-			final int arg2, final long arg3)
+			final int position, final long arg3)
 	{
-		final AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		adb.setTitle("Suppression d'un athlète");
-		adb.setMessage("Êtes vous sûr de vouloir le supprimer ? ");
-		final int positionToRemove = arg2;
-		adb.setNegativeButton("Cancel", null);
-		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
-		{
-			@Override
-			public void onClick(final DialogInterface dialog, final int which)
-			{
-				final Athlete athleteToRemove = (Athlete) lvListe
-						.getItemAtPosition(positionToRemove);
-				model.getAdapter().remove(athleteToRemove);
-				database.deleteAthlete(athleteToRemove);
-			}
-		});
-		adb.show();
+		removePos = position;
+		ActivityListAthlete.setPositionItem(position);
+		lvListe.showContextMenu();
 		return true;
 	}
 }
