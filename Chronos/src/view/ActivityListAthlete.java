@@ -76,6 +76,7 @@ public class ActivityListAthlete extends Activity implements Observer
 		/* Ajout du view.controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
+		lvListe.setOnChildClickListener(controler);
 		registerForContextMenu(lvListe);
 	}
 
@@ -227,7 +228,7 @@ public class ActivityListAthlete extends Activity implements Observer
 		adb.setTitle("Suppression d'un athlète");
 		adb.setMessage("Êtes vous sûr de vouloir le supprimer ? ");
 		final int positionToRemove = removePos;
-		adb.setNegativeButton("Cancel", null);
+		adb.setNegativeButton("Annuler", null);
 		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
 		{
 			@Override

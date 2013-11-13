@@ -9,6 +9,7 @@
  */
 package business;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -91,6 +92,29 @@ public class Performance
 	{
 		return distance;
 	}
+	
+	/**
+	 * Methode de mise en forme du rendu chronometre.
+	 * 
+	 * @param timeElapsed
+	 *            the time elapsed
+	 * @return the string
+	 */
+	public String miseEnForme(final long timeElapsed)
+	{
+		final DecimalFormat df = new DecimalFormat("00");
+		int remaining = (int) (timeElapsed % (3600 * 1000));
+		final int minutes = remaining / (60 * 1000);
+		remaining = remaining % (60 * 1000);
+		final int seconds = remaining / 1000;
+		remaining = remaining % (1000);
+		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
+		final StringBuilder builder = new StringBuilder();
+		builder.append(df.format(minutes)).append("'");
+		builder.append(df.format(seconds)).append("\"");
+		builder.append(df.format(milliseconds));
+		return builder.toString();
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -102,7 +126,7 @@ public class Performance
 	{
 		final StringBuilder build = new StringBuilder();
 		build.append("Le ").append(date).append(", ");
-		build.append(chrono).append(" (").append(distance).append("m)");
+		build.append(miseEnForme(chrono)).append(" (").append(distance).append("m)");
 		return build.toString();
 	}
 }
