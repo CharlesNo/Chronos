@@ -209,7 +209,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	public List<Athlete> getAllAthletes()
 	{
 		final List<Athlete> mesAthletes = new ArrayList<Athlete>();
-		final List<Performance> mesPerformances = new ArrayList<Performance>();
 		// On selectionne toutes les lignes dans la base de données
 		final String selectQuery = "SELECT  * FROM " + Constantes.TABLE_ATHLETE;
 		final SQLiteDatabase db = getWritableDatabase();
@@ -239,11 +238,12 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 							perf = new Performance(athlete,
 									Long.parseLong(cursorPerf.getString(2)),
 									Integer.parseInt(cursorPerf.getString(3)));
+							final List<Performance> mesPerformances = new ArrayList<Performance>();
 							mesPerformances.add(perf);
+							athlete.setListPerf(mesPerformances);
 						}
 						while (cursorPerf.moveToNext());
 					}
-					athlete.setListPerf(mesPerformances);
 					mesAthletes.add(athlete);
 				}
 				catch (final InvalidNameException e)
