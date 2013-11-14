@@ -10,6 +10,7 @@
 package persistence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
@@ -206,6 +207,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	 * 
 	 * @return La liste des athletes.
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Athlete> getAllAthletes()
 	{
 		final List<Athlete> mesAthletes = new ArrayList<Athlete>();
@@ -232,6 +234,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 							.rawQuery(selectQueryPerf, null);
 					if (cursorPerf.moveToFirst())
 					{
+						final List<Performance> mesPerformances = new ArrayList<Performance>();
 						do
 						{
 							Performance perf;
@@ -239,7 +242,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 									Long.parseLong(cursorPerf.getString(2)),
 									Integer.parseInt(cursorPerf.getString(3)),
 									cursorPerf.getString(4));
-							final List<Performance> mesPerformances = new ArrayList<Performance>();
+							
 							mesPerformances.add(perf);
 							athlete.setListPerf(mesPerformances);
 						}
@@ -256,6 +259,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 			}
 			while (cursor.moveToNext());
 		}
+		Collections.sort(mesAthletes);
 		return mesAthletes;
 	}
 

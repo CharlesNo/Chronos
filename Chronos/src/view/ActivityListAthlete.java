@@ -11,12 +11,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
@@ -63,6 +67,9 @@ public class ActivityListAthlete extends Activity implements Observer
 		/* Initialisation des attributs */
 		lvListe = (ExpandableListView) findViewById(R.id.listAthleteExpandable);
 		buttonAjouter = (Button) findViewById(R.id.bouttonAddAthlete);
+		final ImageView settings = (ImageView) findViewById(R.id.settings);
+		
+		
 		/* Base de données */
 		database = DatabaseHandler.getInstance(getBaseContext());
 		/* Creation du business et ajout en tant qu'observeur */
@@ -76,6 +83,7 @@ public class ActivityListAthlete extends Activity implements Observer
 		/* Ajout du view.controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
+		settings.setOnClickListener(controler);
 		registerForContextMenu(lvListe);
 	}
 
@@ -154,7 +162,7 @@ public class ActivityListAthlete extends Activity implements Observer
 		if (v.getId() == R.id.listAthleteExpandable)
 		{
 			menu.setHeaderTitle("Gestion");
-			final String[] menuItems = { "Modifier", "Lié temps", "Supprimer" };
+			final String[] menuItems = { "Modifier", "Lier temps", "Supprimer" };
 			for (int i = 0; i < menuItems.length; i++)
 			{
 				menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -177,7 +185,7 @@ public class ActivityListAthlete extends Activity implements Observer
 			modifier();
 			return true;
 		}
-		if (item.getTitle().equals("Lié temps"))
+		if (item.getTitle().equals("Lier temps"))
 		{
 			lieTemps();
 			return true;

@@ -13,5 +13,6 @@
     <string name="Start">Start</string>
     <string name="ImageDesc">Image</string>
     <string name="tps">Temps : </string>
+    <string name="settings">"<u>Paramètres :</u>"</string>
 
 </resources>

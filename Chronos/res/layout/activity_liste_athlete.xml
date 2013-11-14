@@ -32,17 +32,6 @@
 
     </ExpandableListView>
 
-    <EditText
-        android:id="@+id/editTextNom"
-        android:layout_width="167dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/bouttonAddAthlete"
-        android:layout_toRightOf="@+id/tempsChrono"
-        android:hint="@string/nomAthlete"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
     <TextView
         android:id="@+id/tempsChrono"
         android:layout_width="wrap_content"
@@ -85,5 +74,29 @@
         android:text="@string/tps"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextNom"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bouttonAddAthlete"
+        android:layout_toRightOf="@+id/tempsChrono"
+        android:hint="@string/nomAthlete"
+        android:ems="10"
+        android:inputType="textPersonName" >
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/settings"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignRight="@+id/editTextPrenom"
+        android:contentDescription="@string/app_name"
+        android:maxHeight="35dp"
+        android:maxWidth="35dp"
+        android:src="@drawable/settings" />
 
 </RelativeLayout>
