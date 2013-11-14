@@ -38,7 +38,7 @@ public class Performance
 
 	/* _________________________________________________________ */
 	/**
-	 * Instantiates a new resultat.
+	 * Instantiates a new performance. Utilisé lors de l'ajout d'une nouvelle performance.
 	 * 
 	 * @param athlete
 	 *            L'athlete a qui est rattaché la performance.
@@ -55,6 +55,27 @@ public class Performance
 		this.chrono = chrono;
 		this.distance = distance;
 		this.athlete = athlete;
+	}
+	
+	/* _________________________________________________________ */
+	/**
+	 * Instantiates a new performance. Utiliser pour charger les éléments déja présent dans la BDD.
+	 * 
+	 * @param athlete
+	 *            L'athlete a qui est rattaché la performance.
+	 * @param chrono
+	 *            the chrono
+	 * @param distance
+	 *            the distance
+	 */
+	public Performance(final Athlete athlete, final long chrono,
+			final int distance,String date)
+	{
+		super();
+		this.chrono = chrono;
+		this.distance = distance;
+		this.athlete = athlete;
+		this.date=date;
 	}
 
 	/* _________________________________________________________ */

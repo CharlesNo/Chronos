@@ -237,7 +237,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 							Performance perf;
 							perf = new Performance(athlete,
 									Long.parseLong(cursorPerf.getString(2)),
-									Integer.parseInt(cursorPerf.getString(3)));
+									Integer.parseInt(cursorPerf.getString(3)),
+									cursorPerf.getString(4));
 							final List<Performance> mesPerformances = new ArrayList<Performance>();
 							mesPerformances.add(perf);
 							athlete.setListPerf(mesPerformances);
@@ -330,9 +331,15 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 		db.delete(
 				Constantes.TABLE_PERFORMANCE,
 				Constantes.KEY_NOM + " = ? AND " + Constantes.KEY_PRENOM
-						+ " =?",
+						+ " =? AND " + Constantes.KEY_TEMPS
+						+ " =? AND " + Constantes.KEY_DISTANCE
+						+ " =? AND "+ Constantes.KEY_DATE
+						+ " =? ",
 				new String[] { String.valueOf(athlete.getName()),
-						String.valueOf(athlete.getFirstName()) });
+						String.valueOf(athlete.getFirstName()),
+						String.valueOf(perf.getChrono()),
+						String.valueOf(perf.getDistance()),
+						String.valueOf(perf.getDate())});
 		db.close();
 	}
 }

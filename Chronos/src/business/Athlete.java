@@ -11,6 +11,7 @@ package business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
@@ -26,7 +27,7 @@ import business.exceptions.InvalidNameException;
  * @author Jerome POINAS
  *         Charles NEAU
  */
-public class Athlete implements Serializable
+public class Athlete implements Comparable, Serializable
 {
 	/**
 	 * Le name de famille de l'athlete.
@@ -178,6 +179,19 @@ public class Athlete implements Serializable
 		final StringBuilder builder = new StringBuilder();
 		builder.append(firstName).append(" ").append(name);
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Object obj) {
+		Athlete athlete = (Athlete) obj;
+		int resultat=0;
+	      if (this.getName().compareTo(athlete.getName())>0)
+	         resultat = 1;
+	      else if (this.getName().compareTo(athlete.getName())<0)
+	         resultat = -1;
+	      else if(this.getName().equals(athlete.getName()))
+	         resultat = 0;
+	      return resultat;
 	}
 }
 /* _________________________________________________________ */
