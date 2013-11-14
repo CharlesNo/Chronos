@@ -24,15 +24,17 @@ public final class R {
         public static final int athle=0x7f020000;
         public static final int backgroundlistview=0x7f020001;
         public static final int cercle=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
+        public static final int delete=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
     }
     public static final class id {
         public static final int TextView01=0x7f05000a;
-        public static final int action_settings=0x7f05000c;
+        public static final int action_settings=0x7f05000d;
         public static final int bouttonAddAthlete=0x7f050007;
         public static final int btStart=0x7f050002;
         public static final int btStop=0x7f050003;
         public static final int chronometer=0x7f050001;
+        public static final int deleteImage=0x7f05000c;
         public static final int editTextNom=0x7f050008;
         public static final int editTextPrenom=0x7f050009;
         public static final int listAthleteExpandable=0x7f050005;

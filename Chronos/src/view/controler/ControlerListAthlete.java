@@ -12,21 +12,16 @@ package view.controler;
 import persistence.DatabaseHandler;
 import view.ActivityListAthlete;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 import business.Athlete;
 import business.Model;
-import business.Performance;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
 import com.chronos.R;
@@ -39,7 +34,7 @@ import com.chronos.R;
  */
 @SuppressWarnings("unused")
 public class ControlerListAthlete implements OnItemLongClickListener,
-		OnClickListener, OnChildClickListener
+		OnClickListener
 {
 	/** The activity. */
 	private final Activity				activity;
@@ -51,6 +46,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	final DatabaseHandler				database;
 	/** Le temps de l'athlete */
 	private final long					tempsChrono;
+	/** Position temporaire pour supprimer l'athlete en cours */
 	private int							removePos;
 
 	/* _________________________________________________________ */
@@ -144,7 +140,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 				database.deleteAthlete(athleteSelected);
 				model.getAdapter().remove(athleteSelected);
 				model.getAdapter().notifyDataSetChanged();
-				/**************Ajout du nouvelle athlete **********************/
+				/************** Ajout du nouvelle athlete **********************/
 				model.getAdapter().add(athlete);
 				model.getAdapter().notifyDataSetChanged();
 				lvListe.setAdapter(model.getAdapter());
@@ -174,10 +170,10 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	 *            the arg0
 	 * @param arg1
 	 *            the arg1
-	 * @param arg2
-	 *            the arg2
-	 * @param arg3
-	 *            the arg3
+	 * @param position
+	 *            the position
+	 * @param id
+	 *            the id
 	 * @return true, if successful
 	 * @see android.widget.AdapterView.OnItemLongClickListener#onItemLongClick(android.widget.AdapterView,
 	 *      android.view.View, int, long)
@@ -186,39 +182,13 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	public boolean onItemLongClick(final AdapterView<?> arg0, final View arg1,
 			final int position, final long id)
 	{
-		if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_GROUP){
+		if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_GROUP)
+		{
 			removePos = position;
 			ActivityListAthlete.setPositionItem(position);
 			lvListe.showContextMenu();
 		}
 		return true;
-	}
-
-	@Override
-	public boolean onChildClick(ExpandableListView arg0, View arg1, int groupPos,
-			int childPos, long i) {
-		deleteChild(groupPos,childPos);
-		return true;
-	}
-
-	private void deleteChild(final int groupPos, final int childPos) {
-		final AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		adb.setTitle("Suppression du temps");
-		adb.setMessage("Êtes vous sûr de vouloir supprimer ce temps ? ");
-		adb.setNegativeButton("Annuler", null);
-		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
-		{
-			@Override
-			public void onClick(final DialogInterface dialog, final int which)
-			{
-				final Athlete athlete = (Athlete) lvListe
-						.getItemAtPosition(groupPos);
-				athlete.getPerformances().remove(childPos);
-				//enregistrement database a faire
-				model.getAdapter().notifyDataSetChanged();
-			}
-		});
-		adb.show();
 	}
 }
 /* _________________________________________________________ */

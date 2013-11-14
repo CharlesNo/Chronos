@@ -12,12 +12,16 @@ package business.adapter;
 import java.util.List;
 import java.util.Map;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import business.Athlete;
 import business.Performance;
@@ -105,10 +109,54 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 		final LayoutInflater inflater = context.getLayoutInflater();
 		if (convertView == null)
 		{
-			convertView = inflater.inflate(R.layout.group_item, null);
+			convertView = inflater.inflate(R.layout.child_item, null);
 		}
 		final TextView item = (TextView) convertView
 				.findViewById(R.id.resultat);
+		final ImageView delete = (ImageView) convertView
+				.findViewById(R.id.deleteImage);
+		if (delete != null)
+		{
+			delete.setOnClickListener(new OnClickListener()
+			{
+				@Override
+				public void onClick(final View v)
+				{
+					final AlertDialog.Builder builder = new AlertDialog.Builder(
+							context);
+					builder.setMessage("Supprimer ce temps ?");
+					builder.setCancelable(false);
+					builder.setPositiveButton("Valider",
+							new DialogInterface.OnClickListener()
+							{
+								@Override
+								public void onClick(
+										final DialogInterface dialog,
+										final int id)
+								{
+									final List<Performance> child = resultsCollection
+											.get(listeAthlete
+													.get(groupPosition));
+									child.remove(childPosition);
+									notifyDataSetChanged();
+								}
+							});
+					builder.setNegativeButton("Annuler",
+							new DialogInterface.OnClickListener()
+							{
+								@Override
+								public void onClick(
+										final DialogInterface dialog,
+										final int id)
+								{
+									dialog.cancel();
+								}
+							});
+					final AlertDialog alertDialog = builder.create();
+					alertDialog.show();
+				}
+			});
+		}
 		item.setText(perf.toString());
 		return convertView;
 	}

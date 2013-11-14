@@ -11,6 +11,17 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:paddingLeft="25dp" />
- 
+
+    <ImageView
+        android:id="@+id/deleteImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="24dp"
+        android:layout_toRightOf="@+id/resultat"
+        android:contentDescription="@string/app_name"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:src="@drawable/delete" />
   
 </RelativeLayout>

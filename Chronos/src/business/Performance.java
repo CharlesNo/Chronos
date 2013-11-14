@@ -92,7 +92,7 @@ public class Performance
 	{
 		return distance;
 	}
-	
+
 	/**
 	 * Methode de mise en forme du rendu chronometre.
 	 * 
@@ -125,8 +125,9 @@ public class Performance
 	public String toString()
 	{
 		final StringBuilder build = new StringBuilder();
-		build.append("Le ").append(date).append(", ");
-		build.append(miseEnForme(chrono)).append(" (").append(distance).append("m)");
+		build.append("Le ").append(date).append(", ").append("\n");
+		build.append(miseEnForme(chrono)).append(" (").append(distance)
+				.append("m)");
 		return build.toString();
 	}
 }

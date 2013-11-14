@@ -33,8 +33,6 @@ public class Model extends Observable
 	private final ExpandableListAdapter				adapter;
 	/** La map des resultat par athletes. */
 	private final Map<Athlete, List<Performance>>	mesResultats	= new HashMap<Athlete, List<Performance>>();
-	/** la liste des resultat par child */
-	private List<Performance>						childList;
 
 	/* _________________________________________________________ */
 	/**
@@ -113,14 +111,6 @@ public class Model extends Observable
 	public List<Athlete> getAthletes()
 	{
 		return athletes;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Start.
-	 */
-	public void start()
-	{
 	}
 
 	/* _________________________________________________________ */

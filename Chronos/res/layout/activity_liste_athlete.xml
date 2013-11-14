@@ -27,8 +27,7 @@
         android:layout_marginTop="28dp"
         android:layout_toLeftOf="@+id/bouttonAddAthlete"
         android:background="@drawable/backgroundlistview"
-        android:textSize="12sp"   
-        tools:listitem="@android:layout/" >
+        android:textSize="12sp"   >
         
 
     </ExpandableListView>

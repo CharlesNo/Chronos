@@ -34,6 +34,7 @@ import com.chronos.R;
  */
 public class ActivityListAthlete extends Activity implements Observer
 {
+	/** */
 	private static int			removePos;
 	/** The lv liste. */
 	private ExpandableListView	lvListe;
@@ -76,7 +77,6 @@ public class ActivityListAthlete extends Activity implements Observer
 		/* Ajout du view.controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
-		lvListe.setOnChildClickListener(controler);
 		registerForContextMenu(lvListe);
 	}
 
