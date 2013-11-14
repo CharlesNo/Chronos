@@ -64,7 +64,7 @@ public class ActivityListAthlete extends Activity implements Observer
 		lvListe = (ExpandableListView) findViewById(R.id.listAthleteExpandable);
 		buttonAjouter = (Button) findViewById(R.id.bouttonAddAthlete);
 		/* Base de données */
-		database = new DatabaseHandler(getBaseContext());
+		database = DatabaseHandler.getInstance(getBaseContext());
 		/* Creation du business et ajout en tant qu'observeur */
 		model = new Model(this, database);
 		model.addObserver(this);
@@ -213,8 +213,11 @@ public class ActivityListAthlete extends Activity implements Observer
 		// On recupere l'athlete selectionné
 		final Athlete athleteSelected = (Athlete) lvListe
 				.getItemAtPosition(removePos);
-		athleteSelected.getPerformances()
-				.add(new Performance(tempsChrono, 100));
+		final Performance performance = new Performance(athleteSelected,
+				tempsChrono, 100);
+		athleteSelected.getPerformances().add(performance);
+		// Mise a jour de la base de données.
+		database.addPerformance(athleteSelected, performance);
 		Toast.makeText(this, "Performance associée.", Toast.LENGTH_SHORT)
 				.show();
 	}

@@ -11,6 +11,7 @@ package business.adapter;
 
 import java.util.List;
 import java.util.Map;
+import persistence.DatabaseHandler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -120,6 +121,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	{
 		final Performance perf = (Performance) getChild(groupPosition,
 				childPosition);
+		final Athlete athlete = (Athlete) getGroup(groupPosition);
 		final LayoutInflater inflater = context.getLayoutInflater();
 		if (convertView == null)
 		{
@@ -140,6 +142,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 							context);
 					builder.setMessage("Supprimer ce temps ?");
 					builder.setCancelable(false);
+					builder.setNegativeButton("Annuler",
+							new DialogInterface.OnClickListener()
+							{
+								@Override
+								public void onClick(
+										final DialogInterface dialog,
+										@SuppressWarnings("unused") final int id)
+								{
+									dialog.cancel();
+								}
+							});
 					builder.setPositiveButton("Valider",
 							new DialogInterface.OnClickListener()
 							{
@@ -152,18 +165,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 											.get(listeAthlete
 													.get(groupPosition));
 									child.remove(childPosition);
+									DatabaseHandler.getInstance(context)
+											.removePerformance(athlete, perf);
 									notifyDataSetChanged();
-								}
-							});
-					builder.setNegativeButton("Annuler",
-							new DialogInterface.OnClickListener()
-							{
-								@Override
-								public void onClick(
-										final DialogInterface dialog,
-										@SuppressWarnings("unused") final int id)
-								{
-									dialog.cancel();
 								}
 							});
 					final AlertDialog alertDialog = builder.create();

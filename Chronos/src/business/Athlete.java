@@ -11,6 +11,7 @@ package business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
 
@@ -30,15 +31,15 @@ public class Athlete implements Serializable
 	/**
 	 * Le name de famille de l'athlete.
 	 */
-	private String					name;
+	private String				name;
 	/**
 	 * Le firstName de l'athlete.
 	 */
-	private String					firstName;
+	private String				firstName;
 	/**
 	 * Les performances de cet athlete.
 	 */
-	private ArrayList<Performance>	performances;
+	private List<Performance>	performances;
 
 	/* _________________________________________________________ */
 	/**
@@ -68,7 +69,7 @@ public class Athlete implements Serializable
 	 * 
 	 * @return la valeur du champ performances.
 	 */
-	public ArrayList<Performance> getPerformances()
+	public List<Performance> getPerformances()
 	{
 		return performances;
 	}
@@ -102,7 +103,7 @@ public class Athlete implements Serializable
 	 *            the nom
 	 * @param prenom
 	 *            the prenom
-	 * @param listPerf
+	 * @param list
 	 * @throws InvalidNameException
 	 *             Exception le name est null.
 	 * @throws InvalidFirstNameException
@@ -110,12 +111,12 @@ public class Athlete implements Serializable
 	 */
 	@SuppressWarnings("javadoc")
 	public Athlete(final String nom, final String prenom,
-			final ArrayList<Performance> listPerf) throws InvalidNameException,
+			final List<Performance> list) throws InvalidNameException,
 			InvalidFirstNameException
 	{
 		setName(nom);
 		setFirstName(prenom);
-		setListPerf(listPerf);
+		setListPerf(list);
 	}
 
 	/**
@@ -156,12 +157,12 @@ public class Athlete implements Serializable
 	/**
 	 * Methode qui permet de modifier la liste des performances de l'athlete.
 	 * 
-	 * @param listPerf
+	 * @param mesPerformances
 	 *            La liste des performances.
 	 */
-	public void setListPerf(final ArrayList<Performance> listPerf)
+	public void setListPerf(final List<Performance> mesPerformances)
 	{
-		performances = listPerf;
+		performances = mesPerformances;
 	}
 
 	/* _________________________________________________________ */

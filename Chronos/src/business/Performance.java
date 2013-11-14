@@ -30,22 +30,31 @@ public class Performance
 	private String		date;
 	/** The distance. */
 	private final int	distance;
+	/**
+	 * Athlete qui possède cette performance (nécessaire pour la base de
+	 * données)
+	 */
+	Athlete				athlete;
 
 	/* _________________________________________________________ */
 	/**
 	 * Instantiates a new resultat.
 	 * 
+	 * @param athlete
+	 *            L'athlete a qui est rattaché la performance.
 	 * @param chrono
 	 *            the chrono
 	 * @param distance
 	 *            the distance
 	 */
-	public Performance(final long chrono, final int distance)
+	public Performance(final Athlete athlete, final long chrono,
+			final int distance)
 	{
 		super();
 		formatDate();
 		this.chrono = chrono;
 		this.distance = distance;
+		this.athlete = athlete;
 	}
 
 	/* _________________________________________________________ */
