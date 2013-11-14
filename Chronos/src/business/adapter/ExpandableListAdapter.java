@@ -39,19 +39,22 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	 */
 	private final Activity							context;
 	/**
-	 * 
+	 * Map des athletes et de leur resultats
 	 */
 	private final Map<Athlete, List<Performance>>	resultsCollection;
 	/**
-	 * 
+	 * La liste des athletes
 	 */
 	private final List<Athlete>						listeAthlete;
 
 	/* _________________________________________________________ */
 	/**
 	 * @param context
+	 *            Le contexte.
 	 * @param athletes
+	 *            Liste des athletes.
 	 * @param mesResultats
+	 *            La map athlete/Performance.
 	 */
 	public ExpandableListAdapter(final Activity context,
 			final List<Athlete> athletes,
@@ -65,8 +68,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
+	 *            La position du group.
 	 * @param childPosition
-	 * @return
+	 *            La position du child.
+	 * @return L'objet se trouvant à cet emplacement.
 	 * @see android.widget.ExpandableListAdapter#getChild(int, int)
 	 */
 	@Override
@@ -79,12 +84,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
+	 *            La position du group.
 	 * @param childPosition
-	 * @return
+	 *            La position du child.
+	 * @return L'id de l'objet se trouvant à cet emplacement.
 	 * @see android.widget.ExpandableListAdapter#getChildId(int, int)
 	 */
 	@Override
-	public long getChildId(final int groupPosition, final int childPosition)
+	public long getChildId(@SuppressWarnings("unused") final int groupPosition,
+			final int childPosition)
 	{
 		return childPosition;
 	}
@@ -92,17 +100,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
+	 *            La position du group.
 	 * @param childPosition
+	 *            La position du child.
 	 * @param isLastChild
+	 *            True si c'est le dernier child.
 	 * @param convertView
+	 *            La view.
 	 * @param parent
-	 * @return
+	 *            Son group d'appartenance.
+	 * @return La view correspondante au child.
 	 * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean,
 	 *      android.view.View, android.view.ViewGroup)
 	 */
 	@Override
 	public View getChildView(final int groupPosition, final int childPosition,
-			final boolean isLastChild, View convertView, final ViewGroup parent)
+			@SuppressWarnings("unused") final boolean isLastChild,
+			View convertView, @SuppressWarnings("unused") final ViewGroup parent)
 	{
 		final Performance perf = (Performance) getChild(groupPosition,
 				childPosition);
@@ -120,7 +134,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 			delete.setOnClickListener(new OnClickListener()
 			{
 				@Override
-				public void onClick(final View v)
+				public void onClick(@SuppressWarnings("unused") final View v)
 				{
 					final AlertDialog.Builder builder = new AlertDialog.Builder(
 							context);
@@ -131,8 +145,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 							{
 								@Override
 								public void onClick(
-										final DialogInterface dialog,
-										final int id)
+										@SuppressWarnings("unused") final DialogInterface dialog,
+										@SuppressWarnings("unused") final int id)
 								{
 									final List<Performance> child = resultsCollection
 											.get(listeAthlete
@@ -147,7 +161,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 								@Override
 								public void onClick(
 										final DialogInterface dialog,
-										final int id)
+										@SuppressWarnings("unused") final int id)
 								{
 									dialog.cancel();
 								}
@@ -164,7 +178,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
-	 * @return
+	 *            La position du group.
+	 * @return Le nombre de child.
 	 * @see android.widget.ExpandableListAdapter#getChildrenCount(int)
 	 */
 	@Override
@@ -178,7 +193,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
-	 * @return
+	 *            La position du group.
+	 * @return Le group.
 	 * @see android.widget.ExpandableListAdapter#getGroup(int)
 	 */
 	@Override
@@ -189,7 +205,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 
 	/* _________________________________________________________ */
 	/**
-	 * @return
+	 * @return Le nombre de group total.
 	 * @see android.widget.ExpandableListAdapter#getGroupCount()
 	 */
 	@Override
@@ -201,7 +217,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
-	 * @return
+	 *            La position du group.
+	 * @return L'id du group recherché.
 	 * @see android.widget.ExpandableListAdapter#getGroupId(int)
 	 */
 	@Override
@@ -213,16 +230,21 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
+	 *            La position du group.
 	 * @param isExpanded
+	 *            True si le groupe est étendu.
 	 * @param convertView
+	 *            La view.
 	 * @param parent
-	 * @return
+	 *            Son group d'appartenance.
+	 * @return La view correspondant au group.
 	 * @see android.widget.ExpandableListAdapter#getGroupView(int, boolean,
 	 *      android.view.View, android.view.ViewGroup)
 	 */
 	@Override
-	public View getGroupView(final int groupPosition, final boolean isExpanded,
-			View convertView, final ViewGroup parent)
+	public View getGroupView(final int groupPosition,
+			@SuppressWarnings("unused") final boolean isExpanded,
+			View convertView, @SuppressWarnings("unused") final ViewGroup parent)
 	{
 		final Athlete athlete = (Athlete) getGroup(groupPosition);
 		if (convertView == null)
@@ -240,7 +262,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 
 	/* _________________________________________________________ */
 	/**
-	 * @return
+	 * @return .
 	 * @see android.widget.ExpandableListAdapter#hasStableIds()
 	 */
 	@Override
@@ -252,13 +274,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	/* _________________________________________________________ */
 	/**
 	 * @param groupPosition
+	 *            La position du group.
 	 * @param childPosition
-	 * @return
+	 *            La position du child.
+	 * @return True si le child est selectionnable.
 	 * @see android.widget.ExpandableListAdapter#isChildSelectable(int, int)
 	 */
 	@Override
-	public boolean isChildSelectable(final int groupPosition,
-			final int childPosition)
+	public boolean isChildSelectable(
+			@SuppressWarnings("unused") final int groupPosition,
+			@SuppressWarnings("unused") final int childPosition)
 	{
 		return true;
 	}

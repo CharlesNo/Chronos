@@ -14,7 +14,7 @@ import java.util.Date;
 /* _________________________________________________________ */
 /**
  * The Class FieldTime.
- * TODO Cette classe doit retourner une {@link String} lisible d'une date.
+ * Cette classe doit retourner une valeur lisible d'une date.
  * 
  * @author Charles NEAU
  */

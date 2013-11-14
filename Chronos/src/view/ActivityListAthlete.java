@@ -14,7 +14,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -140,18 +139,20 @@ public class ActivityListAthlete extends Activity implements Observer
 	/* _________________________________________________________ */
 	/**
 	 * @param menu
+	 *            ContextMenu.
 	 * @param v
+	 *            La view.
 	 * @param menuInfo
+	 *            ContextMenuInfo.
 	 * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu,
 	 *      android.view.View, android.view.ContextMenu.ContextMenuInfo)
 	 */
 	@Override
 	public void onCreateContextMenu(final ContextMenu menu, final View v,
-			final ContextMenuInfo menuInfo)
+			@SuppressWarnings("unused") final ContextMenuInfo menuInfo)
 	{
 		if (v.getId() == R.id.listAthleteExpandable)
 		{
-			final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 			menu.setHeaderTitle("Gestion");
 			final String[] menuItems = { "Modifier", "Lié temps", "Supprimer" };
 			for (int i = 0; i < menuItems.length; i++)
@@ -212,7 +213,6 @@ public class ActivityListAthlete extends Activity implements Observer
 		// On recupere l'athlete selectionné
 		final Athlete athleteSelected = (Athlete) lvListe
 				.getItemAtPosition(removePos);
-		final TextView champsTemps = (TextView) findViewById(R.id.tempsChrono);
 		athleteSelected.getPerformances()
 				.add(new Performance(tempsChrono, 100));
 		Toast.makeText(this, "Performance associée.", Toast.LENGTH_SHORT)
@@ -232,7 +232,9 @@ public class ActivityListAthlete extends Activity implements Observer
 		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
 		{
 			@Override
-			public void onClick(final DialogInterface dialog, final int which)
+			public void onClick(
+					@SuppressWarnings("unused") final DialogInterface dialog,
+					@SuppressWarnings("unused") final int which)
 			{
 				final Athlete athleteToRemove = (Athlete) lvListe
 						.getItemAtPosition(positionToRemove);
@@ -258,12 +260,14 @@ public class ActivityListAthlete extends Activity implements Observer
 	@Override
 	public void update(final Observable arg0, final Object arg1)
 	{
-		// TODO Auto-generated method stub
 	}
 
 	/* _________________________________________________________ */
 	/**
+	 * Methode qui permet de modifier la position de l'item.
+	 * 
 	 * @param position
+	 *            La position de l'item.
 	 */
 	public static void setPositionItem(final int position)
 	{
