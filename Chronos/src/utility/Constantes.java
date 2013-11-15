@@ -6,7 +6,7 @@
  * 
  * Auteur : Jean-Louis IMBERT
  */
-package business;
+package utility;
 
 /* ________________________________________________________ */
 /**

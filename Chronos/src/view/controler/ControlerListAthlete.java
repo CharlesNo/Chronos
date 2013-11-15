@@ -10,6 +10,7 @@
 package view.controler;
 
 import persistence.DatabaseHandler;
+import utility.Constantes;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.view.View;
@@ -24,7 +25,6 @@ import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
-import business.Constantes;
 import business.Model;
 import business.dialog.DialogFragmentSettings;
 import business.exceptions.InvalidFirstNameException;

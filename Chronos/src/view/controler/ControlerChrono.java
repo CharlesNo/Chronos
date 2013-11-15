@@ -1,5 +1,6 @@
 package view.controler;
 
+import utility.Constantes;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
-import business.Constantes;
 import com.chronos.R;
 
 /* _________________________________________________________ */

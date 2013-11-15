@@ -6,6 +6,7 @@
  * Créé le 31 oct. 2013 à 13:12:58
  * 
  * Auteur : Charles NEAU
+ * Jérôme POINAS
  */
 package business;
 

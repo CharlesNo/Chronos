@@ -107,7 +107,8 @@
         android:layout_below="@+id/editTextPrenom"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="20dp"
-        android:text="Distance d'enregistrement : (100m)"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="Distance d&apos;enregistrement : (100m)"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
