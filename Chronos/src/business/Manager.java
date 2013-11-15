@@ -1,7 +1,7 @@
 /* _________________________________________________________ */
 /* _________________________________________________________ */
 /**
- * Fichier : Model.java
+ * Fichier : Manager.java
  * 
  * Créé le 31 oct. 2013 à 13:24:23
  * 
@@ -20,12 +20,12 @@ import business.adapter.ExpandableListAdapter;
 
 /* _________________________________________________________ */
 /**
- * The Class Model.
+ * The Class Manager.
  * Cette classe contient la liste des Athletes.
  * 
  * @author Charles NEAU
  */
-public class Model extends Observable
+public class Manager extends Observable
 {
 	/** The athletes. */
 	private List<Athlete>							athletes		= new ArrayList<Athlete>();
@@ -69,7 +69,7 @@ public class Model extends Observable
 	 * @param database
 	 *            the database
 	 */
-	public Model(final Activity activity, final DatabaseHandler database)
+	public Manager(final Activity activity, final DatabaseHandler database)
 	{
 		athletes = database.getAllAthletes();
 		initResultats();
@@ -126,6 +126,6 @@ public class Model extends Observable
 }
 /* _________________________________________________________ */
 /*
- * Fin du fichier Model.java.
+ * Fin du fichier Manager.java.
  * /*_________________________________________________________
  */

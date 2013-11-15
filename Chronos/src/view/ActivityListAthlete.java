@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
-import business.Model;
+import business.Manager;
 import business.Performance;
 import com.chronos.R;
 
@@ -49,7 +49,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 	/** La base de données */
 	private DatabaseHandler		database;
 	/** Le model */
-	private Model				model;
+	private Manager				model;
 
 	/* _________________________________________________________ */
 	/**
@@ -72,7 +72,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 		/* Base de données */
 		database = DatabaseHandler.getInstance(getBaseContext());
 		/* Creation du business et ajout en tant qu'observeur */
-		model = new Model(this, database);
+		model = new Manager(this, database);
 		model.addObserver(this);
 		/* Creation du bundle de récupération des données */
 		createBundle();

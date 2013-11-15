@@ -25,7 +25,7 @@ import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
-import business.Model;
+import business.Manager;
 import business.dialog.DialogFragmentSettings;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
@@ -46,7 +46,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	/** The lv liste. */
 	private final ExpandableListView	lvListe;
 	/** The business. */
-	private final Model					model;
+	private final Manager					model;
 	/** La base de données */
 	final DatabaseHandler				database;
 	/** Le temps de l'athlete */
@@ -67,7 +67,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	 * @param tempsChrono
 	 *            the time
 	 */
-	public ControlerListAthlete(final Activity activity, final Model model,
+	public ControlerListAthlete(final Activity activity, final Manager model,
 			final DatabaseHandler database, final long tempsChrono)
 	{
 		this.activity = activity;
