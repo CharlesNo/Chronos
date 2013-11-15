@@ -31,7 +31,7 @@ public class Athlete implements Comparable<Athlete>, Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long	serialVersionUID	= 1L;
 	/**
 	 * Le name de famille de l'athlete.
 	 */
@@ -184,24 +184,43 @@ public class Athlete implements Comparable<Athlete>, Serializable
 		return builder.toString();
 	}
 
+	/* _________________________________________________________ */
+	/**
+	 * Methode permettant de comparer deux athletes.
+	 * 
+	 * @param athlete
+	 *            L'athlete a comparer.
+	 * @return int représentant l'égalité ou pas des deux athletes.
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
-	public int compareTo(Athlete athlete) {
-		int resultat=0;
-	      if (this.getName().compareTo(athlete.getName())>0)
-	    	  resultat = 1;
-	      else if (this.getName().compareTo(athlete.getName())<0)
-	         resultat = -1;
-	      else if(this.getName().equals(athlete.getName()))
-	      {
-	    	  if (this.getFirstName().compareTo(athlete.getFirstName())>0)
-		    	  resultat = 1;
-	    	  else  if (this.getFirstName().compareTo(athlete.getFirstName())<0)
-		    	  resultat = -1;
-	    	  else
-	    		   resultat = 0;
-	      }
-	        
-	      return resultat;
+	public int compareTo(final Athlete athlete)
+	{
+		int resultat = 0;
+		if (getName().compareTo(athlete.getName()) > 0)
+		{
+			resultat = 1;
+		}
+		else if (getName().compareTo(athlete.getName()) < 0)
+		{
+			resultat = -1;
+		}
+		else if (getName().equals(athlete.getName()))
+		{
+			if (getFirstName().compareTo(athlete.getFirstName()) > 0)
+			{
+				resultat = 1;
+			}
+			else if (getFirstName().compareTo(athlete.getFirstName()) < 0)
+			{
+				resultat = -1;
+			}
+			else
+			{
+				resultat = 0;
+			}
+		}
+		return resultat;
 	}
 }
 /* _________________________________________________________ */

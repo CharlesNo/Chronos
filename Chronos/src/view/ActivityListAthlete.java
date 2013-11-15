@@ -11,19 +11,17 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
+import business.Constantes;
 import business.Model;
 import business.Performance;
 import com.chronos.R;
@@ -35,10 +33,13 @@ import com.chronos.R;
  *         Charles NEAU
  * 
  */
-public class ActivityListAthlete extends Activity implements Observer
+public class ActivityListAthlete extends Activity implements Observer,
+		Constantes
 {
 	/** */
 	private static int			removePos;
+	/** */
+	private static int			distanceRecord	= 100;
 	/** The lv liste. */
 	private ExpandableListView	lvListe;
 	/** The button ajouter. */
@@ -68,8 +69,6 @@ public class ActivityListAthlete extends Activity implements Observer
 		lvListe = (ExpandableListView) findViewById(R.id.listAthleteExpandable);
 		buttonAjouter = (Button) findViewById(R.id.bouttonAddAthlete);
 		final ImageView settings = (ImageView) findViewById(R.id.settings);
-		
-		
 		/* Base de données */
 		database = DatabaseHandler.getInstance(getBaseContext());
 		/* Creation du business et ajout en tant qu'observeur */
@@ -95,9 +94,11 @@ public class ActivityListAthlete extends Activity implements Observer
 		// On récupère l'objet Bundle envoyé par l'autre Activity
 		final Bundle objetbunble = getIntent().getExtras();
 		// On récupère les données du Bundle
-		if ((objetbunble != null) && objetbunble.containsKey("temps"))
+		if ((objetbunble != null)
+				&& objetbunble.containsKey(Constantes.BUNDLETIME))
 		{
-			final String temps = getIntent().getStringExtra("temps");
+			final String temps = getIntent().getStringExtra(
+					Constantes.BUNDLETIME);
 			tempsChrono = Long.parseLong(temps);
 			final TextView champsTemps = (TextView) findViewById(R.id.tempsChrono);
 			champsTemps.setText(miseEnForme(tempsChrono));
@@ -161,8 +162,9 @@ public class ActivityListAthlete extends Activity implements Observer
 	{
 		if (v.getId() == R.id.listAthleteExpandable)
 		{
-			menu.setHeaderTitle("Gestion");
-			final String[] menuItems = { "Modifier", "Lier temps", "Supprimer" };
+			menu.setHeaderTitle(Constantes.MANAGETITLE);
+			final String[] menuItems = { Constantes.MODIFY, Constantes.ADDPERF,
+					Constantes.DELETE };
 			for (int i = 0; i < menuItems.length; i++)
 			{
 				menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -180,17 +182,17 @@ public class ActivityListAthlete extends Activity implements Observer
 	@Override
 	public boolean onContextItemSelected(final MenuItem item)
 	{
-		if (item.getTitle().equals("Modifier"))
+		if (item.getTitle().equals(Constantes.MODIFY))
 		{
 			modifier();
 			return true;
 		}
-		if (item.getTitle().equals("Lier temps"))
+		if (item.getTitle().equals(Constantes.ADDPERF))
 		{
 			lieTemps();
 			return true;
 		}
-		if (item.getTitle().equals("Supprimer"))
+		if (item.getTitle().equals(Constantes.DELETE))
 		{
 			supprimer();
 			return true;
@@ -200,6 +202,7 @@ public class ActivityListAthlete extends Activity implements Observer
 
 	/* _________________________________________________________ */
 	/**
+	 * Modification d'un athlete.
 	 */
 	private void modifier()
 	{
@@ -210,11 +213,12 @@ public class ActivityListAthlete extends Activity implements Observer
 				.getItemAtPosition(removePos);
 		champNom.setText(athleteSelected.getName());
 		champPrenom.setText(athleteSelected.getFirstName());
-		modif.setText("Modifier");
+		modif.setText(Constantes.MODIFY);
 	}
 
 	/* _________________________________________________________ */
 	/**
+	 * Ajout d'une performance à un athlète.
 	 */
 	private void lieTemps()
 	{
@@ -222,38 +226,40 @@ public class ActivityListAthlete extends Activity implements Observer
 		final Athlete athleteSelected = (Athlete) lvListe
 				.getItemAtPosition(removePos);
 		final Performance performance = new Performance(athleteSelected,
-				tempsChrono, 100);
+				tempsChrono, distanceRecord);
 		athleteSelected.getPerformances().add(performance);
 		// Mise a jour de la base de données.
 		database.addPerformance(athleteSelected, performance);
-		Toast.makeText(this, "Performance associée.", Toast.LENGTH_SHORT)
+		Toast.makeText(this, Constantes.ASSOCIATEDPERF, Toast.LENGTH_SHORT)
 				.show();
 	}
 
 	/* _________________________________________________________ */
 	/**
+	 * Suppression d'un athlète.
 	 */
 	private void supprimer()
 	{
 		final AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		adb.setTitle("Suppression d'un athlète");
-		adb.setMessage("Êtes vous sûr de vouloir le supprimer ? ");
+		adb.setTitle(Constantes.DELETETITLE);
+		adb.setMessage(Constantes.VALIDATEDELETE);
 		final int positionToRemove = removePos;
-		adb.setNegativeButton("Annuler", null);
-		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener()
-		{
-			@Override
-			public void onClick(
-					@SuppressWarnings("unused") final DialogInterface dialog,
-					@SuppressWarnings("unused") final int which)
-			{
-				final Athlete athleteToRemove = (Athlete) lvListe
-						.getItemAtPosition(positionToRemove);
-				database.deleteAthlete(athleteToRemove);
-				model.getAdapter().remove(athleteToRemove);
-				model.getAdapter().notifyDataSetChanged();
-			}
-		});
+		adb.setNegativeButton(Constantes.CANCEL, null);
+		adb.setPositiveButton(Constantes.VALIDATE,
+				new AlertDialog.OnClickListener()
+				{
+					@Override
+					public void onClick(
+							@SuppressWarnings("unused") final DialogInterface dialog,
+							@SuppressWarnings("unused") final int which)
+					{
+						final Athlete athleteToRemove = (Athlete) lvListe
+								.getItemAtPosition(positionToRemove);
+						database.deleteAthlete(athleteToRemove);
+						model.getAdapter().remove(athleteToRemove);
+						model.getAdapter().notifyDataSetChanged();
+					}
+				});
 		adb.show();
 	}
 
@@ -283,5 +289,17 @@ public class ActivityListAthlete extends Activity implements Observer
 	public static void setPositionItem(final int position)
 	{
 		removePos = position;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Methode qui permet de modifier la distance d'enregistrment.
+	 * 
+	 * @param distance
+	 *            La distance d'enregistrment.
+	 */
+	public static void setRecordDistance(final int distance)
+	{
+		distanceRecord = distance;
 	}
 }

@@ -11,11 +11,7 @@ package view.controler;
 
 import persistence.DatabaseHandler;
 import view.ActivityListAthlete;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.Build;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -24,9 +20,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnValueChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
+import business.Constantes;
 import business.Model;
+import business.dialog.DialogFragmentSettings;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
 import com.chronos.R;
@@ -39,7 +39,7 @@ import com.chronos.R;
  */
 @SuppressWarnings("unused")
 public class ControlerListAthlete implements OnItemLongClickListener,
-		OnClickListener
+		OnClickListener, OnValueChangeListener, Constantes
 {
 	/** The activity. */
 	private final Activity				activity;
@@ -90,120 +90,97 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	@Override
 	public void onClick(final View arg0)
 	{
-		switch(arg0.getId())
+		switch (arg0.getId())
 		{
-		//*****************BOUTON AJOUTER ATHLETE ET MODIFICATION*********************//
-		case R.id.bouttonAddAthlete :
-		
-			final Button add = (Button) activity
-					.findViewById(R.id.bouttonAddAthlete);
-			final EditText champNom = (EditText) activity
-					.findViewById(R.id.editTextNom);
-			final EditText champPrenom = (EditText) activity
-					.findViewById(R.id.editTextPrenom);
-			if (add.getText().equals("Ajouter"))
-			{
-				if (!champNom.getText().toString().equals("")
-					&& !champPrenom.getText().toString().equals(""))
+		// *****************BOUTON AJOUTER ATHLETE ET
+		// MODIFICATION*********************//
+			case R.id.bouttonAddAthlete:
+				final Button add = (Button) activity
+						.findViewById(R.id.bouttonAddAthlete);
+				final EditText champNom = (EditText) activity
+						.findViewById(R.id.editTextNom);
+				final EditText champPrenom = (EditText) activity
+						.findViewById(R.id.editTextPrenom);
+				if (add.getText().equals(Constantes.ADD))
 				{
+					if (!champNom.getText().toString().equals(Constantes.EMPTY)
+							&& !champPrenom.getText().toString()
+									.equals(Constantes.EMPTY))
+					{
+						try
+						{
+							final Athlete athlete = new Athlete(champNom
+									.getText().toString(), champPrenom
+									.getText().toString());
+							model.getAdapter().add(athlete);
+							model.getAdapter().notifyDataSetChanged();
+							lvListe.setAdapter(model.getAdapter());
+							database.addAthlete(athlete);
+						}
+						catch (final InvalidNameException e)
+						{
+							Toast.makeText(activity, Constantes.EMPTYNAME,
+									Toast.LENGTH_SHORT).show();
+						}
+						catch (final InvalidFirstNameException e)
+						{
+							Toast.makeText(activity, Constantes.EMPTYFIRSTNAME,
+									Toast.LENGTH_SHORT).show();
+						}
+						champNom.setText(Constantes.EMPTY);
+						champPrenom.setText(Constantes.EMPTY);
+					}
+					else
+					{
+						Toast.makeText(activity, Constantes.REQUESTINFORM,
+								Toast.LENGTH_SHORT).show();
+					}
+				}
+				else
+				{
+					final Athlete athleteSelected = (Athlete) lvListe
+							.getItemAtPosition(removePos);
+					Athlete athlete;
 					try
 					{
-						final Athlete athlete = new Athlete(champNom.getText()
-								.toString(), champPrenom.getText().toString());
+						athlete = new Athlete(champNom.getText().toString(),
+								champPrenom.getText().toString(),
+								athleteSelected.getPerformances());
+						// *********** Suppression de athlete selected
+						// *******************//
+						database.deleteAthlete(athleteSelected);
+						model.getAdapter().remove(athleteSelected);
+						model.getAdapter().notifyDataSetChanged();
+						// ************** Ajout du nouvel athlete
+						// **********************//
 						model.getAdapter().add(athlete);
 						model.getAdapter().notifyDataSetChanged();
 						lvListe.setAdapter(model.getAdapter());
 						database.addAthlete(athlete);
 					}
 					catch (final InvalidNameException e)
-						{
-						Toast.makeText(activity, "Le nom est vide",
-								Toast.LENGTH_SHORT).show();
-						}
-					catch (final InvalidFirstNameException e)
 					{
-						Toast.makeText(activity, "Le prenom est vide",
+						Toast.makeText(activity, Constantes.EMPTYNAME,
 								Toast.LENGTH_SHORT).show();
 					}
-					champNom.setText("");
-					champPrenom.setText("");
-				}
-				else
-				{
-					Toast.makeText(
-							activity,
-							"Veuillez renseigner le nom et le prenom de l'athlete.",
-							Toast.LENGTH_SHORT).show();
-				}
-			}
-			else
-			{
-				final Athlete athleteSelected = (Athlete) lvListe
-						.getItemAtPosition(removePos);
-				Athlete athlete;
-				try
-				{
-					athlete = new Athlete(champNom.getText().toString(),
-							champPrenom.getText().toString(),
-							athleteSelected.getPerformances());
-					//*********** Suppression de athlete selected *******************//
-					database.deleteAthlete(athleteSelected);
-					model.getAdapter().remove(athleteSelected);
-					model.getAdapter().notifyDataSetChanged();
-					//************** Ajout du nouvel athlete **********************//
-					model.getAdapter().add(athlete);
-					model.getAdapter().notifyDataSetChanged();
-					lvListe.setAdapter(model.getAdapter());
-					database.addAthlete(athlete);
-				}
-				catch (final InvalidNameException e)
+					catch (final InvalidFirstNameException e)
 					{
-					Toast.makeText(activity, "Le nom est vide", Toast.LENGTH_SHORT)
-							.show();
+						Toast.makeText(activity, Constantes.EMPTYFIRSTNAME,
+								Toast.LENGTH_SHORT).show();
+					}
+					champNom.setText(Constantes.EMPTY);
+					champPrenom.setText(Constantes.EMPTY);
 				}
-				catch (final InvalidFirstNameException e)
-				{
-					Toast.makeText(activity, "Le prenom est vide",
-							Toast.LENGTH_SHORT).show();
-				}
-				champNom.setText("");
-				champPrenom.setText("");
-			}
-			add.setText("Ajouter");
-			//*****************BOUTON SETTINGS*********************//
-		case R.id.settings :
-			
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-			builder.setTitle("Réglage de la distance");
-			
-			builder.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               //Traitement
-			           }
-			       });
-			builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               //Traitement
-			           }
-			       });
-			
-			builder.setView(activity.getLayoutInflater().inflate(R.layout.distance_picker_view, null));
-			AlertDialog dialog = builder.create();
-			
-			//**********Parametrage du numberPicker****************//
-			//NumberPicker picker = (NumberPicker) activity.findViewById(R.id.pickerDistance);
-			//String[] tabValeurs = new String[3];
-			//	tabValeurs[0] = Integer.toString(50);
-			//	tabValeurs[1] = Integer.toString(100);
-			//	tabValeurs[2] = Integer.toString(200);
-			//picker.setDisplayedValues(tabValeurs);
-			//picker.setWrapSelectorWheel(true);
-			//******************************************************//
-			
-			dialog.show();
-			
+				add.setText(Constantes.ADD);
+				break;
+			// *****************BOUTON SETTINGS*********************//
+			case R.id.settings:
+				final DialogFragmentSettings dialog = new DialogFragmentSettings(
+						activity, this);
+				break;
+			default:
+				break;
 		}
-			
 	}
 
 	/* _________________________________________________________ */
@@ -233,6 +210,23 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 			lvListe.showContextMenu();
 		}
 		return true;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * @see android.widget.NumberPicker.OnValueChangeListener#onValueChange(android.widget.NumberPicker,
+	 *      int, int)
+	 */
+	@Override
+	public void onValueChange(final NumberPicker picker, final int oldVal,
+			final int newVal)
+	{
+		final TextView champsDistance = (TextView) activity
+				.findViewById(R.id.textView1);
+		final String[] values = picker.getDisplayedValues();
+		champsDistance.setText("Distance d'enregistrement : (" + values[newVal]
+				+ "m)");
+		ActivityListAthlete.setRecordDistance(Integer.parseInt(values[newVal]));
 	}
 }
 /* _________________________________________________________ */

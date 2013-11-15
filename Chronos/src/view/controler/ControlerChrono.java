@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
+import business.Constantes;
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -57,7 +58,7 @@ public class ControlerChrono implements OnClickListener
 					ActivityListAthlete.class);
 			final Bundle objetbunble = new Bundle();
 			objetbunble.putString(
-					"temps",
+					Constantes.BUNDLETIME,
 					String.valueOf(SystemClock.elapsedRealtime()
 							- chronos.getBase()));
 			intent.putExtras(objetbunble);

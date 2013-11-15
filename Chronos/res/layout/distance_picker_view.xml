@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="150dp"
-    android:minWidth="80dp" >
+    android:minWidth="80dp"
+    android:background="#CAD2DD">
 
     <NumberPicker
         android:id="@+id/pickerDistance"
@@ -12,8 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:fadingEdgeLength="80dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
+        android:focusableInTouchMode="false"/>
+
+    <TextView
+        android:id="@+id/distanceRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/pickerDistance"
+        android:text="@string/metre"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

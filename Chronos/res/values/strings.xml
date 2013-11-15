@@ -3,16 +3,15 @@
 
     <string name="app_name">Chronos</string>
     <string name="action_settings">Settings</string>
-    <string name="listeAthlete">Liste des athletes :</string>
+    <string name="listeAthlete"><u>Liste des athletes :</u></string>
     <string name="btAjouterAthlete">Ajouter</string>
     <string name="nomAthlete">Nom</string>
     <string name="prenomAthlete">Prenom</string>
     <string name="tps_chrono">Tps chrono</string>
     <string name="Chronometre">Chronometre</string>
-    <string name="Stop">Stop</string>
-    <string name="Start">Start</string>
+    <string name="Stop">Arrêter</string>
+    <string name="Start">Démarrer</string>
     <string name="ImageDesc">Image</string>
     <string name="tps">Temps : </string>
-    <string name="settings">"<u>Paramètres :</u>"</string>
-
+    <string name="metre">mètres</string>
 </resources>

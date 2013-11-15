@@ -99,4 +99,15 @@
         android:maxWidth="35dp"
         android:src="@drawable/settings" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPrenom"
+        android:layout_below="@+id/editTextPrenom"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="20dp"
+        android:text="Distance d'enregistrement : (100m)"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

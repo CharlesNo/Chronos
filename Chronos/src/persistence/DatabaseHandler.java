@@ -207,7 +207,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 	 * 
 	 * @return La liste des athletes.
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Athlete> getAllAthletes()
 	{
 		final List<Athlete> mesAthletes = new ArrayList<Athlete>();
@@ -242,7 +241,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 									Long.parseLong(cursorPerf.getString(2)),
 									Integer.parseInt(cursorPerf.getString(3)),
 									cursorPerf.getString(4));
-							
 							mesPerformances.add(perf);
 							athlete.setListPerf(mesPerformances);
 						}
@@ -335,15 +333,14 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Constantes
 		db.delete(
 				Constantes.TABLE_PERFORMANCE,
 				Constantes.KEY_NOM + " = ? AND " + Constantes.KEY_PRENOM
-						+ " =? AND " + Constantes.KEY_TEMPS
-						+ " =? AND " + Constantes.KEY_DISTANCE
-						+ " =? AND "+ Constantes.KEY_DATE
-						+ " =? ",
+						+ " =? AND " + Constantes.KEY_TEMPS + " =? AND "
+						+ Constantes.KEY_DISTANCE + " =? AND "
+						+ Constantes.KEY_DATE + " =? ",
 				new String[] { String.valueOf(athlete.getName()),
 						String.valueOf(athlete.getFirstName()),
 						String.valueOf(perf.getChrono()),
 						String.valueOf(perf.getDistance()),
-						String.valueOf(perf.getDate())});
+						String.valueOf(perf.getDate()) });
 		db.close();
 	}
 }
