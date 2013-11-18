@@ -35,6 +35,8 @@ public class DialogFragmentSettings extends DialogFragment implements
 	private Activity					activity	= null;
 	/** Le controleur du numberPicker */
 	private final ControlerListAthlete	controler;
+	/**position du picker */
+	private int pos;
 
 	/**
 	 * Constructeur complet d'un DialogFragmentSettings.
@@ -45,10 +47,11 @@ public class DialogFragmentSettings extends DialogFragment implements
 	 *            Le controleur.
 	 */
 	public DialogFragmentSettings(final Activity activity,
-			final ControlerListAthlete controler)
+			final ControlerListAthlete controler, int pos)
 	{
 		this.activity = activity;
 		this.controler = controler;
+		this.pos=pos;
 		final Dialog dial = onCreateDialog(getArguments());
 		dial.show();
 	}
@@ -80,8 +83,8 @@ public class DialogFragmentSettings extends DialogFragment implements
 		picker.setMinValue(0);
 		picker.setMaxValue(tabValeurs.length - 1);
 		picker.setDisplayedValues(tabValeurs);
-		picker.setDisplayedValues(tabValeurs);
 		picker.setWrapSelectorWheel(true);
+		picker.setValue(pos);
 		picker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 		picker.setOnValueChangedListener(controler);
 		// ******************************************************//

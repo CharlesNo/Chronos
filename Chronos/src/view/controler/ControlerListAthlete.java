@@ -53,6 +53,8 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	private final long					tempsChrono;
 	/** Position temporaire pour supprimer l'athlete en cours */
 	private int							removePos;
+	/** position du picker */
+	private int itemSelected=1;
 
 	/* _________________________________________________________ */
 	/**
@@ -176,7 +178,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 			// *****************BOUTON SETTINGS*********************//
 			case R.id.settings:
 				final DialogFragmentSettings dialog = new DialogFragmentSettings(
-						activity, this);
+						activity, this, itemSelected);
 				break;
 			default:
 				break;
@@ -227,6 +229,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 		champsDistance.setText("Distance d'enregistrement : (" + values[newVal]
 				+ "m)");
 		ActivityListAthlete.setRecordDistance(Integer.parseInt(values[newVal]));
+		itemSelected = picker.getValue();
 	}
 }
 /* _________________________________________________________ */
