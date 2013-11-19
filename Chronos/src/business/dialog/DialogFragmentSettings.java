@@ -75,11 +75,13 @@ public class DialogFragmentSettings extends DialogFragment implements
 		// **********Parametrage du numberPicker****************//
 		final NumberPicker picker = (NumberPicker) promptsView
 				.findViewById(R.id.pickerDistance);
-		final String[] tabValeurs = new String[4];
-		tabValeurs[0] = Integer.toString(50);
-		tabValeurs[1] = Integer.toString(100);
-		tabValeurs[2] = Integer.toString(200);
-		tabValeurs[3] = Integer.toString(500);
+		final String[] tabValeurs = new String[16];
+		int val = 50 ;
+		for(int i=0;i<16;i++)
+		{
+			tabValeurs[i] = Integer.toString(val);
+			val=val+10;
+		}
 		picker.setMinValue(0);
 		picker.setMaxValue(tabValeurs.length - 1);
 		picker.setDisplayedValues(tabValeurs);
@@ -92,15 +94,6 @@ public class DialogFragmentSettings extends DialogFragment implements
 		builder.setTitle(Constantes.REGLAGE_DISTANCE);
 		builder.setView(promptsView);
 		builder.setPositiveButton(Constantes.VALIDATE,
-				new DialogInterface.OnClickListener()
-				{
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int id)
-					{
-					}
-				});
-		builder.setNegativeButton(Constantes.CANCEL,
 				new DialogInterface.OnClickListener()
 				{
 					@Override

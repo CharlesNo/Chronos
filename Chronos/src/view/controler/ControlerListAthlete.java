@@ -53,8 +53,8 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	private final long					tempsChrono;
 	/** Position temporaire pour supprimer l'athlete en cours */
 	private int							removePos;
-	/** position du picker */
-	private int itemSelected=1;
+	/** Position du picker */
+	private int itemSelected=5;
 
 	/* _________________________________________________________ */
 	/**
