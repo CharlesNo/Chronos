@@ -1,6 +1,8 @@
 package view.controler;
 
 import utility.Constantes;
+import utility.wifiConnection.NetworkTask;
+import view.ActivityChronometer;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +10,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -22,6 +26,8 @@ public class ControlerChrono implements OnClickListener
 	private final Activity				activity;
 	/** Le chronometre */
 	private final business.Chronometer	chronos;
+	/** NetWork Task */
+	private NetworkTask networktask;
 
 	/**
 	 * Instantiates a new view.controler fen chrono.
@@ -29,9 +35,10 @@ public class ControlerChrono implements OnClickListener
 	 * @param activityChronos
 	 *            the activity chronos
 	 */
-	public ControlerChrono(final Activity activityChronos)
+	public ControlerChrono(final Activity activityChronos,NetworkTask task)
 	{
 		activity = activityChronos;
+		this.networktask = task;
 		chronos = (business.Chronometer) activity
 				.findViewById(R.id.chronometer);
 	}
@@ -63,6 +70,21 @@ public class ControlerChrono implements OnClickListener
 							- chronos.getBase()));
 			intent.putExtras(objetbunble);
 			activity.startActivity(intent);
+		}
+		if(source == activity.findViewById(R.id.connect))
+		{
+			final Button connect = (Button) activity.findViewById(R.id.connect);
+			if(!NetworkTask.getConnected()){
+				connect.append("Connexion au serveur...\n");
+		        NetworkTask networktask = new NetworkTask((ActivityChronometer) activity); 
+		        networktask.execute();
+		    }else{
+		        connect.append("Déconnexion du serveur...\n");
+		        if(networktask!=null){
+		        	networktask.closeSocket();
+		            networktask.cancel(true);
+		        }
+		    }
 		}
 	}
 }

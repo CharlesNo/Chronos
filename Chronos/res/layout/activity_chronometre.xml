@@ -46,7 +46,20 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp"
             android:text="@string/Stop" />
+        
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/connect"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Connexion" />
+    <TextView
+		android:id="@+id/textlog"
+ 		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:scrollbars = "vertical"
+ />
 
 </LinearLayout>

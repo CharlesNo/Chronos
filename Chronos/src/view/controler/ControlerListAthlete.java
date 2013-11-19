@@ -11,6 +11,7 @@ package view.controler;
 
 import persistence.DatabaseHandler;
 import utility.Constantes;
+import utility.wifiConnection.NetworkTask;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.view.View;
