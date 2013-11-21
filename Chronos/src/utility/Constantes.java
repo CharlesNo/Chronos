@@ -50,6 +50,7 @@ public interface Constantes
 	public static final String	DELETETITLE			= "Suppression d'un athlète";
 	public static final String	VALIDATEDELETE		= "Êtes vous sûr de vouloir supprimer cet athlète? ";
 	public static final String	BUNDLEDISTANCE		= "distance";
+	public static final String	ERRORSOCKET			= "Impossible de contacter le serveur";
 }
 /* ________________________________________________________ */
 /*

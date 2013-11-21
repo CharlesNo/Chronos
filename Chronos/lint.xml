@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-    <issue id="CutPasteId">
-        <ignore path="src/view/controler/ControlerChrono.java" />
-    </issue>
     <issue id="ValidFragment">
         <ignore path="src/business/dialog/DialogFragmentSettings.java" />
     </issue>

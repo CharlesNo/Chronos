@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -27,7 +25,7 @@ public class ControlerChrono implements OnClickListener
 	/** Le chronometre */
 	private final business.Chronometer	chronos;
 	/** NetWork Task */
-	private NetworkTask networktask;
+	private final NetworkTask			networktask;
 
 	/**
 	 * Instantiates a new view.controler fen chrono.
@@ -35,10 +33,11 @@ public class ControlerChrono implements OnClickListener
 	 * @param activityChronos
 	 *            the activity chronos
 	 */
-	public ControlerChrono(final Activity activityChronos,NetworkTask task)
+	public ControlerChrono(final Activity activityChronos,
+			final NetworkTask task)
 	{
 		activity = activityChronos;
-		this.networktask = task;
+		networktask = task;
 		chronos = (business.Chronometer) activity
 				.findViewById(R.id.chronometer);
 	}
@@ -71,20 +70,22 @@ public class ControlerChrono implements OnClickListener
 			intent.putExtras(objetbunble);
 			activity.startActivity(intent);
 		}
-		if(source == activity.findViewById(R.id.connect))
+		if (source == activity.findViewById(R.id.connect))
 		{
-			final Button connect = (Button) activity.findViewById(R.id.connect);
-			if(!NetworkTask.getConnected()){
-				connect.append("Connexion au serveur...\n");
-		        NetworkTask networktask = new NetworkTask((ActivityChronometer) activity); 
-		        networktask.execute();
-		    }else{
-		        connect.append("Déconnexion du serveur...\n");
-		        if(networktask!=null){
-		        	networktask.closeSocket();
-		            networktask.cancel(true);
-		        }
-		    }
+			if (!NetworkTask.getConnected())
+			{
+				final NetworkTask networktask = new NetworkTask(
+						(ActivityChronometer) activity);
+				networktask.execute();
+			}
+			else
+			{
+				if (networktask != null)
+				{
+					networktask.cancel(true);
+					networktask.closeSocket();
+				}
+			}
 		}
 	}
 }
