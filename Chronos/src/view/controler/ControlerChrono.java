@@ -1,8 +1,7 @@
 package view.controler;
 
 import utility.Constantes;
-import utility.wifiConnection.NetworkTask;
-import view.ActivityChronometer;
+import utility.wifiConnection.ClientStartTcp;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -24,8 +24,6 @@ public class ControlerChrono implements OnClickListener
 	private final Activity				activity;
 	/** Le chronometre */
 	private final business.Chronometer	chronos;
-	/** NetWork Task */
-	private final NetworkTask			networktask;
 
 	/**
 	 * Instantiates a new view.controler fen chrono.
@@ -33,11 +31,9 @@ public class ControlerChrono implements OnClickListener
 	 * @param activityChronos
 	 *            the activity chronos
 	 */
-	public ControlerChrono(final Activity activityChronos,
-			final NetworkTask task)
+	public ControlerChrono(final Activity activityChronos)
 	{
 		activity = activityChronos;
-		networktask = task;
 		chronos = (business.Chronometer) activity
 				.findViewById(R.id.chronometer);
 	}
@@ -72,19 +68,29 @@ public class ControlerChrono implements OnClickListener
 		}
 		if (source == activity.findViewById(R.id.connect))
 		{
-			if (!NetworkTask.getConnected())
+			final Button connect = (Button) activity.findViewById(R.id.connect);
+			if (connect.getText().equals(Constantes.CONNECTED))// Si on est pas
+																// connecté
 			{
-				final NetworkTask networktask = new NetworkTask(
-						(ActivityChronometer) activity);
-				networktask.execute();
+				try
+				{
+					ClientStartTcp.closeConnection();
+					final ClientStartTcp connexion = new ClientStartTcp("192.168.1.131",
+							8888, activity);
+					final Thread thread = new Thread(connexion);
+					thread.start();
+				}
+				catch (final Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
 			else
-			{
-				if (networktask != null)
-				{
-					networktask.cancel(true);
-					networktask.closeSocket();
-				}
+			/* On se deconnecte */{
+				final Button connection = (Button) activity
+						.findViewById(R.id.connect);
+				connection.setText(Constantes.CONNECTED);
+				ClientStartTcp.closeConnection();
 			}
 		}
 	}

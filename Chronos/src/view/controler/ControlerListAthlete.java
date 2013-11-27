@@ -9,9 +9,9 @@
  */
 package view.controler;
 
+import java.util.Locale;
 import persistence.DatabaseHandler;
 import utility.Constantes;
-import utility.wifiConnection.NetworkTask;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.view.View;
@@ -47,7 +47,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	/** The lv liste. */
 	private final ExpandableListView	lvListe;
 	/** The business. */
-	private final Manager					model;
+	private final Manager				model;
 	/** La base de données */
 	final DatabaseHandler				database;
 	/** Le temps de l'athlete */
@@ -55,7 +55,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	/** Position temporaire pour supprimer l'athlete en cours */
 	private int							removePos;
 	/** Position du picker */
-	private int itemSelected=5;
+	private int							itemSelected	= 5;
 
 	/* _________________________________________________________ */
 	/**
@@ -104,17 +104,24 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 						.findViewById(R.id.editTextNom);
 				final EditText champPrenom = (EditText) activity
 						.findViewById(R.id.editTextPrenom);
-				if (add.getText().equals(Constantes.ADD))
+				if (add.getText().equals(Constantes.ADD))// Ajout d'un nouvel
+															// athlete
 				{
-					if (!champNom.getText().toString().equals(Constantes.EMPTY)
-							&& !champPrenom.getText().toString()
+					if (!champNom.getText().toString().trim()
+							.equals(Constantes.EMPTY)
+							&& !champPrenom.getText().toString().trim()
 									.equals(Constantes.EMPTY))
 					{
 						try
 						{
+							// Traitement sur la mise en forme du prénom.
+							final String nom = champPrenom.getText().toString()
+									.trim();
+							final String nomModifié = firstLetterUpperCase(nom);
 							final Athlete athlete = new Athlete(champNom
-									.getText().toString(), champPrenom
-									.getText().toString());
+									.getText().toString()
+									.toUpperCase(Locale.getDefault()),
+									nomModifié);
 							model.getAdapter().add(athlete);
 							model.getAdapter().notifyDataSetChanged();
 							lvListe.setAdapter(model.getAdapter());
@@ -140,41 +147,57 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 					}
 				}
 				else
+				// Modification du nom et du prenom d'un athlete existant
 				{
 					final Athlete athleteSelected = (Athlete) lvListe
 							.getItemAtPosition(removePos);
 					Athlete athlete;
-					try
+					if (!champNom.getText().toString().trim()
+							.equals(Constantes.EMPTY)
+							&& !champPrenom.getText().toString().trim()
+									.equals(Constantes.EMPTY))
 					{
-						athlete = new Athlete(champNom.getText().toString(),
-								champPrenom.getText().toString(),
-								athleteSelected.getPerformances());
-						// *********** Suppression de athlete selected
-						// *******************//
-						database.deleteAthlete(athleteSelected);
-						model.getAdapter().remove(athleteSelected);
-						model.getAdapter().notifyDataSetChanged();
-						// ************** Ajout du nouvel athlete
-						// **********************//
-						model.getAdapter().add(athlete);
-						model.getAdapter().notifyDataSetChanged();
-						lvListe.setAdapter(model.getAdapter());
-						database.addAthlete(athlete);
+						try
+						{
+							// Traitement sur la mise en forme du prénom.
+							final String nom = champPrenom.getText().toString()
+									.trim();
+							final String nomModifié = firstLetterUpperCase(nom);
+							athlete = new Athlete(champNom.getText().toString()
+									.trim().toUpperCase(), nomModifié,
+									athleteSelected.getPerformances());
+							// *********** Suppression de athlete selected
+							// *******************//
+							database.deleteAthlete(athleteSelected);
+							model.getAdapter().remove(athleteSelected);
+							model.getAdapter().notifyDataSetChanged();
+							// ************** Ajout du nouvel athlete
+							// **********************//
+							model.getAdapter().add(athlete);
+							model.getAdapter().notifyDataSetChanged();
+							lvListe.setAdapter(model.getAdapter());
+							database.addAthlete(athlete);
+						}
+						catch (final InvalidNameException e)
+						{
+							Toast.makeText(activity, Constantes.EMPTYNAME,
+									Toast.LENGTH_SHORT).show();
+						}
+						catch (final InvalidFirstNameException e)
+						{
+							Toast.makeText(activity, Constantes.EMPTYFIRSTNAME,
+									Toast.LENGTH_SHORT).show();
+						}
+						champNom.setText(Constantes.EMPTY);
+						champPrenom.setText(Constantes.EMPTY);
+						add.setText(Constantes.ADD);
 					}
-					catch (final InvalidNameException e)
+					else
 					{
-						Toast.makeText(activity, Constantes.EMPTYNAME,
+						Toast.makeText(activity, Constantes.REQUESTINFORM,
 								Toast.LENGTH_SHORT).show();
 					}
-					catch (final InvalidFirstNameException e)
-					{
-						Toast.makeText(activity, Constantes.EMPTYFIRSTNAME,
-								Toast.LENGTH_SHORT).show();
-					}
-					champNom.setText(Constantes.EMPTY);
-					champPrenom.setText(Constantes.EMPTY);
 				}
-				add.setText(Constantes.ADD);
 				break;
 			// *****************BOUTON SETTINGS*********************//
 			case R.id.settings:
@@ -184,6 +207,27 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 			default:
 				break;
 		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Méthode qui permet de mettre la premiere lettre de la chaine de character
+	 * passée en paramètre.
+	 * 
+	 * @param nom
+	 *            La chaine de character a mettre en forme.
+	 * @return La chaine de character modifiée.
+	 */
+	private String firstLetterUpperCase(final String nom)
+	{
+		final char first = nom.charAt(0);
+		System.out.println(first);
+		String firstLetter = Character.toString(first);
+		firstLetter = firstLetter.toUpperCase(Locale.getDefault());
+		System.out.println(firstLetter);
+		// Substring pour enlever la premiere lettre
+		final String resteChaine = nom.substring(1);
+		return firstLetter.concat(resteChaine);
 	}
 
 	/* _________________________________________________________ */

@@ -1,6 +1,5 @@
 package view;
 
-import utility.wifiConnection.NetworkTask;
 import view.controler.ControlerChrono;
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.chronos.R;
 
 /**
@@ -16,12 +14,10 @@ import com.chronos.R;
  */
 public class ActivityChronometer extends Activity
 {
-	/** Tache */
-	NetworkTask networktask;
 	/** Les logs de la connexion */
-	 TextView textlog;
-	 /** Bouton de (dé)connexion */
-	 Button buttonConnect;
+	TextView	textlog;
+	/** Bouton de (dé)connexion */
+	Button		buttonConnect;
 
 	/* _________________________________________________________ */
 	/**
@@ -38,19 +34,16 @@ public class ActivityChronometer extends Activity
 		setContentView(R.layout.activity_chronometre);
 		final Button btStart = (Button) findViewById(R.id.btStart);
 		final Button btStop = (Button) findViewById(R.id.btStop);
-		buttonConnect = (Button)findViewById(R.id.connect);
-		textlog = (TextView)findViewById(R.id.textlog);
+		buttonConnect = (Button) findViewById(R.id.connect);
+		textlog = (TextView) findViewById(R.id.textlog);
 		textlog.setMovementMethod(new ScrollingMovementMethod());
 		textlog.setText("Initialisation de la connexion\n");
-	 
-	    //add Eventlisteners
-	    networktask = new NetworkTask(this);
-		final ControlerChrono controler = new ControlerChrono(this,networktask);
+		// add Eventlisteners
+		final ControlerChrono controler = new ControlerChrono(this);
 		btStart.setOnClickListener(controler);
 		btStop.setOnClickListener(controler);
 		buttonConnect.setOnClickListener(controler);
-		
-    }
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -69,5 +62,3 @@ public class ActivityChronometer extends Activity
 		return true;
 	}
 }
-
-
