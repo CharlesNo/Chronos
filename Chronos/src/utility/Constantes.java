@@ -50,11 +50,17 @@ public interface Constantes
 	public static final String	DELETETITLE				= "Suppression d'un athlète";
 	public static final String	VALIDATEDELETE			= "Êtes vous sûr de vouloir supprimer cet athlète? ";
 	public static final String	BUNDLEDISTANCE			= "distance";
-	public static final String	ERRORSOCKET				= "Impossible de contacter le serveur";
+	public static final String	ERRORSOCKET				= "Impossible de contacter le serveur\n";
 	public static final String	CONNECTED				= "Connexion départ";
 	public static final String	DISCONNECTED			= "Déconnexion départ";
 	public static final String	CONNECTEDFROMSTART		= "Connection établie avec le capteur de départ\n";
 	public static final String	DISCONNECTEDFROMSTART	= "Déconnexion avec le capteur de départ\n";
+	public static final String	CONNECTEDSTOP			= "Connexion arrivée";
+	public static final String	DISCONNECTEDSTOP		= "Déconnexion arrivée";
+	public static final String	CONNECTEDFROMSTOP		= "Connection établie avec le capteur d'arrivée\n";
+	public static final String	DISCONNECTEDFROMSTOP	= "Déconnexion avec le capteur d'arrivée\n";
+	public static final String	WAITINGFORCONNECTION	= "En attente de connexion...\n";
+	public static final String	INITCONNECTION			= "Initialisation de la connexion...\n";
 }
 /* ________________________________________________________ */
 /*

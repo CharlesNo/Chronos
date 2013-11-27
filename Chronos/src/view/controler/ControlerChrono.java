@@ -2,6 +2,7 @@ package view.controler;
 
 import utility.Constantes;
 import utility.wifiConnection.ClientStartTcp;
+import utility.wifiConnection.ClientStopTcp;
 import view.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import com.chronos.R;
 
 /* _________________________________________________________ */
@@ -74,9 +76,15 @@ public class ControlerChrono implements OnClickListener
 			{
 				try
 				{
+					final Button connection = (Button) activity
+							.findViewById(R.id.connect);
+					connection.setText(Constantes.DISCONNECTED);
+					final TextView log = (TextView) activity
+							.findViewById(R.id.textlog);
+					log.append(Constantes.WAITINGFORCONNECTION);
 					ClientStartTcp.closeConnection();
-					final ClientStartTcp connexion = new ClientStartTcp("192.168.1.131",
-							8888, activity);
+					final ClientStartTcp connexion = new ClientStartTcp(
+							"192.168.1.131", 8888, activity);
 					final Thread thread = new Thread(connexion);
 					thread.start();
 				}
@@ -91,6 +99,41 @@ public class ControlerChrono implements OnClickListener
 						.findViewById(R.id.connect);
 				connection.setText(Constantes.CONNECTED);
 				ClientStartTcp.closeConnection();
+			}
+		}
+		if (source == activity.findViewById(R.id.connect2))
+		{
+			final Button connect = (Button) activity
+					.findViewById(R.id.connect2);
+			if (connect.getText().equals(Constantes.CONNECTEDSTOP))// Si on est
+																	// pas
+																	// connecté
+			{
+				try
+				{
+					final Button connection = (Button) activity
+							.findViewById(R.id.connect2);
+					connection.setText(Constantes.DISCONNECTEDSTOP);
+					final TextView log = (TextView) activity
+							.findViewById(R.id.textlog);
+					log.append(Constantes.WAITINGFORCONNECTION);
+					ClientStopTcp.closeConnection();
+					final ClientStopTcp connexion = new ClientStopTcp(
+							"192.168.1.118", 8888, activity);
+					final Thread thread = new Thread(connexion);
+					thread.start();
+				}
+				catch (final Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+			else
+			/* On se deconnecte */{
+				final Button connection = (Button) activity
+						.findViewById(R.id.connect2);
+				connection.setText(Constantes.CONNECTEDSTOP);
+				ClientStopTcp.closeConnection();
 			}
 		}
 	}

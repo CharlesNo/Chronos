@@ -1,9 +1,9 @@
 /* _________________________________________________________ */
 /* _________________________________________________________ */
 /**
- * Fichier : ClientTCP.java
+ * Fichier : ClientStopTcp.java
  * 
- * Créé le 25 nov. 2013 à 13:47:51
+ * Créé le 27 nov. 2013 à 14:42:30
  * 
  * Auteur : Jerome POINAS
  */
@@ -17,7 +17,11 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import utility.Constantes;
+import view.ActivityListAthlete;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.TextView;
 import com.chronos.R;
@@ -26,7 +30,7 @@ import com.chronos.R;
 /**
  * The Class ClientStartTcp.
  */
-public class ClientStartTcp implements Runnable
+public class ClientStopTcp implements Runnable
 {
 	/** The tcp socket. */
 	private static Socket	tcpSocket;
@@ -52,7 +56,7 @@ public class ClientStartTcp implements Runnable
 	 *            the port
 	 * @param activity
 	 */
-	public ClientStartTcp(final String host, final int port,
+	public ClientStopTcp(final String host, final int port,
 			final Activity activity)
 	{
 		this.host = host;
@@ -85,14 +89,14 @@ public class ClientStartTcp implements Runnable
 
 	public void modifyStatus(final boolean connected)
 	{
-		final Button connection = (Button) activity.findViewById(R.id.connect);
+		final Button connection = (Button) activity.findViewById(R.id.connect2);
 		if (connected == true)
 		{
-			connection.setText(Constantes.DISCONNECTED);
+			connection.setText(Constantes.DISCONNECTEDSTOP);
 		}
 		else
 		{
-			connection.setText(Constantes.CONNECTED);
+			connection.setText(Constantes.CONNECTEDSTOP);
 		}
 	}
 
@@ -136,7 +140,7 @@ public class ClientStartTcp implements Runnable
 					modifyStatus(true);
 					final TextView log = (TextView) activity
 							.findViewById(R.id.textlog);
-					log.append(Constantes.CONNECTEDFROMSTART);
+					log.append(Constantes.CONNECTEDFROMSTOP);
 				}
 			});
 		}
@@ -147,7 +151,7 @@ public class ClientStartTcp implements Runnable
 			{
 				newLine = inBuff.readLine();
 				System.out.println("newLine: " + newLine);
-				if ((newLine != null) && newLine.contains("Start"))
+				if ((newLine != null) && newLine.contains("Stop"))
 				{
 					System.out.println(newLine);
 					final business.Chronometer chronos = (business.Chronometer) activity
@@ -157,7 +161,15 @@ public class ClientStartTcp implements Runnable
 						@Override
 						public void run()
 						{
-							chronos.start();
+							chronos.stop();
+							final Intent intent = new Intent(activity,
+									ActivityListAthlete.class);
+							final Bundle objetbunble = new Bundle();
+							objetbunble.putString(Constantes.BUNDLETIME, String
+									.valueOf(SystemClock.elapsedRealtime()
+											- chronos.getBase()));
+							intent.putExtras(objetbunble);
+							activity.startActivity(intent);
 						}
 					});
 					run = false;
@@ -177,7 +189,7 @@ public class ClientStartTcp implements Runnable
 						{
 							final TextView log = (TextView) activity
 									.findViewById(R.id.textlog);
-							log.append(Constantes.DISCONNECTEDFROMSTART);
+							log.append(Constantes.DISCONNECTEDFROMSTOP);
 						}
 					});
 				}
@@ -215,6 +227,6 @@ public class ClientStartTcp implements Runnable
 }
 /* _________________________________________________________ */
 /*
- * Fin du fichier ClientTCP.java.
+ * Fin du fichier ClientStopTcp.java.
  * /*_________________________________________________________
  */

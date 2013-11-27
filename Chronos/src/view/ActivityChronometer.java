@@ -1,5 +1,6 @@
 package view;
 
+import utility.Constantes;
 import view.controler.ControlerChrono;
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ public class ActivityChronometer extends Activity
 {
 	/** Les logs de la connexion */
 	TextView	textlog;
-	/** Bouton de (dé)connexion */
+	/** Bouton de (dé)connexion Départ */
 	Button		buttonConnect;
+	/** Bouton de (dé)connexion Arrivée */
+	Button		buttonConnect2;
 
 	/* _________________________________________________________ */
 	/**
@@ -35,14 +38,16 @@ public class ActivityChronometer extends Activity
 		final Button btStart = (Button) findViewById(R.id.btStart);
 		final Button btStop = (Button) findViewById(R.id.btStop);
 		buttonConnect = (Button) findViewById(R.id.connect);
+		buttonConnect2 = (Button) findViewById(R.id.connect2);
 		textlog = (TextView) findViewById(R.id.textlog);
+		textlog.setText(Constantes.INITCONNECTION);
 		textlog.setMovementMethod(new ScrollingMovementMethod());
-		textlog.setText("Initialisation de la connexion\n");
 		// add Eventlisteners
 		final ControlerChrono controler = new ControlerChrono(this);
 		btStart.setOnClickListener(controler);
 		btStop.setOnClickListener(controler);
 		buttonConnect.setOnClickListener(controler);
+		buttonConnect2.setOnClickListener(controler);
 	}
 
 	/* _________________________________________________________ */
