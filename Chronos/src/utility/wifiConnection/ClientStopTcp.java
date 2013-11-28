@@ -12,7 +12,6 @@ package utility.wifiConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -22,7 +21,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.chronos.R;
 
@@ -36,8 +37,6 @@ public class ClientStopTcp implements Runnable
 	private static Socket	tcpSocket;
 	/** The in buff. */
 	private BufferedReader	inBuff;
-	/** The out print. */
-	private PrintWriter		outPrint;
 	/** The host. */
 	private String			host	= "";
 	/** The port. */
@@ -55,6 +54,7 @@ public class ClientStopTcp implements Runnable
 	 * @param port
 	 *            the port
 	 * @param activity
+	 *            L'activité.
 	 */
 	public ClientStopTcp(final String host, final int port,
 			final Activity activity)
@@ -84,9 +84,15 @@ public class ClientStopTcp implements Runnable
 		tcpSocket = new Socket(connectedAddress, port);
 		inBuff = new BufferedReader(new InputStreamReader(
 				tcpSocket.getInputStream()));
-		outPrint = new PrintWriter(tcpSocket.getOutputStream());
 	}
 
+	/* _________________________________________________________ */
+	/**
+	 * Modifie l'aspect du bouton de connexion.
+	 * 
+	 * @param connected
+	 *            La valeur correspondant au status du bouton de connexion.
+	 */
 	public void modifyStatus(final boolean connected)
 	{
 		final Button connection = (Button) activity.findViewById(R.id.connect2);
@@ -97,6 +103,9 @@ public class ClientStopTcp implements Runnable
 		else
 		{
 			connection.setText(Constantes.CONNECTEDSTOP);
+			final ProgressBar wait = (ProgressBar) activity
+					.findViewById(R.id.progressBar1);
+			wait.setVisibility(View.GONE);
 		}
 	}
 
@@ -144,18 +153,16 @@ public class ClientStopTcp implements Runnable
 				}
 			});
 		}
+		final business.Chronometer chronos = (business.Chronometer) activity
+				.findViewById(R.id.chronometer);
 		while (run)
 		{
 			String newLine = "";
 			try
 			{
 				newLine = inBuff.readLine();
-				System.out.println("newLine: " + newLine);
 				if ((newLine != null) && newLine.contains("Stop"))
 				{
-					System.out.println(newLine);
-					final business.Chronometer chronos = (business.Chronometer) activity
-							.findViewById(R.id.chronometer);
 					activity.runOnUiThread(new Runnable()
 					{
 						@Override
@@ -209,6 +216,10 @@ public class ClientStopTcp implements Runnable
 		}
 	}
 
+	/* _________________________________________________________ */
+	/**
+	 * Permet de fermer la connexion de la socket.
+	 */
 	public static void closeConnection()
 	{
 		if (tcpSocket != null)

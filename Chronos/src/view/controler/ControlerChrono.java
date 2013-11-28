@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.chronos.R;
 
@@ -70,6 +71,9 @@ public class ControlerChrono implements OnClickListener
 		}
 		if (source == activity.findViewById(R.id.connect))
 		{
+			final ProgressBar wait = (ProgressBar) activity
+					.findViewById(R.id.progressBar1);
+			wait.setVisibility(View.VISIBLE);
 			final Button connect = (Button) activity.findViewById(R.id.connect);
 			if (connect.getText().equals(Constantes.CONNECTED))// Si on est pas
 																// connecté
@@ -103,6 +107,9 @@ public class ControlerChrono implements OnClickListener
 		}
 		if (source == activity.findViewById(R.id.connect2))
 		{
+			final ProgressBar wait = (ProgressBar) activity
+					.findViewById(R.id.progressBar1);
+			wait.setVisibility(View.VISIBLE);
 			final Button connect = (Button) activity
 					.findViewById(R.id.connect2);
 			if (connect.getText().equals(Constantes.CONNECTEDSTOP))// Si on est

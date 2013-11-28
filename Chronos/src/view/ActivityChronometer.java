@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.chronos.R;
 
@@ -21,6 +23,8 @@ public class ActivityChronometer extends Activity
 	Button		buttonConnect;
 	/** Bouton de (dé)connexion Arrivée */
 	Button		buttonConnect2;
+	/** ProgressBar */
+	ProgressBar	wait;
 
 	/* _________________________________________________________ */
 	/**
@@ -39,6 +43,8 @@ public class ActivityChronometer extends Activity
 		final Button btStop = (Button) findViewById(R.id.btStop);
 		buttonConnect = (Button) findViewById(R.id.connect);
 		buttonConnect2 = (Button) findViewById(R.id.connect2);
+		wait = (ProgressBar) findViewById(R.id.progressBar1);
+		wait.setVisibility(View.GONE);
 		textlog = (TextView) findViewById(R.id.textlog);
 		textlog.setText(Constantes.INITCONNECTION);
 		textlog.setMovementMethod(new ScrollingMovementMethod());

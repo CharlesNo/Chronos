@@ -14,4 +14,7 @@
     <string name="ImageDesc">Image</string>
     <string name="tps">Temps : </string>
     <string name="metre">mètres</string>
+    <string name="title_activity_activity_waiting">ActivityWaiting</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

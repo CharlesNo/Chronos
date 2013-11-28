@@ -68,6 +68,14 @@
              android:layout_alignParentTop="true"
              android:text="Connexion arrivée" />
 
+         <ProgressBar
+             android:id="@+id/progressBar1"
+             style="?android:attr/progressBarStyleLarge"
+             android:layout_width="60dp"
+             android:layout_height="60dp"
+             android:layout_alignParentTop="true"
+             android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
     <TextView
 		android:id="@+id/textlog"
@@ -76,6 +84,7 @@
 		android:scrollbars = "vertical"
 		android:ellipsize="marquee"
 		android:marqueeRepeatLimit="marquee_forever"
+		android:gravity="bottom"
  />
 
 </LinearLayout>
