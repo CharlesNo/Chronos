@@ -1,10 +1,10 @@
 package view;
 
-import java.text.DecimalFormat;
 import java.util.Observable;
 import java.util.Observer;
 import persistence.DatabaseHandler;
 import utility.Constantes;
+import utility.Formatter;
 import view.controler.ControlerListAthlete;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -103,31 +103,8 @@ public class ActivityListAthlete extends Activity implements Observer,
 					Constantes.BUNDLETIME);
 			tempsChrono = Long.parseLong(temps);
 			final TextView champsTemps = (TextView) findViewById(R.id.tempsChrono);
-			champsTemps.setText(miseEnForme(tempsChrono));
+			champsTemps.setText(Formatter.miseEnForme(tempsChrono));
 		}
-	}
-
-	/**
-	 * Methode de mise en forme du rendu chronometre.
-	 * 
-	 * @param timeElapsed
-	 *            the time elapsed
-	 * @return the string
-	 */
-	public String miseEnForme(final long timeElapsed)
-	{
-		final DecimalFormat df = new DecimalFormat("00");
-		int remaining = (int) (timeElapsed % (3600 * 1000));
-		final int minutes = remaining / (60 * 1000);
-		remaining = remaining % (60 * 1000);
-		final int seconds = remaining / 1000;
-		remaining = remaining % (1000);
-		final int milliseconds = ((((int) timeElapsed % 1000) / 10));
-		final StringBuilder builder = new StringBuilder();
-		builder.append(df.format(minutes)).append("'");
-		builder.append(df.format(seconds)).append("\"");
-		builder.append(df.format(milliseconds));
-		return builder.toString();
 	}
 
 	/* _________________________________________________________ */

@@ -12,6 +12,7 @@ package utility;
 /**
  * The Interface Constantes.
  */
+@SuppressWarnings("javadoc")
 public interface Constantes
 {
 	/** Le nom de la base de données */

@@ -265,7 +265,6 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 				}
 				catch (final IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

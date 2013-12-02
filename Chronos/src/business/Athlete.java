@@ -24,7 +24,6 @@ import business.exceptions.InvalidNameException;
  * Il a une liste de performances/performances.
  * 
  * @author Jerome POINAS
- *         Charles NEAU
  */
 public class Athlete implements Comparable<Athlete>, Serializable
 {

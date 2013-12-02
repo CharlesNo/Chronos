@@ -218,6 +218,7 @@ public class Chronometer extends TextView
 		{
 			if (running)
 			{
+				timeElapsed = SystemClock.elapsedRealtime() - mBase;
 				updateText(SystemClock.elapsedRealtime());
 				dispatchChronometerTick();
 				mHandler.sendMessageDelayed(
