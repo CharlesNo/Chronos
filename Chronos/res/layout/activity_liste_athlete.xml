@@ -20,15 +20,14 @@
     <ExpandableListView
         android:id="@+id/listAthleteExpandable"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"  
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/tempsChrono"
+        android:layout_alignRight="@+id/tempsChrono"
         android:layout_below="@+id/textViewListeAthlete"
         android:layout_marginTop="28dp"
-        android:layout_toLeftOf="@+id/bouttonAddAthlete"
         android:background="@drawable/backgroundlistview"
-        android:textSize="12sp"   >
-        
+        android:orientation="vertical"
+        android:textSize="12sp" >
 
     </ExpandableListView>
 
@@ -88,27 +87,73 @@
         <requestFocus />
     </EditText>
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPrenom"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/listAthleteExpandable"
+        android:text="Distance d&apos;enregistrement : (100m)"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/Exporter"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignLeft="@+id/settings"
+        android:layout_below="@+id/settings"
+        android:contentDescription="@string/app_name"
+        android:maxHeight="35dp"
+        android:maxWidth="35dp"
+        android:src="@drawable/exporter" />
+
     <ImageView
         android:id="@+id/settings"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/TextView01"
-        android:layout_alignRight="@+id/editTextPrenom"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/app_name"
         android:maxHeight="35dp"
         android:maxWidth="35dp"
         android:src="@drawable/settings" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextPrenom"
-        android:layout_below="@+id/editTextPrenom"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="20dp"
-        android:text="Distance d&apos;enregistrement : (100m)"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:ignore="HardcodedText" />
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/listAthleteExpandable"
+        android:text="@string/Fonctions"
+        android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/fleche"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/settings"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="17dp"
+        android:layout_toLeftOf="@+id/settings"
+        android:contentDescription="@string/app_name"
+        android:maxHeight="25dp"
+        android:maxWidth="25dp"
+        android:src="@drawable/fleche" />
+
+     <ImageView
+         android:id="@+id/fleche2"
+         android:layout_width="25dp"
+         android:layout_height="25dp"
+         android:layout_alignBottom="@+id/Exporter"
+         android:layout_alignLeft="@+id/fleche"
+         android:layout_marginBottom="10dp"
+         android:contentDescription="@string/app_name"
+         android:maxHeight="25dp"
+         android:maxWidth="25dp"
+         android:src="@drawable/fleche" />
 
 </RelativeLayout>

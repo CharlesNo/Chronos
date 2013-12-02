@@ -16,5 +16,7 @@
     <string name="metre">mètres</string>
     <string name="title_activity_activity_waiting">ActivityWaiting</string>
     <string name="hello_world">Hello world!</string>
+    <string name="Exporter">Exporter</string>
+    <string name="Fonctions"><u>Fonctions avancées :</u></string>
 
 </resources>

@@ -181,6 +181,21 @@ public class Athlete implements Comparable<Athlete>, Serializable
 	{
 		final StringBuilder builder = new StringBuilder();
 		builder.append(firstName).append(" ").append(name);
+		builder.append("[");
+		for (int i = 0; i < performances.size(); i++)
+		{
+			final Performance perf = performances.get(i);
+			if (i == (performances.size() - 1))
+			{
+				builder.append(perf);
+			}
+			else
+			{
+				builder.append(perf).append(";");
+			}
+		}
+		builder.append("]");
+		builder.append("\n");
 		return builder.toString();
 	}
 

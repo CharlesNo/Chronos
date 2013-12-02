@@ -61,6 +61,7 @@ public interface Constantes
 	public static final String	DISCONNECTEDFROMSTOP	= "Déconnexion avec le capteur d'arrivée\n";
 	public static final String	WAITINGFORCONNECTION	= "En attente de connexion...\n";
 	public static final String	INITCONNECTION			= "Initialisation de la connexion...\n";
+	public static final String	DATABASEEXPORTED		= "Les données ont été exportées";
 }
 /* ________________________________________________________ */
 /*

@@ -68,6 +68,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 		/* Initialisation des attributs */
 		lvListe = (ExpandableListView) findViewById(R.id.listAthleteExpandable);
 		buttonAjouter = (Button) findViewById(R.id.bouttonAddAthlete);
+		final ImageView exporter = (ImageView) findViewById(R.id.Exporter);
 		final ImageView settings = (ImageView) findViewById(R.id.settings);
 		/* Base de données */
 		database = DatabaseHandler.getInstance(getBaseContext());
@@ -83,6 +84,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
 		settings.setOnClickListener(controler);
+		exporter.setOnClickListener(controler);
 		registerForContextMenu(lvListe);
 	}
 

@@ -9,11 +9,21 @@
  */
 package view.controler;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.List;
 import java.util.Locale;
 import persistence.DatabaseHandler;
 import utility.Constantes;
 import view.ActivityListAthlete;
 import android.app.Activity;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -204,8 +214,69 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 				final DialogFragmentSettings dialog = new DialogFragmentSettings(
 						activity, this, itemSelected);
 				break;
+			case R.id.Exporter:
+				exportDataBase();
+				Toast.makeText(activity, Constantes.DATABASEEXPORTED,
+						Toast.LENGTH_SHORT).show();
+				break;
 			default:
 				break;
+		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 */
+	private void exportDataBase()
+	{
+		final List<Athlete> maListeAthlete = DatabaseHandler.getInstance(
+				activity.getApplicationContext()).getAllAthletes();
+		final String data = "";
+		final File myFile = new File(Environment.getExternalStorageDirectory()
+				+ File.separator + "chronos", "database.txt"); // on déclare
+																// notre futur
+																// fichier
+		final File myDir = new File(Environment.getExternalStorageDirectory()
+				+ File.separator + "chronos"); // pour créer le repertoire dans
+												// lequel on va mettre notre
+												// fichier
+		Boolean success = true;
+		if (!myDir.exists())
+		{
+			success = myDir.mkdir(); // On crée le répertoire (s'il n'existe
+										// pas!!)
+		}
+		if (success)
+		{
+			FileOutputStream output;
+			try
+			{
+				output = new FileOutputStream(myFile, false);
+				try
+				{
+					final Writer out = new BufferedWriter(
+							new OutputStreamWriter(output, "UTF-8"));
+					for (final Athlete athlete : maListeAthlete)
+					{
+						out.write(athlete.toString());
+						out.flush();
+					}
+					out.close();
+				}
+				catch (final IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			catch (final FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			Log.e("TEST", "Erreur de création de dossier");
 		}
 	}
 

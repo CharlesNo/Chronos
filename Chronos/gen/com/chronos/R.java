@@ -25,30 +25,36 @@ public final class R {
         public static final int backgroundlistview=0x7f020001;
         public static final int cercle=0x7f020002;
         public static final int delete=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int settings=0x7f020005;
+        public static final int exporter=0x7f020004;
+        public static final int fleche=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int settings=0x7f020007;
     }
     public static final class id {
+        public static final int Exporter=0x7f050010;
         public static final int TextView01=0x7f05000e;
-        public static final int action_settings=0x7f050015;
+        public static final int action_settings=0x7f050019;
         public static final int bouttonAddAthlete=0x7f05000b;
         public static final int btStart=0x7f050002;
         public static final int btStop=0x7f050003;
         public static final int chronometer=0x7f050001;
         public static final int connect=0x7f050004;
         public static final int connect2=0x7f050005;
-        public static final int deleteImage=0x7f050012;
-        public static final int distanceRecord=0x7f050014;
+        public static final int deleteImage=0x7f050016;
+        public static final int distanceRecord=0x7f050018;
         public static final int editTextNom=0x7f05000c;
         public static final int editTextPrenom=0x7f05000d;
+        public static final int fleche=0x7f050013;
+        public static final int fleche2=0x7f050014;
         public static final int listAthleteExpandable=0x7f050009;
         public static final int listeAthlete=0x7f050000;
-        public static final int pickerDistance=0x7f050013;
+        public static final int pickerDistance=0x7f050017;
         public static final int progressBar1=0x7f050006;
-        public static final int resultat=0x7f050011;
-        public static final int settings=0x7f05000f;
+        public static final int resultat=0x7f050015;
+        public static final int settings=0x7f050011;
         public static final int tempsChrono=0x7f05000a;
-        public static final int textView1=0x7f050010;
+        public static final int textView1=0x7f05000f;
+        public static final int textView2=0x7f050012;
         public static final int textViewListeAthlete=0x7f050008;
         public static final int textlog=0x7f050007;
     }
@@ -65,6 +71,8 @@ public final class R {
     }
     public static final class string {
         public static final int Chronometre=0x7f060007;
+        public static final int Exporter=0x7f06000f;
+        public static final int Fonctions=0x7f060010;
         public static final int ImageDesc=0x7f06000a;
         public static final int Start=0x7f060009;
         public static final int Stop=0x7f060008;
