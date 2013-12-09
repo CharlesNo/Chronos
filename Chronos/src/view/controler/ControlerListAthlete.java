@@ -267,6 +267,14 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 				{
 					e.printStackTrace();
 				}
+				try
+				{
+					output.close();
+				}
+				catch (final IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
 			catch (final FileNotFoundException e)
 			{

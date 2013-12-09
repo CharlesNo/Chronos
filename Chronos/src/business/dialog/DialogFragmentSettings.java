@@ -35,8 +35,8 @@ public class DialogFragmentSettings extends DialogFragment implements
 	private Activity					activity	= null;
 	/** Le controleur du numberPicker */
 	private final ControlerListAthlete	controler;
-	/**position du picker */
-	private int pos;
+	/** position du picker */
+	private final int					pos;
 
 	/**
 	 * Constructeur complet d'un DialogFragmentSettings.
@@ -45,13 +45,15 @@ public class DialogFragmentSettings extends DialogFragment implements
 	 *            L'activité utilisé.
 	 * @param controler
 	 *            Le controleur.
+	 * @param pos
+	 *            La position de l'athlete
 	 */
 	public DialogFragmentSettings(final Activity activity,
-			final ControlerListAthlete controler, int pos)
+			final ControlerListAthlete controler, final int pos)
 	{
 		this.activity = activity;
 		this.controler = controler;
-		this.pos=pos;
+		this.pos = pos;
 		final Dialog dial = onCreateDialog(getArguments());
 		dial.show();
 	}
@@ -66,7 +68,8 @@ public class DialogFragmentSettings extends DialogFragment implements
 	 * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
 	 */
 	@Override
-	public Dialog onCreateDialog(final Bundle savedInstanceState)
+	public Dialog onCreateDialog(
+			@SuppressWarnings("unused") final Bundle savedInstanceState)
 	{
 		final LayoutInflater li = LayoutInflater
 				.from(activity.getBaseContext());
@@ -76,11 +79,11 @@ public class DialogFragmentSettings extends DialogFragment implements
 		final NumberPicker picker = (NumberPicker) promptsView
 				.findViewById(R.id.pickerDistance);
 		final String[] tabValeurs = new String[16];
-		int val = 50 ;
-		for(int i=0;i<16;i++)
+		int val = 50;
+		for (int i = 0; i < 16; i++)
 		{
 			tabValeurs[i] = Integer.toString(val);
-			val=val+10;
+			val = val + 10;
 		}
 		picker.setMinValue(0);
 		picker.setMaxValue(tabValeurs.length - 1);
@@ -97,8 +100,9 @@ public class DialogFragmentSettings extends DialogFragment implements
 				new DialogInterface.OnClickListener()
 				{
 					@Override
-					public void onClick(final DialogInterface dialog,
-							final int id)
+					public void onClick(
+							@SuppressWarnings("unused") final DialogInterface dialog,
+							@SuppressWarnings("unused") final int id)
 					{
 					}
 				});

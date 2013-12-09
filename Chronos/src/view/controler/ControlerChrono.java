@@ -83,9 +83,7 @@ public class ControlerChrono implements OnClickListener
 			{
 				try
 				{
-					final Button connection = (Button) activity
-							.findViewById(R.id.connect);
-					connection.setText(Constantes.DISCONNECTED);
+					connect.setText(Constantes.DISCONNECTED);
 					log.append(Constantes.WAITINGFORCONNECTION);
 					ClientStartTcp.closeConnection();
 					final ClientStartTcp connexion = new ClientStartTcp(
@@ -100,9 +98,7 @@ public class ControlerChrono implements OnClickListener
 			}
 			else
 			/* On se deconnecte */{
-				final Button connection = (Button) activity
-						.findViewById(R.id.connect);
-				connection.setText(Constantes.CONNECTED);
+				connect.setText(Constantes.CONNECTED);
 				ClientStartTcp.closeConnection();
 				wait.setVisibility(View.GONE);
 				log.append(Constantes.INTERRUPTEDSTART);
@@ -122,9 +118,7 @@ public class ControlerChrono implements OnClickListener
 			{
 				try
 				{
-					final Button connection = (Button) activity
-							.findViewById(R.id.connect2);
-					connection.setText(Constantes.DISCONNECTEDSTOP);
+					connect.setText(Constantes.DISCONNECTEDSTOP);
 					log.append(Constantes.WAITINGFORCONNECTION);
 					ClientStopTcp.closeConnection();
 					final ClientStopTcp connexion = new ClientStopTcp(
@@ -139,9 +133,7 @@ public class ControlerChrono implements OnClickListener
 			}
 			else
 			/* On se deconnecte */{
-				final Button connection = (Button) activity
-						.findViewById(R.id.connect2);
-				connection.setText(Constantes.CONNECTEDSTOP);
+				connect.setText(Constantes.CONNECTEDSTOP);
 				ClientStopTcp.closeConnection();
 				wait.setVisibility(View.GONE);
 				log.append(Constantes.INTERRUPTEDSTOP);
