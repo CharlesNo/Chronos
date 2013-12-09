@@ -17,10 +17,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
-import java.util.Locale;
 import persistence.DatabaseHandler;
 import utility.Constantes;
-import view.ActivityListAthlete;
+import utility.Formatter;
+import view.activity.ActivityListAthlete;
+import view.dialog.DialogFragmentSettings;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Environment;
 import android.util.Log;
@@ -31,13 +33,10 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.NumberPicker;
-import android.widget.NumberPicker.OnValueChangeListener;
-import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
+import business.DialogDistance;
 import business.Manager;
-import business.dialog.DialogFragmentSettings;
 import business.exceptions.InvalidFirstNameException;
 import business.exceptions.InvalidNameException;
 import com.chronos.R;
@@ -48,9 +47,10 @@ import com.chronos.R;
  * 
  * @author Charles NEAU
  */
+@SuppressLint("DefaultLocale")
 @SuppressWarnings("unused")
 public class ControlerListAthlete implements OnItemLongClickListener,
-		OnClickListener, OnValueChangeListener, Constantes
+		OnClickListener, Constantes
 {
 	/** The activity. */
 	private final Activity				activity;
@@ -64,8 +64,8 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	private final long					tempsChrono;
 	/** Position temporaire pour supprimer l'athlete en cours */
 	private int							removePos;
-	/** Position du picker */
-	private int							itemSelected	= 5;
+	/** The dialog distance. */
+	private final DialogDistance		dialogDistance;
 
 	/* _________________________________________________________ */
 	/**
@@ -75,16 +75,20 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 	 *            the activity
 	 * @param model
 	 *            the model
+	 * @param dialogDistance
+	 *            the dialog distance
 	 * @param database
 	 *            the database
 	 * @param tempsChrono
 	 *            the time
 	 */
 	public ControlerListAthlete(final Activity activity, final Manager model,
+			final DialogDistance dialogDistance,
 			final DatabaseHandler database, final long tempsChrono)
 	{
 		this.activity = activity;
 		this.model = model;
+		this.dialogDistance = dialogDistance;
 		this.database = database;
 		this.tempsChrono = tempsChrono;
 		lvListe = (ExpandableListView) activity
@@ -127,11 +131,11 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 							// Traitement sur la mise en forme du prénom.
 							final String nom = champPrenom.getText().toString()
 									.trim();
-							final String nomModifié = firstLetterUpperCase(nom);
-							final Athlete athlete = new Athlete(champNom
-									.getText().toString()
-									.toUpperCase(Locale.getDefault()),
-									nomModifié);
+							final String nomModifié = Formatter
+									.firstLetterUpperCase(nom);
+							final Athlete athlete = new Athlete(
+									Formatter.ToUpperCase(champNom.getText()
+											.toString().trim()), nomModifié);
 							model.getAdapter().add(athlete);
 							model.getAdapter().notifyDataSetChanged();
 							lvListe.setAdapter(model.getAdapter());
@@ -172,9 +176,11 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 							// Traitement sur la mise en forme du prénom.
 							final String nom = champPrenom.getText().toString()
 									.trim();
-							final String nomModifié = firstLetterUpperCase(nom);
-							athlete = new Athlete(champNom.getText().toString()
-									.trim().toUpperCase(), nomModifié,
+							final String nomModifié = Formatter
+									.firstLetterUpperCase(nom);
+							athlete = new Athlete(
+									Formatter.ToUpperCase(champNom.getText()
+											.toString().trim()), nomModifié,
 									athleteSelected.getPerformances());
 							// *********** Suppression de athlete selected
 							// *******************//
@@ -212,7 +218,7 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 			// *****************BOUTON SETTINGS*********************//
 			case R.id.settings:
 				final DialogFragmentSettings dialog = new DialogFragmentSettings(
-						activity, this, itemSelected);
+						activity, dialogDistance);
 				break;
 			case R.id.Exporter:
 				exportDataBase();
@@ -289,27 +295,6 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 
 	/* _________________________________________________________ */
 	/**
-	 * Méthode qui permet de mettre la premiere lettre de la chaine de character
-	 * passée en paramètre.
-	 * 
-	 * @param nom
-	 *            La chaine de character a mettre en forme.
-	 * @return La chaine de character modifiée.
-	 */
-	private String firstLetterUpperCase(final String nom)
-	{
-		final char first = nom.charAt(0);
-		System.out.println(first);
-		String firstLetter = Character.toString(first);
-		firstLetter = firstLetter.toUpperCase(Locale.getDefault());
-		System.out.println(firstLetter);
-		// Substring pour enlever la premiere lettre
-		final String resteChaine = nom.substring(1);
-		return firstLetter.concat(resteChaine);
-	}
-
-	/* _________________________________________________________ */
-	/**
 	 * On item long click.
 	 * 
 	 * @param arg0
@@ -335,24 +320,6 @@ public class ControlerListAthlete implements OnItemLongClickListener,
 			lvListe.showContextMenu();
 		}
 		return true;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * @see android.widget.NumberPicker.OnValueChangeListener#onValueChange(android.widget.NumberPicker,
-	 *      int, int)
-	 */
-	@Override
-	public void onValueChange(final NumberPicker picker, final int oldVal,
-			final int newVal)
-	{
-		final TextView champsDistance = (TextView) activity
-				.findViewById(R.id.textView1);
-		final String[] values = picker.getDisplayedValues();
-		champsDistance.setText("Distance d'enregistrement : (" + values[newVal]
-				+ "m)");
-		ActivityListAthlete.setRecordDistance(Integer.parseInt(values[newVal]));
-		itemSelected = picker.getValue();
 	}
 }
 /* _________________________________________________________ */

@@ -12,15 +12,12 @@ package business.adapter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import persistence.DatabaseHandler;
+import view.controler.ControlerExpandableList;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
@@ -36,10 +33,8 @@ import com.chronos.R;
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter
 {
-	/**
-	 * Le contexte.
-	 */
-	private final Activity							context;
+	/** The activity. */
+	private final Activity							activity;
 	/**
 	 * Map des athletes et de leur resultats
 	 */
@@ -51,8 +46,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 
 	/* _________________________________________________________ */
 	/**
+	 * Instantiates a new expandable list adapter.
+	 * 
 	 * @param context
-	 *            Le contexte.
+	 *            the context
 	 * @param athletes
 	 *            Liste des athletes.
 	 * @param mesResultats
@@ -62,7 +59,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 			final List<Athlete> athletes,
 			final Map<Athlete, List<Performance>> mesResultats)
 	{
-		this.context = context;
+		activity = context;
 		resultsCollection = mesResultats;
 		listeAthlete = athletes;
 	}
@@ -79,8 +76,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	@Override
 	public Object getChild(final int groupPosition, final int childPosition)
 	{
-		return resultsCollection.get(listeAthlete.get(groupPosition)).get(
-				childPosition);
+		return getResultsCollection().get(getListeAthlete().get(groupPosition))
+				.get(childPosition);
 	}
 
 	/* _________________________________________________________ */
@@ -122,8 +119,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	{
 		final Performance perf = (Performance) getChild(groupPosition,
 				childPosition);
-		final Athlete athlete = (Athlete) getGroup(groupPosition);
-		final LayoutInflater inflater = context.getLayoutInflater();
+		final LayoutInflater inflater = getActivity().getLayoutInflater();
 		if (convertView == null)
 		{
 			convertView = inflater.inflate(R.layout.child_item, null);
@@ -134,47 +130,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 				.findViewById(R.id.deleteImage);
 		if (delete != null)
 		{
-			delete.setOnClickListener(new OnClickListener()
-			{
-				@Override
-				public void onClick(@SuppressWarnings("unused") final View v)
-				{
-					final AlertDialog.Builder builder = new AlertDialog.Builder(
-							context);
-					builder.setMessage("Supprimer ce temps ?");
-					builder.setCancelable(false);
-					builder.setNegativeButton("Annuler",
-							new DialogInterface.OnClickListener()
-							{
-								@Override
-								public void onClick(
-										final DialogInterface dialog,
-										@SuppressWarnings("unused") final int id)
-								{
-									dialog.cancel();
-								}
-							});
-					builder.setPositiveButton("Valider",
-							new DialogInterface.OnClickListener()
-							{
-								@Override
-								public void onClick(
-										@SuppressWarnings("unused") final DialogInterface dialog,
-										@SuppressWarnings("unused") final int id)
-								{
-									final List<Performance> child = resultsCollection
-											.get(listeAthlete
-													.get(groupPosition));
-									child.remove(childPosition);
-									DatabaseHandler.getInstance(context)
-											.removePerformance(athlete, perf);
-									notifyDataSetChanged();
-								}
-							});
-					final AlertDialog alertDialog = builder.create();
-					alertDialog.show();
-				}
-			});
+			delete.setOnClickListener(new ControlerExpandableList(this,
+					groupPosition, childPosition));
 		}
 		item.setText(perf.toString());
 		return convertView;
@@ -190,8 +147,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	@Override
 	public int getChildrenCount(final int groupPosition)
 	{
-		final int i = resultsCollection.get(listeAthlete.get(groupPosition))
-				.size();
+		final int i = getResultsCollection().get(
+				getListeAthlete().get(groupPosition)).size();
 		return i;
 	}
 
@@ -205,7 +162,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	@Override
 	public Object getGroup(final int groupPosition)
 	{
-		return listeAthlete.get(groupPosition);
+		return getListeAthlete().get(groupPosition);
 	}
 
 	/* _________________________________________________________ */
@@ -216,7 +173,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	@Override
 	public int getGroupCount()
 	{
-		return listeAthlete.size();
+		return getListeAthlete().size();
 	}
 
 	/* _________________________________________________________ */
@@ -254,7 +211,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 		final Athlete athlete = (Athlete) getGroup(groupPosition);
 		if (convertView == null)
 		{
-			final LayoutInflater infalInflater = (LayoutInflater) context
+			final LayoutInflater infalInflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.group_item, null);
 		}
@@ -300,8 +257,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	 */
 	public void remove(final Athlete athleteToRemove)
 	{
-		listeAthlete.remove(athleteToRemove);
-		resultsCollection.remove(athleteToRemove);
+		getListeAthlete().remove(athleteToRemove);
+		getResultsCollection().remove(athleteToRemove);
 	}
 
 	/* _________________________________________________________ */
@@ -311,9 +268,42 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	 */
 	public void add(final Athlete athlete)
 	{
-		listeAthlete.add(athlete);
-		Collections.sort(listeAthlete);
-		resultsCollection.put(athlete, athlete.getPerformances());
+		getListeAthlete().add(athlete);
+		Collections.sort(getListeAthlete());
+		getResultsCollection().put(athlete, athlete.getPerformances());
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ activity.
+	 * 
+	 * @return la valeur du champ activity.
+	 */
+	public Activity getActivity()
+	{
+		return activity;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ resultsCollection.
+	 * 
+	 * @return la valeur du champ resultsCollection.
+	 */
+	public Map<Athlete, List<Performance>> getResultsCollection()
+	{
+		return resultsCollection;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ listeAthlete.
+	 * 
+	 * @return la valeur du champ listeAthlete.
+	 */
+	public List<Athlete> getListeAthlete()
+	{
+		return listeAthlete;
 	}
 }
 /* _________________________________________________________ */

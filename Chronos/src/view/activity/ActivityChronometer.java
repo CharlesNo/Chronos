@@ -1,4 +1,4 @@
-package view;
+package view.activity;
 
 import utility.Constantes;
 import view.controler.ControlerChrono;

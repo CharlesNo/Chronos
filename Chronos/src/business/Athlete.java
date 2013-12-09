@@ -9,7 +9,6 @@
  */
 package business;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import business.exceptions.InvalidFirstNameException;
@@ -25,12 +24,8 @@ import business.exceptions.InvalidNameException;
  * 
  * @author Jerome POINAS
  */
-public class Athlete implements Comparable<Athlete>, Serializable
+public class Athlete implements Comparable<Athlete>
 {
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= 1L;
 	/**
 	 * Le name de famille de l'athlete.
 	 */
@@ -107,12 +102,12 @@ public class Athlete implements Comparable<Athlete>, Serializable
 	 * @param prenom
 	 *            the prenom
 	 * @param list
+	 *            the list
 	 * @throws InvalidNameException
 	 *             Exception le name est null.
 	 * @throws InvalidFirstNameException
 	 *             Exception le firstName est null.
 	 */
-	@SuppressWarnings("javadoc")
 	public Athlete(final String nom, final String prenom,
 			final List<Performance> list) throws InvalidNameException,
 			InvalidFirstNameException

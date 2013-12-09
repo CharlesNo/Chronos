@@ -10,6 +10,7 @@
 package utility;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 /* _________________________________________________________ */
 /**
@@ -39,6 +40,41 @@ public class Formatter
 		builder.append(df.format(seconds)).append("\"");
 		builder.append(df.format(milliseconds));
 		return builder.toString();
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Méthode qui permet de mettre la premiere lettre de la chaine de
+	 * charactere
+	 * passée en paramètre en majuscule.
+	 * 
+	 * @param nom
+	 *            La chaine de character a mettre en forme.
+	 * @return La chaine de character modifiée.
+	 */
+	public static String firstLetterUpperCase(final String nom)
+	{
+		final char first = nom.charAt(0);
+		String firstLetter = Character.toString(first);
+		firstLetter = firstLetter.toUpperCase(Locale.getDefault());
+		// Substring pour enlever la premiere lettre
+		final String resteChaine = nom.substring(1);
+		return firstLetter.concat(resteChaine);
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Méthode qui permet de mettre la chaine de charactere
+	 * passée en paramètre en majuscule.
+	 * 
+	 * @param nom
+	 *            La chaine de character a mettre en forme.
+	 * @return La chaine de character modifiée.
+	 */
+	public static String ToUpperCase(final String nom)
+	{
+		final String upperChain = nom.toUpperCase(Locale.getDefault());
+		return upperChain;
 	}
 }
 /* _________________________________________________________ */

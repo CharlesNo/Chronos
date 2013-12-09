@@ -16,7 +16,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import utility.Constantes;
-import view.ActivityListAthlete;
+import view.activity.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

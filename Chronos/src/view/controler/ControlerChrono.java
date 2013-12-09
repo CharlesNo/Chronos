@@ -3,7 +3,7 @@ package view.controler;
 import utility.Constantes;
 import utility.wifiConnection.ClientStartTcp;
 import utility.wifiConnection.ClientStopTcp;
-import view.ActivityListAthlete;
+import view.activity.ActivityListAthlete;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

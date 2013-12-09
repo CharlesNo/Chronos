@@ -26,16 +26,16 @@ import utility.Formatter;
 public class Performance
 {
 	/** The chrono. */
-	private final long	chrono;
+	private final long		chrono;
 	/** La date. */
-	private String		date;
+	private String			date;
 	/** The distance. */
-	private final int	distance;
+	private final int		distance;
 	/**
 	 * Athlete qui possède cette performance (nécessaire pour la base de
 	 * données)
 	 */
-	Athlete				athlete;
+	private final Athlete	athlete;
 
 	/* _________________________________________________________ */
 	/**

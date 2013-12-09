@@ -1,4 +1,4 @@
-package view;
+package view.activity;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import business.Athlete;
+import business.DialogDistance;
 import business.Manager;
 import business.Performance;
 import com.chronos.R;
@@ -50,6 +51,8 @@ public class ActivityListAthlete extends Activity implements Observer,
 	private DatabaseHandler		database;
 	/** Le model */
 	private Manager				model;
+	/** The dialogDistance. */
+	private DialogDistance		dialogDistance;
 
 	/* _________________________________________________________ */
 	/**
@@ -73,13 +76,14 @@ public class ActivityListAthlete extends Activity implements Observer,
 		/* Base de données */
 		database = DatabaseHandler.getInstance(getBaseContext());
 		/* Creation du business et ajout en tant qu'observeur */
+		dialogDistance = new DialogDistance();
 		model = new Manager(this, database);
 		model.addObserver(this);
 		/* Creation du bundle de récupération des données */
 		createBundle();
 		/* Creation du view.controler */
 		final ControlerListAthlete controler = new ControlerListAthlete(this,
-				model, database, tempsChrono);
+				model, dialogDistance, database, tempsChrono);
 		/* Ajout du view.controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
 		lvListe.setOnItemLongClickListener(controler);
