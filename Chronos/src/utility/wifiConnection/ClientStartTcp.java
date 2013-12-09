@@ -91,6 +91,8 @@ public class ClientStartTcp implements Runnable
 	 */
 	public void modifyStatus(final boolean connected)
 	{
+		final ProgressBar wait = (ProgressBar) activity
+				.findViewById(R.id.progressBar1);
 		final Button connection = (Button) activity.findViewById(R.id.connect);
 		if (connected == true)
 		{
@@ -99,10 +101,8 @@ public class ClientStartTcp implements Runnable
 		else
 		{
 			connection.setText(Constantes.CONNECTED);
-			final ProgressBar wait = (ProgressBar) activity
-					.findViewById(R.id.progressBar1);
-			wait.setVisibility(View.GONE);
 		}
+		wait.setVisibility(View.GONE);
 	}
 
 	/* _________________________________________________________ */
@@ -165,6 +165,9 @@ public class ClientStartTcp implements Runnable
 						public void run()
 						{
 							chronos.start();
+							final Button btStop = (Button) activity
+									.findViewById(R.id.btStop);
+							btStop.setEnabled(true);
 						}
 					});
 					run = false;

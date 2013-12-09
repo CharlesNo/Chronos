@@ -55,6 +55,8 @@ public class ControlerChrono implements OnClickListener
 		if (source == activity.findViewById(R.id.btStart))
 		{
 			chronos.start();
+			final Button btStop = (Button) activity.findViewById(R.id.btStop);
+			btStop.setEnabled(true);
 		}
 		if (source == activity.findViewById(R.id.btStop))
 		{
@@ -73,6 +75,7 @@ public class ControlerChrono implements OnClickListener
 		{
 			final ProgressBar wait = (ProgressBar) activity
 					.findViewById(R.id.progressBar1);
+			final TextView log = (TextView) activity.findViewById(R.id.textlog);
 			wait.setVisibility(View.VISIBLE);
 			final Button connect = (Button) activity.findViewById(R.id.connect);
 			if (connect.getText().equals(Constantes.CONNECTED))// Si on est pas
@@ -83,8 +86,6 @@ public class ControlerChrono implements OnClickListener
 					final Button connection = (Button) activity
 							.findViewById(R.id.connect);
 					connection.setText(Constantes.DISCONNECTED);
-					final TextView log = (TextView) activity
-							.findViewById(R.id.textlog);
 					log.append(Constantes.WAITINGFORCONNECTION);
 					ClientStartTcp.closeConnection();
 					final ClientStartTcp connexion = new ClientStartTcp(
@@ -103,12 +104,15 @@ public class ControlerChrono implements OnClickListener
 						.findViewById(R.id.connect);
 				connection.setText(Constantes.CONNECTED);
 				ClientStartTcp.closeConnection();
+				wait.setVisibility(View.GONE);
+				log.append(Constantes.INTERRUPTEDSTART);
 			}
 		}
 		if (source == activity.findViewById(R.id.connect2))
 		{
 			final ProgressBar wait = (ProgressBar) activity
 					.findViewById(R.id.progressBar1);
+			final TextView log = (TextView) activity.findViewById(R.id.textlog);
 			wait.setVisibility(View.VISIBLE);
 			final Button connect = (Button) activity
 					.findViewById(R.id.connect2);
@@ -121,8 +125,6 @@ public class ControlerChrono implements OnClickListener
 					final Button connection = (Button) activity
 							.findViewById(R.id.connect2);
 					connection.setText(Constantes.DISCONNECTEDSTOP);
-					final TextView log = (TextView) activity
-							.findViewById(R.id.textlog);
 					log.append(Constantes.WAITINGFORCONNECTION);
 					ClientStopTcp.closeConnection();
 					final ClientStopTcp connexion = new ClientStopTcp(
@@ -141,6 +143,8 @@ public class ControlerChrono implements OnClickListener
 						.findViewById(R.id.connect2);
 				connection.setText(Constantes.CONNECTEDSTOP);
 				ClientStopTcp.closeConnection();
+				wait.setVisibility(View.GONE);
+				log.append(Constantes.INTERRUPTEDSTOP);
 			}
 		}
 	}

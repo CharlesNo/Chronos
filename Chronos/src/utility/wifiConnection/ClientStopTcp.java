@@ -96,6 +96,8 @@ public class ClientStopTcp implements Runnable
 	public void modifyStatus(final boolean connected)
 	{
 		final Button connection = (Button) activity.findViewById(R.id.connect2);
+		final ProgressBar wait = (ProgressBar) activity
+				.findViewById(R.id.progressBar1);
 		if (connected == true)
 		{
 			connection.setText(Constantes.DISCONNECTEDSTOP);
@@ -103,10 +105,8 @@ public class ClientStopTcp implements Runnable
 		else
 		{
 			connection.setText(Constantes.CONNECTEDSTOP);
-			final ProgressBar wait = (ProgressBar) activity
-					.findViewById(R.id.progressBar1);
-			wait.setVisibility(View.GONE);
 		}
+		wait.setVisibility(View.GONE);
 	}
 
 	/* _________________________________________________________ */

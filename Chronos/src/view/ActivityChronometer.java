@@ -41,6 +41,7 @@ public class ActivityChronometer extends Activity
 		setContentView(R.layout.activity_chronometre);
 		final Button btStart = (Button) findViewById(R.id.btStart);
 		final Button btStop = (Button) findViewById(R.id.btStop);
+		btStop.setEnabled(false);
 		buttonConnect = (Button) findViewById(R.id.connect);
 		buttonConnect2 = (Button) findViewById(R.id.connect2);
 		wait = (ProgressBar) findViewById(R.id.progressBar1);

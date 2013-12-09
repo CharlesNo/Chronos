@@ -65,11 +65,13 @@ public interface Constantes
 	public static final String	DISCONNECTEDFROMSTOP	= "Déconnexion avec le capteur d'arrivée\n";
 	public static final String	WAITINGFORCONNECTION	= "En attente de connexion...\n";
 	public static final String	INITCONNECTION			= "Initialisation de la connexion...\n";
-	public static final String	DATABASEEXPORTED		= "Les données ont été exportées dans"
+	public static final String	DATABASEEXPORTED		= "Les données ont été exportées dans "
 																+ Environment
 																		.getExternalStorageDirectory()
 																+ File.separator
 																+ "chronos";
+	public static final String	INTERRUPTEDSTART		= "Connexion interrompue avec le capteur de départ\n";
+	public static final String	INTERRUPTEDSTOP			= "Connexion interrompue avec le capteur d'arrivée\n";		;
 }
 /* ________________________________________________________ */
 /*
