@@ -10,12 +10,14 @@
 package utility;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
  * 
+ *         Classe de mise en forme de chaines de caracteres et de dates.
  */
 public class Formatter
 {
@@ -75,6 +77,22 @@ public class Formatter
 	{
 		final String upperChain = nom.toUpperCase(Locale.getDefault());
 		return upperChain;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Init date format.
+	 * 
+	 * @return La date.
+	 * 
+	 */
+	public static String formatDate()
+	{
+		final Calendar cal = Calendar.getInstance(Locale.FRANCE);
+		final java.text.DateFormat dateF = java.text.DateFormat
+				.getDateInstance(java.text.DateFormat.MEDIUM);
+		final String datemodif = dateF.format(cal.getTime());
+		return datemodif;
 	}
 }
 /* _________________________________________________________ */

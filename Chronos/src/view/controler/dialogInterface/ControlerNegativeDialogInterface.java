@@ -1,10 +1,12 @@
-package view.controler;
+package view.controler.dialogInterface;
 
 import android.content.DialogInterface;
 
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
+ *         La classe ControlerNegativeDialogInterface permettant de gérer les
+ *         évenement sur la boite de dialogue (bouton "annuler").
  * 
  */
 public final class ControlerNegativeDialogInterface implements

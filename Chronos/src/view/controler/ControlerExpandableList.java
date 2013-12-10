@@ -1,5 +1,7 @@
 package view.controler;
 
+import view.controler.dialogInterface.ControlerNegativeDialogInterface;
+import view.controler.dialogInterface.ControlerPositiveDialogInterface;
 import android.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;

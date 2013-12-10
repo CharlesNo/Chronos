@@ -1,11 +1,10 @@
 package view.activity;
 
-import java.util.Observable;
-import java.util.Observer;
 import persistence.DatabaseHandler;
 import utility.Constantes;
 import utility.Formatter;
 import view.controler.ControlerListAthlete;
+import view.controler.ControlerListManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -34,8 +33,7 @@ import com.chronos.R;
  *         Charles NEAU
  * 
  */
-public class ActivityListAthlete extends Activity implements Observer,
-		Constantes
+public class ActivityListAthlete extends Activity implements Constantes
 {
 	/** */
 	private static int			removePos;
@@ -78,17 +76,18 @@ public class ActivityListAthlete extends Activity implements Observer,
 		/* Creation du business et ajout en tant qu'observeur */
 		dialogDistance = new DialogDistance();
 		model = new Manager(this, database);
-		model.addObserver(this);
 		/* Creation du bundle de récupération des données */
 		createBundle();
 		/* Creation du view.controler */
 		final ControlerListAthlete controler = new ControlerListAthlete(this,
 				model, dialogDistance, database, tempsChrono);
+		final ControlerListManager controlerList = new ControlerListManager(
+				lvListe);
 		/* Ajout du view.controler en tant que Listener */
 		buttonAjouter.setOnClickListener(controler);
-		lvListe.setOnItemLongClickListener(controler);
 		settings.setOnClickListener(controler);
 		exporter.setOnClickListener(controler);
+		lvListe.setOnItemLongClickListener(controlerList);
 		registerForContextMenu(lvListe);
 	}
 
@@ -193,7 +192,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 		final EditText champPrenom = (EditText) findViewById(R.id.editTextPrenom);
 		final Button modif = (Button) findViewById(R.id.bouttonAddAthlete);
 		final Athlete athleteSelected = (Athlete) lvListe
-				.getItemAtPosition(removePos);
+				.getItemAtPosition(getRemovePos());
 		champNom.setText(athleteSelected.getName());
 		champPrenom.setText(athleteSelected.getFirstName());
 		modif.setText(Constantes.MODIFY);
@@ -207,7 +206,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 	{
 		// On recupere l'athlete selectionné
 		final Athlete athleteSelected = (Athlete) lvListe
-				.getItemAtPosition(removePos);
+				.getItemAtPosition(getRemovePos());
 		final Performance performance = new Performance(athleteSelected,
 				tempsChrono, distanceRecord);
 		athleteSelected.getPerformances().add(performance);
@@ -226,7 +225,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 		final AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		adb.setTitle(Constantes.DELETETITLE);
 		adb.setMessage(Constantes.VALIDATEDELETE);
-		final int positionToRemove = removePos;
+		final int positionToRemove = getRemovePos();
 		adb.setNegativeButton(Constantes.CANCEL, null);
 		adb.setPositiveButton(Constantes.VALIDATE,
 				new AlertDialog.OnClickListener()
@@ -248,22 +247,6 @@ public class ActivityListAthlete extends Activity implements Observer,
 
 	/* _________________________________________________________ */
 	/**
-	 * Update.
-	 * 
-	 * @param arg0
-	 *            the arg0
-	 * @param arg1
-	 *            the arg1
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
-	@SuppressWarnings("unused")
-	@Override
-	public void update(final Observable arg0, final Object arg1)
-	{
-	}
-
-	/* _________________________________________________________ */
-	/**
 	 * Methode qui permet de modifier la position de l'item.
 	 * 
 	 * @param position
@@ -271,7 +254,7 @@ public class ActivityListAthlete extends Activity implements Observer,
 	 */
 	public static void setPositionItem(final int position)
 	{
-		removePos = position;
+		ActivityListAthlete.removePos = position;
 	}
 
 	/* _________________________________________________________ */
@@ -284,5 +267,16 @@ public class ActivityListAthlete extends Activity implements Observer,
 	public static void setRecordDistance(final int distance)
 	{
 		distanceRecord = distance;
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Retourne la valeur du champ removePos.
+	 * 
+	 * @return la valeur du champ removePos.
+	 */
+	public static int getRemovePos()
+	{
+		return removePos;
 	}
 }

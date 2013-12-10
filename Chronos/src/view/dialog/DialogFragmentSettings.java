@@ -10,7 +10,7 @@
 package view.dialog;
 
 import utility.Constantes;
-import view.controler.ControlerDistanceDialogInterface;
+import view.controler.dialogInterface.ControlerDistanceDialogInterface;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,7 +29,6 @@ import com.chronos.R;
  * @author Jerome POINAS
  * 
  */
-// TODO PK ?
 @SuppressLint("ValidFragment")
 public class DialogFragmentSettings extends DialogFragment implements
 		Constantes

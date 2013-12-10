@@ -10,8 +10,6 @@
  */
 package business;
 
-import java.util.Calendar;
-import java.util.Locale;
 import utility.Formatter;
 
 /* _________________________________________________________ */
@@ -28,7 +26,7 @@ public class Performance
 	/** The chrono. */
 	private final long		chrono;
 	/** La date. */
-	private String			date;
+	private final String	date;
 	/** The distance. */
 	private final int		distance;
 	/**
@@ -53,7 +51,7 @@ public class Performance
 			final int distance)
 	{
 		super();
-		formatDate();
+		date = Formatter.formatDate();
 		this.chrono = chrono;
 		this.distance = distance;
 		this.athlete = athlete;
@@ -81,18 +79,6 @@ public class Performance
 		this.distance = distance;
 		this.athlete = athlete;
 		this.date = date;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * Init date format.
-	 */
-	private void formatDate()
-	{
-		final Calendar cal = Calendar.getInstance(Locale.FRANCE);
-		final java.text.DateFormat dateF = java.text.DateFormat
-				.getDateInstance(java.text.DateFormat.MEDIUM);
-		date = dateF.format(cal.getTime());
 	}
 
 	/* _________________________________________________________ */

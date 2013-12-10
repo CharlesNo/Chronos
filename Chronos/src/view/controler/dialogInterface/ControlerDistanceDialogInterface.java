@@ -1,4 +1,4 @@
-package view.controler;
+package view.controler.dialogInterface;
 
 import view.activity.ActivityListAthlete;
 import android.app.Activity;
@@ -11,6 +11,9 @@ import com.chronos.R;
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
+ * 
+ *         La classe ControlerDistanceDialogInterface permettant de gérer les
+ *         évenements sur le numberpicker des distances.
  * 
  */
 public final class ControlerDistanceDialogInterface implements

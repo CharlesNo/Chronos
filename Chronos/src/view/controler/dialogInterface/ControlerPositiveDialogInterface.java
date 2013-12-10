@@ -1,7 +1,8 @@
-package view.controler;
+package view.controler.dialogInterface;
 
 import java.util.List;
 import persistence.DatabaseHandler;
+import view.controler.ControlerExpandableList;
 import android.content.DialogInterface;
 import business.Athlete;
 import business.Performance;
@@ -10,6 +11,9 @@ import business.adapter.ExpandableListAdapter;
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
+ * 
+ *         La classe ControlerPositiveDialogInterface permettant de gérer les
+ *         évenement sur la boite de dialogue (bouton "valider").
  * 
  */
 public final class ControlerPositiveDialogInterface implements

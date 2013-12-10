@@ -103,6 +103,8 @@ public interface Constantes
 	public static final String	INTERRUPTEDSTART		= "Connexion interrompue avec le capteur de départ\n";
 	/** Chaine de caractère : interruption connexion arrivée. */
 	public static final String	INTERRUPTEDSTOP			= "Connexion interrompue avec le capteur d'arrivée\n";
+	/** Chaine de caractère : erreur création dossier. */
+	public static final String	DIRERROR				= "Erreur de création de dossier";
 }
 /* ________________________________________________________ */
 /*
