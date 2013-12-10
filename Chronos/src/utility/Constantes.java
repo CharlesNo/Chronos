@@ -105,6 +105,10 @@ public interface Constantes
 	public static final String	INTERRUPTEDSTOP			= "Connexion interrompue avec le capteur d'arrivée\n";
 	/** Chaine de caractère : erreur création dossier. */
 	public static final String	DIRERROR				= "Erreur de création de dossier";
+	/** Chaine de caractère : start. */
+	public static final String	START					= "Start";
+	/** Chaine de caractère : stop. */
+	public static final String	STOP					= "Stop";
 }
 /* ________________________________________________________ */
 /*

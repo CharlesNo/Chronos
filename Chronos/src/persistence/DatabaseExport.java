@@ -26,7 +26,7 @@ import business.Athlete;
 /* _________________________________________________________ */
 /**
  * @author Jerome POINAS
- *         La classe DatabaseExport qui permet d'exporter la base de données de
+ *         La classe DatabaseExport permet d'exporter la base de données de
  *         l'application directement sur la SDCard du téléphone afin de pouvoir
  *         récupérer le fichier associé et de le synchroniser avec l'application
  *         PC.

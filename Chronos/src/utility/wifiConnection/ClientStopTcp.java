@@ -27,7 +27,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.chronos.R;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClientStartTcp.
  */
@@ -38,13 +37,18 @@ public class ClientStopTcp implements Runnable
 	/** The in buff. */
 	private BufferedReader	inBuff;
 	/** The host. */
-	private String			host	= "";
+	private String			host	= Constantes.EMPTY;
 	/** The port. */
 	private int				port	= 80;
 	/** L'activité */
 	private final Activity	activity;
 	/** Boolean run */
 	static boolean			run		= true;
+	/**
+	 * Temps reel du chronometre auquel on va soustraire le temps d'envoie de
+	 * trame.
+	 */
+	private static long		chronoTimeStop;
 
 	/**
 	 * Instantiates a new client tcp.
@@ -157,17 +161,25 @@ public class ClientStopTcp implements Runnable
 				.findViewById(R.id.chronometer);
 		while (run)
 		{
-			String newLine = "";
+			String newLine = Constantes.EMPTY;
 			try
 			{
 				newLine = inBuff.readLine();
-				if ((newLine != null) && newLine.contains("Stop"))
+				if ((newLine != null) && newLine.contains(Constantes.STOP))
 				{
+					/** Traitement synchronisation */
+					chronoTimeStop = System.currentTimeMillis();
+					final long timeToPing = getTimePing();
+					chronoTimeStop = chronoTimeStop - timeToPing;
+					/*******************************/
 					activity.runOnUiThread(new Runnable()
 					{
 						@Override
 						public void run()
 						{
+							// System.out.println(Formatter
+							// .miseEnForme(chronoTimeStop
+							// - ClientStartTcp.chronoTimeStart));
 							chronos.stop();
 							final Intent intent = new Intent(activity,
 									ActivityListAthlete.class);
@@ -214,6 +226,31 @@ public class ClientStopTcp implements Runnable
 				});
 			}
 		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * Methode qui ping l'arduino et qui retourne le temps d'envoie de la trame.
+	 * 
+	 * @return Le temps d'envoie de la requete ping.
+	 */
+	protected long getTimePing()
+	{
+		final InetAddress target = tcpSocket.getInetAddress();
+		final long start = System.currentTimeMillis();
+		try
+		{
+			target.isReachable(1000);
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+		final long end = System.currentTimeMillis();
+		long timePing = end - start;
+		timePing = timePing / 2;
+		System.out.println("ClientStopTcp.getTimePing()" + timePing);
+		return timePing;
 	}
 
 	/* _________________________________________________________ */
