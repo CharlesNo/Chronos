@@ -123,18 +123,9 @@ public class Performance
 	public String toString()
 	{
 		final StringBuilder build = new StringBuilder();
-		if (distance < 100)
-		{
-			build.append("Le ").append(date).append(", ").append("\n");
-			build.append(Formatter.miseEnForme(chrono)).append(" (")
-					.append(distance).append("  m)");
-		}
-		else
-		{
-			build.append("Le ").append(date).append(", ").append("\n");
-			build.append(Formatter.miseEnForme(chrono)).append(" (")
-					.append(distance).append("m)");
-		}
+		build.append("Le ").append(date).append(", ").append("\n");
+		build.append(Formatter.miseEnForme(chrono)).append(" (")
+				.append(distance).append("m)");
 		return build.toString();
 	}
 }
