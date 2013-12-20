@@ -22,7 +22,6 @@ import android.app.Activity;
 import android.os.Environment;
 import android.widget.Toast;
 import business.Athlete;
-import business.Performance;
 
 /* _________________________________________________________ */
 /**
@@ -64,18 +63,7 @@ public class DatabaseExport
 							new OutputStreamWriter(output, "UTF-8"));
 					for (final Athlete athlete : maListeAthlete)
 					{
-						out.write("[");
-						out.write(athlete.getName() + ";"
-								+ athlete.getFirstName() + ";");
-						for (final Performance perf : athlete.getPerformances())
-						{
-							out.write("/");
-							out.write(perf.getChrono() + ";"
-									+ perf.getDistance() + ";" + perf.getDate()
-									+ ";");
-							out.write("/");
-						}
-						out.write("]");
+						out.write(athlete.toString());
 						out.flush();
 					}
 					out.close();

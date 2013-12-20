@@ -44,7 +44,7 @@ public class ClientStartTcp implements Runnable
 	 * Temps reel du chronometre auquel on va soustraire le temps d'envoie de
 	 * trame.
 	 */
-	public static long		chronoTimeStart;
+	public static long				chronoTimeStart = 0;
 
 	/**
 	 * Instantiates a new client tcp.

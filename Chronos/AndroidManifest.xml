@@ -31,15 +31,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="view.activity.ActivityWaiting"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
             android:name="view.activity.ActivityListAthlete"
             android:label="@string/app_name"
-             android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="view.activity.ActivitySynchronysing"
+            android:label="@string/title_activity_activity_synchronysing" 
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
     </application>

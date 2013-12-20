@@ -17,6 +17,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import utility.Constantes;
 import view.activity.ActivityListAthlete;
+import view.activity.ActivitySynchronysing;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class ClientStopTcp implements Runnable
 	 * Temps reel du chronometre auquel on va soustraire le temps d'envoie de
 	 * trame.
 	 */
-	public static long		chronoTimeStop;
+	public static long		chronoTimeStop = 0;
 
 	/**
 	 * Instantiates a new client tcp.
@@ -177,12 +178,9 @@ public class ClientStopTcp implements Runnable
 						@Override
 						public void run()
 						{
-							// System.out.println(Formatter
-							// .miseEnForme(chronoTimeStop
-							// - ClientStartTcp.chronoTimeStart));
 							chronos.stop();
 							final Intent intent = new Intent(activity,
-									ActivityListAthlete.class);
+									ActivitySynchronysing.class);
 							final Bundle objetbunble = new Bundle();
 							objetbunble.putString(Constantes.BUNDLETIME, String
 									.valueOf(SystemClock.elapsedRealtime()

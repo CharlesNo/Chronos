@@ -21,19 +21,6 @@
             android:textSize="50sp" 
             android:background="@drawable/cercle"/>
 
-        <ImageView
-            android:id="@+id/btSync"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/app_name"
-            android:maxHeight="35dp"
-            android:maxWidth="35dp"
-            android:minHeight="35dp"
-            android:minWidth="35dp"
-            android:src="@drawable/sync" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -71,7 +58,7 @@
             android:id="@+id/connect"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/connexion_d_part" />
+            android:text="Connexion départ" />
 
          <Button
              android:id="@+id/connect2"
@@ -79,7 +66,7 @@
              android:layout_height="wrap_content"
              android:layout_alignParentRight="true"
              android:layout_alignParentTop="true"
-             android:text="@string/connexion_arriv_e" />
+             android:text="Connexion arrivée" />
 
          <ProgressBar
              android:id="@+id/progressBar1"

@@ -18,9 +18,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="Exporter">Exporter</string>
     <string name="Fonctions"><u>Fonctions avancées :</u></string>
-    <string name="synchronisation">Synchronisation</string>
-    <string name="connexion_d_part">Connexion départ</string>
-    <string name="connexion_arriv_e">Connexion arrivée</string>
-    <string name="Synchronisation">Synchronisation</string>
+    <string name="Synchronisation">Synchronisation...</string>
+    <string name="title_activity_activity_synchronysing">ActivitySynchronysing</string>
 
 </resources>
