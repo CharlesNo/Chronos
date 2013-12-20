@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.chronos.R;
@@ -44,6 +45,7 @@ public class ActivityChronometer extends Activity
 		btStop.setEnabled(false);
 		buttonConnect = (Button) findViewById(R.id.connect);
 		buttonConnect2 = (Button) findViewById(R.id.connect2);
+		final ImageView buttonSync = (ImageView) findViewById(R.id.btSync);
 		wait = (ProgressBar) findViewById(R.id.progressBar1);
 		wait.setVisibility(View.GONE);
 		textlog = (TextView) findViewById(R.id.textlog);
@@ -55,6 +57,7 @@ public class ActivityChronometer extends Activity
 		btStop.setOnClickListener(controler);
 		buttonConnect.setOnClickListener(controler);
 		buttonConnect2.setOnClickListener(controler);
+		buttonSync.setOnClickListener(controler);
 	}
 
 	/* _________________________________________________________ */

@@ -3,7 +3,9 @@ package view.controler;
 import utility.Constantes;
 import utility.wifiConnection.ClientStartTcp;
 import utility.wifiConnection.ClientStopTcp;
-import view.activity.ActivityListAthlete;
+import utility.wifiConnection.SyncStartTcp;
+import utility.wifiConnection.SyncStopTcp;
+import view.activity.ActivityWaiting;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +64,7 @@ public class ControlerChrono implements OnClickListener
 		{
 			chronos.stop();
 			final Intent intent = new Intent(activity,
-					ActivityListAthlete.class);
+					ActivityWaiting.class);
 			final Bundle objetbunble = new Bundle();
 			objetbunble.putString(
 					Constantes.BUNDLETIME,
@@ -138,6 +140,17 @@ public class ControlerChrono implements OnClickListener
 				wait.setVisibility(View.GONE);
 				log.append(Constantes.INTERRUPTEDSTOP);
 			}
+		}
+		if (source == activity.findViewById(R.id.btSync))
+		{
+			final SyncStartTcp connexionStartSync = new SyncStartTcp(
+					"192.168.1.131", 8888, activity);
+			final Thread thread = new Thread(connexionStartSync);
+			thread.start();
+			final SyncStopTcp connexionStopSync = new SyncStopTcp(
+					"192.168.1.118", 8888, activity);
+			final Thread thread2 = new Thread(connexionStopSync);
+			thread2.start();
 		}
 	}
 }

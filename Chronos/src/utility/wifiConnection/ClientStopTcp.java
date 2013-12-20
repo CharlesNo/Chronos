@@ -48,7 +48,7 @@ public class ClientStopTcp implements Runnable
 	 * Temps reel du chronometre auquel on va soustraire le temps d'envoie de
 	 * trame.
 	 */
-	private static long		chronoTimeStop;
+	public static long		chronoTimeStop;
 
 	/**
 	 * Instantiates a new client tcp.
